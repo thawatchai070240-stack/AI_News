@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI News Hub — รวมข่าว AI รายสัปดาห์</title>
+<meta name="description" content="รวมข่าว AI และเทคโนโลยี อัปเดตรายสัปดาห์ ฉบับภาษาไทย — เพื่ออัพเดทความรู้ AI">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="alternate" type="application/rss+xml" title="AI News Hub RSS" href="rss.xml">
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker-inner">
+    <span class="tlabel">LOADING</span>
+    <span>กำลังโหลดข่าวล่าสุด...</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="masthead-inner">
+    <div>
+      <div class="site-name">AI <em>News</em> Hub</div>
+      <div class="site-tagline">รวมข่าว AI และเทคโนโลยีรายสัปดาห์ · ฉบับภาษาไทย</div>
+    </div>
+    <div class="site-meta">
+      <strong id="header-date">—</strong>
+      อัปเดตล่าสุด · <span id="header-count">— ฉบับ</span><br>
+      อัปเดตทุกสัปดาห์
+    </div>
+  </div>
+  <div class="search-bar">
+    <div class="search-inner">
+      <input type="search" id="search-input" class="search-input" placeholder="ค้นหาในชื่อฉบับ หัวข่าว หรือคำสำคัญ..." autocomplete="off">
+      <select id="month-select" class="month-select" aria-label="กรองตามเดือน">
+        <option value="">ทุกเดือน</option>
+      </select>
+      <span class="search-stats" id="search-stats">— ฉบับ</span>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE CONTENT -->
+<main class="page-wrap">
+
+  <div class="section-label fu d1"><span class="slabel-text">ฉบับล่าสุด</span></div>
+  <div id="latest-issue"></div>
+
+  <div class="section-label fu d2"><span class="slabel-text">ฉบับย้อนหลัง</span></div>
+  <div class="archive-grid" id="archive-grid"></div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <strong>AI News Hub</strong> · สรุปข่าว AI รายสัปดาห์ © 2026<br>
+      สร้างเพื่อเผยแพร่ความรู้ด้าน AI สู่ผู้อ่านชาวไทย
+    </div>
+    <div>
+      <a href="rss.xml">RSS Feed</a> ·
+      <a href="README.md">วิธีเพิ่มฉบับใหม่</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

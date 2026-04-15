@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBrief — สรุปข่าวเทคโนโลยีประจำสัปดาห์</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0f0e;--ink-2:#2a2a28;--ink-3:#4a4a47;
+  --smoke:#f5f4f0;--paper:#faf9f6;--rule:#e0dfd8;
+  --accent:#c8230e;--accent2:#e8a020;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Sarabun','Noto Sans Thai',sans-serif;
+  --max:1180px;
+}
+html{font-size:16px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+/* TICKER */
+.ticker-wrap{background:var(--accent);overflow:hidden}
+.ticker-inner{display:flex;align-items:center;padding:6px 0;white-space:nowrap;animation:ticker 45s linear infinite;font-size:12px;font-weight:700;color:#fff;letter-spacing:.4px}
+.ticker-inner span{padding:0 36px}
+.tlabel{background:#fff;color:var(--accent);font-size:11px;font-weight:800;padding:2px 10px;margin-right:16px;letter-spacing:1px;flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* HEADER */
+.site-header{background:var(--ink);border-bottom:3px solid var(--accent)}
+.masthead-inner{max-width:var(--max);margin:0 auto;padding:22px 24px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.site-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.site-name em{color:var(--accent);font-style:normal}
+.site-tagline{color:rgba(255,255,255,.38);font-size:12px;letter-spacing:.5px;margin-top:5px}
+.site-meta{text-align:right;color:rgba(255,255,255,.4);font-size:12px;line-height:1.8}
+.site-meta strong{color:rgba(255,255,255,.78);display:block;font-size:13px}
+/* NAV */
+.site-nav{border-top:1px solid rgba(255,255,255,.1)}
+.site-nav ul{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;list-style:none;overflow-x:auto}
+.site-nav li a{display:block;padding:10px 18px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;cursor:pointer}
+.site-nav li a:hover{color:rgba(255,255,255,.85)}
+.site-nav li a.tab-active{color:#fff;border-bottom-color:var(--accent)}
+/* LAYOUT */
+.page-wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+/* SECTION LABEL */
+.section-label{display:flex;align-items:center;gap:12px;margin:36px 0 20px}
+.section-label::before{content:'';width:28px;height:3px;background:var(--accent);flex-shrink:0}
+.slabel-text{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+/* CHIP */
+.chip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 10px;text-transform:uppercase}
+.chip-red{background:var(--accent);color:#fff}
+.chip-gold{background:var(--accent2);color:var(--ink)}
+.chip-dark{background:rgba(255,255,255,.15);color:#fff}
+.chip-slate{background:#1a1a1a;color:#f0efeb}
+/* HERO GRID */
+.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:720px){.hero-grid{grid-template-columns:1fr}}
+.hero-primary{position:relative;overflow:hidden;cursor:pointer}
+.hero-primary svg.cover{width:100%;height:440px;display:block;transition:transform .5s ease-out}
+.hero-primary:hover svg.cover{transform:scale(1.03)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,7,.93) 38%,rgba(8,8,7,.15) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.hero-primary .hl{font-family:var(--serif);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;color:#fff;line-height:1.3;margin:10px 0 9px}
+.hero-primary .dk{font-size:14px;color:rgba(255,255,255,.68);line-height:1.65;margin-bottom:12px}
+.byline{font-size:11.5px;color:rgba(255,255,255,.38)}
+.hero-stack{display:flex;flex-direction:column;gap:3px}
+.hero-secondary{position:relative;overflow:hidden;flex:1;cursor:pointer;min-height:218px}
+.hero-secondary svg.cover{width:100%;height:218px;display:block;transition:transform .5s ease-out}
+.hero-secondary:hover svg.cover{transform:scale(1.04)}
+.hero-secondary .hero-overlay{padding:18px 20px}
+.hero-secondary .hl{font-family:var(--serif);font-size:clamp(1rem,1.7vw,1.18rem);font-weight:700;color:#fff;line-height:1.35;margin:8px 0 6px}
+/* ARTICLE ROW */
+.article-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px}
+@media(max-width:860px){.article-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.article-row{grid-template-columns:1fr}}
+.article-card{cursor:pointer}
+.thumb-wrap{overflow:hidden;aspect-ratio:16/9;margin-bottom:14px}
+.thumb-wrap svg{width:100%;height:100%;display:block;transition:transform .45s ease-out}
+.article-card:hover .thumb-wrap svg{transform:scale(1.05)}
+.article-card .chip{margin-bottom:9px}
+.article-card .hl{font-family:var(--serif);font-size:1.08rem;font-weight:700;line-height:1.4;color:var(--ink);margin-bottom:8px}
+.article-card .excerpt{font-size:13.5px;color:var(--ink-3);line-height:1.7;margin-bottom:10px}
+.article-card .byline{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:8px}
+/* EXPLAINER DARK */
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:600px){.explainer-grid{grid-template-columns:1fr}}
+.explainer-card{background:#1c1c1a;padding:30px 26px;cursor:pointer;transition:background .2s;display:flex;flex-direction:column}
+.explainer-card:hover{background:#222220}
+.explainer-card svg{width:100%;height:192px;display:block;margin-bottom:20px;opacity:.82;transition:opacity .3s}
+.explainer-card:hover svg{opacity:1}
+.kicker{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.explainer-card .hl{font-family:var(--serif);font-size:1.28rem;font-weight:700;color:#f5f4f0;line-height:1.35;margin-bottom:12px}
+.explainer-card .excerpt{font-size:13.5px;color:rgba(245,244,240,.58);line-height:1.7;margin-bottom:16px;flex:1}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;color:rgba(245,244,240,.45);border:1px solid rgba(245,244,240,.18);padding:3px 9px;transition:.2s}
+.explainer-card:hover .tag{border-color:rgba(245,244,240,.32);color:rgba(245,244,240,.68)}
+/* TABLE */
+.table-section{background:var(--smoke);border:1px solid var(--rule);padding:26px 26px 22px;margin-top:36px}
+.table-section h2{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{background:var(--ink);color:#fff;text-align:left;padding:10px 14px;font-weight:700;font-size:12px;letter-spacing:.5px}
+tbody tr{border-bottom:1px solid var(--rule)}
+tbody tr:hover{background:#edece6}
+tbody td{padding:11px 14px;color:var(--ink-2);vertical-align:middle}
+tbody td:first-child{font-weight:800;color:var(--accent);font-size:15px;width:36px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:2px}
+.yes{background:#d4edda;color:#1a5c2a}
+.no{background:#f5e0e0;color:#6b1a1a}
+.part{background:#fff3cd;color:#664d00}
+/* FOOTER */
+.site-footer{background:var(--ink);color:rgba(255,255,255,.32);text-align:center;font-size:12px;padding:22px;margin-top:48px}
+.site-footer strong{color:rgba(255,255,255,.7)}
+hr.rule{border:none;border-top:1px solid var(--rule);margin:36px 0}
+.hidden-card{display:none!important}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .5s ease-out both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}
+</style>
+</head>
+<body>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="tlabel">LIVE</span>
+    <span>Claude เปิด Microsoft 365 Connector ฟรีทุก Plan รวม Free Tier</span>
+    <span>&#183;</span><span>Gemini 3.1 Flash Live พร้อมใช้งานแล้วใน 200+ ประเทศ</span>
+    <span>&#183;</span><span>NotebookLM อัพเกรด Cinematic Video Overviews ด้วย Veo</span>
+    <span>&#183;</span><span>Copilot Cowork เปิด Frontier Program อย่างเป็นทางการ 30 มี.ค. 2569</span>
+    <span>&#183;</span><span>Google Translate Live Translation รองรับไทยบน iOS &amp; Android แล้ว</span>
+    <span style="padding-right:80px">&#183;</span>
+    <span class="tlabel">LIVE</span>
+    <span>Claude เปิด Microsoft 365 Connector ฟรีทุก Plan รวม Free Tier</span>
+    <span>&#183;</span><span>Gemini 3.1 Flash Live พร้อมใช้งานแล้วใน 200+ ประเทศ</span>
+    <span>&#183;</span><span>NotebookLM อัพเกรด Cinematic Video Overviews ด้วย Veo</span>
+    <span>&#183;</span><span>Copilot Cowork เปิด Frontier Program อย่างเป็นทางการ 30 มี.ค. 2569</span>
+    <span>&#183;</span><span>Google Translate Live Translation รองรับไทยบน iOS &amp; Android แล้ว</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="masthead-inner fu">
+    <div>
+      <div class="site-name">Tech<em>Brief</em></div>
+      <div class="site-tagline">สรุปข่าวเทคโนโลยีและ AI ที่คุณพลาดไม่ได้</div>
+    </div>
+    <div class="site-meta">
+      <strong>7 เมษายน 2569</strong>
+      สัปดาห์ที่ 14 &#183; ฉบับที่ 52<br>8 หัวข่าวสำคัญ
+    </div>
+  </div>
+  <nav class="site-nav" aria-label="หมวดหมู่">
+    <ul id="tab-list">
+      <li><a href="#" class="tab-active" data-filter="all">ทั้งหมด</a></li>
+      <li><a href="#" data-filter="google">Google AI</a></li>
+      <li><a href="#" data-filter="microsoft">Microsoft</a></li>
+      <li><a href="#" data-filter="anthropic">Anthropic</a></li>
+      <li><a href="#" data-filter="tools">Tools &amp; Apps</a></li>
+      <li><a href="#" data-filter="concept">พื้นฐาน Tech</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+  <div class="section-label fu d1"><span class="slabel-text">ข่าวเด่นสัปดาห์นี้</span></div>
+
+  <div class="hero-grid fu d2" id="hero-grid">
+
+    <article class="hero-primary" data-cat="google">
+      <svg class="cover" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1a" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3a5c"/><stop offset="100%" stop-color="#0d1f36"/></linearGradient>
+          <radialGradient id="g1b" cx="65%" cy="42%" r="48%"><stop offset="0%" stop-color="#4a90e2" stop-opacity=".3"/><stop offset="100%" stop-color="#0d1f36" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="800" height="440" fill="url(#g1a)"/>
+        <rect width="800" height="440" fill="url(#g1b)"/>
+        <circle cx="590" cy="195" r="42" fill="none" stroke="#4a90e2" stroke-width="2.5" opacity=".75"/>
+        <circle cx="590" cy="195" r="72" fill="none" stroke="#4a90e2" stroke-width="1.8" opacity=".5"/>
+        <circle cx="590" cy="195" r="105" fill="none" stroke="#4a90e2" stroke-width="1.2" opacity=".32"/>
+        <circle cx="590" cy="195" r="140" fill="none" stroke="#4a90e2" stroke-width=".9" opacity=".18"/>
+        <circle cx="590" cy="195" r="175" fill="none" stroke="#4a90e2" stroke-width=".6" opacity=".1"/>
+        <rect x="577" y="163" width="26" height="44" rx="13" fill="#4a90e2" opacity=".9"/>
+        <path d="M566 195 Q566 224 590 224 Q614 224 614 195" fill="none" stroke="#4a90e2" stroke-width="2.8" stroke-linecap="round" opacity=".85"/>
+        <line x1="590" y1="224" x2="590" y2="238" stroke="#4a90e2" stroke-width="2.8" stroke-linecap="round" opacity=".85"/>
+        <line x1="578" y1="238" x2="602" y2="238" stroke="#4a90e2" stroke-width="2.8" stroke-linecap="round" opacity=".85"/>
+        <text x="40" y="56" fill="#4a90e2" font-size="13" font-family="sans-serif" font-weight="700" opacity=".55">Google DeepMind &#183; 26 Mar 2026</text>
+        <text x="40" y="330" fill="white" font-size="56" font-family="Georgia,serif" font-weight="700" opacity=".07">Gemini</text>
+        <text x="40" y="375" fill="white" font-size="22" font-family="Georgia,serif" opacity=".07">3.1 Flash Live</text>
+      </svg>
+      <div class="hero-overlay">
+        <span class="chip chip-red">Google AI &#183; ใหม่ล่าสุด</span>
+        <h1 class="hl">Google ปล่อย Gemini 3.1 Flash Live &#8212; คุยกับ AI ได้ลื่นเหมือนโทรหาเพื่อน ไม่มีการหน่วงอีกต่อไป</h1>
+        <p class="dk">AI voice รุ่นใหม่ที่ฟัง-คิด-ตอบได้ในขั้นตอนเดียว กรองเสียงรบกวนได้แม้อยู่บนถนน รองรับ 90+ ภาษา ใช้ได้ใน 200+ ประเทศรวมถึงไทย</p>
+        <div class="byline">26 มีนาคม 2569 &#183; Google DeepMind</div>
+      </div>
+    </article>
+
+    <div class="hero-stack">
+      <article class="hero-secondary" data-cat="google">
+        <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1565C0"/><stop offset="100%" stop-color="#0a3d7a"/></linearGradient></defs>
+          <rect width="500" height="218" fill="url(#g2)"/>
+          <path d="M210 76 Q210 46 250 46 Q290 46 290 76" fill="none" stroke="white" stroke-width="5.5" stroke-linecap="round" opacity=".72"/>
+          <rect x="198" y="76" width="20" height="36" rx="10" fill="white" opacity=".72"/>
+          <rect x="282" y="76" width="20" height="36" rx="10" fill="white" opacity=".72"/>
+          <text x="118" y="148" fill="white" font-size="13" font-family="sans-serif" opacity=".55" font-weight="700">TH &#8594; EN</text>
+          <line x1="230" y1="153" x2="268" y2="153" stroke="#4fc3f7" stroke-width="2" stroke-dasharray="4,3" opacity=".8"/>
+          <polygon points="268,149 276,153 268,157" fill="#4fc3f7" opacity=".8"/>
+          <text x="280" y="158" fill="#4fc3f7" font-size="11" font-family="sans-serif" opacity=".75" font-weight="600">Real-time</text>
+          <text x="60" y="40" fill="white" font-size="11" font-family="sans-serif" opacity=".4" font-weight="700">Google Translate &#183; Live Translation &#183; iOS &amp; Android</text>
+        </svg>
+        <div class="hero-overlay">
+          <span class="chip chip-gold">Google &#183; แอปพลิเคชัน</span>
+          <h2 class="hl">Google Translate เปิด Live Translation ในไทยแล้ว &#8212; แปลผ่านหูฟัง real-time ไม่ต้องพิมพ์แม้แต่ตัวเดียว</h2>
+          <div class="byline">26 มีนาคม 2569 &#183; TechCrunch</div>
+        </div>
+      </article>
+      <article class="hero-secondary" data-cat="microsoft">
+        <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0f2d5e"/><stop offset="100%" stop-color="#041228"/></linearGradient></defs>
+          <rect width="500" height="218" fill="url(#g3)"/>
+          <rect x="148" y="50" width="32" height="32" rx="5" fill="#0078D4" opacity=".85"/>
+          <rect x="187" y="50" width="32" height="32" rx="5" fill="#217346" opacity=".85"/>
+          <rect x="148" y="88" width="32" height="32" rx="5" fill="#D83B01" opacity=".85"/>
+          <rect x="187" y="88" width="32" height="32" rx="5" fill="#6264A7" opacity=".85"/>
+          <path d="M232 95 L272 95" stroke="white" stroke-width="2" stroke-dasharray="4,3" opacity=".45"/>
+          <polygon points="272,91 280,95 272,99" fill="white" opacity=".45"/>
+          <circle cx="306" cy="95" r="30" fill="none" stroke="#c8230e" stroke-width="2.5" opacity=".75"/>
+          <text x="291" y="101" fill="#c8230e" font-size="20" font-family="sans-serif" font-weight="700" opacity=".85">AI</text>
+          <text x="90" y="162" fill="white" font-size="10" font-family="sans-serif" opacity=".35" font-weight="700">Microsoft Copilot Cowork &#183; Wave 3 &#183; Powered by Claude</text>
+        </svg>
+        <div class="hero-overlay">
+          <span class="chip chip-dark">Microsoft &#183; Copilot</span>
+          <h2 class="hl">Copilot Cowork เปิดตัวอย่างเป็นทางการ &#8212; ใช้ Claude ทำงานแทนคุณข้าม Word, Excel, Outlook พร้อมกัน</h2>
+          <div class="byline">30 มีนาคม 2569 &#183; Microsoft</div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div class="section-label fu"><span class="slabel-text">AI Tools น่าจับตา</span></div>
+
+  <div class="article-row" id="article-row">
+
+    <article class="article-card fu d1" data-cat="anthropic">
+      <div class="thumb-wrap">
+        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="ga1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3d1c08"/><stop offset="100%" stop-color="#1a0c03"/></linearGradient></defs>
+          <rect width="640" height="360" fill="url(#ga1)"/>
+          <circle cx="180" cy="155" r="58" fill="none" stroke="#d4692a" stroke-width="3" opacity=".65"/>
+          <text x="153" y="166" fill="#d4692a" font-size="30" font-family="Georgia,serif" font-weight="700" opacity=".85">C</text>
+          <text x="248" y="165" fill="white" font-size="30" font-family="sans-serif" opacity=".4">+</text>
+          <rect x="292" y="128" width="30" height="30" rx="5" fill="#0078D4" opacity=".75"/>
+          <rect x="329" y="128" width="30" height="30" rx="5" fill="#217346" opacity=".75"/>
+          <rect x="292" y="164" width="30" height="30" rx="5" fill="#D83B01" opacity=".75"/>
+          <rect x="329" y="164" width="30" height="30" rx="5" fill="#6264A7" opacity=".75"/>
+          <text x="60" y="282" fill="white" font-size="13" font-family="sans-serif" opacity=".28" font-weight="700">Anthropic &#215; Microsoft 365 &#183; Free on every plan</text>
+          <text x="60" y="302" fill="#d4692a" font-size="11" font-family="sans-serif" opacity=".45">April 2026 &#183; Outlook &#183; OneDrive &#183; SharePoint &#183; Teams</text>
+        </svg>
+      </div>
+      <span class="chip chip-red" style="margin-bottom:9px">Anthropic &#183; Claude</span>
+      <h3 class="hl">Claude เปิด Microsoft 365 ฟรีทุก Plan &#8212; อ่าน Outlook, OneDrive, SharePoint โดยไม่ต้องจ่ายเพิ่ม</h3>
+      <p class="excerpt">Anthropic ประกาศให้ผู้ใช้ทุก plan รวมถึง Free สามารถเชื่อม Claude กับ Microsoft 365 ได้แล้ว สั่งให้ Claude สรุปอีเมล ค้นไฟล์ หรืออ่านการสนทนาใน Teams ได้ทันทีโดยไม่ต้องอัปโหลดไฟล์เอง</p>
+      <div class="byline">4 เมษายน 2569 &#183; Anthropic</div>
+    </article>
+
+    <article class="article-card fu d2" data-cat="google">
+      <div class="thumb-wrap">
+        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="ga2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3320"/><stop offset="100%" stop-color="#0a1a10"/></linearGradient></defs>
+          <rect width="640" height="360" fill="url(#ga2)"/>
+          <rect x="78" y="70" width="220" height="140" rx="6" fill="#0e3018" stroke="#2a7a3a" stroke-width="1.5" opacity=".5"/>
+          <rect x="65" y="60" width="220" height="140" rx="6" fill="#0a2814" stroke="#1e6a2a" stroke-width="1" opacity=".3"/>
+          <rect x="52" y="50" width="220" height="140" rx="6" fill="#071e0e" stroke="#145020" stroke-width="1" opacity=".18"/>
+          <rect x="92" y="84" width="196" height="9" rx="3" fill="#3a8a4a" opacity=".55"/>
+          <rect x="92" y="102" width="140" height="6" rx="2" fill="#3a8a4a" opacity=".32"/>
+          <rect x="92" y="115" width="160" height="6" rx="2" fill="#3a8a4a" opacity=".28"/>
+          <rect x="92" y="128" width="100" height="6" rx="2" fill="#3a8a4a" opacity=".24"/>
+          <path d="M318 155 L370 155" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
+          <polygon points="370,150 382,155 370,160" fill="#4ade80" opacity=".7"/>
+          <rect x="395" y="112" width="130" height="86" rx="8" fill="#0e3018" stroke="#4ade80" stroke-width="1.5" opacity=".65"/>
+          <polygon points="440,148 440,172 462,160" fill="#4ade80" opacity=".72"/>
+          <text x="60" y="270" fill="white" font-size="12" font-family="sans-serif" opacity=".28" font-weight="700">NotebookLM &#183; Slide Deck + Cinematic Video &#183; Gemini + Veo</text>
+        </svg>
+      </div>
+      <span class="chip chip-gold" style="margin-bottom:9px">Google &#183; NotebookLM</span>
+      <h3 class="hl">โยน PDF เข้า NotebookLM &#8212; ได้วิดีโออธิบายและ Slides สวยงามออกมาใน 5 นาที</h3>
+      <p class="excerpt">Google อัพเกรด NotebookLM ให้สร้าง Cinematic Video Overviews ด้วย Gemini + Veo และ Slide Deck 2 รูปแบบ ไม่ต้องแตะ PowerPoint แม้แต่ครั้งเดียว มี visual style ให้เลือกตั้งแต่ Scientific ไปถึง Kawaii</p>
+      <div class="byline">23 มีนาคม 2569 &#183; Google Labs</div>
+    </article>
+
+    <article class="article-card fu d3" data-cat="tools">
+      <div class="thumb-wrap">
+        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="ga3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c1410"/><stop offset="100%" stop-color="#0e0a07"/></linearGradient></defs>
+          <rect width="640" height="360" fill="url(#ga3)"/>
+          <rect x="80" y="60" width="480" height="240" rx="8" fill="#231a12" stroke="#3a2a18" stroke-width="1.5"/>
+          <rect x="80" y="60" width="480" height="28" rx="8" fill="#2e2218"/>
+          <circle cx="104" cy="74" r="5" fill="#c8230e" opacity=".7"/>
+          <circle cx="122" cy="74" r="5" fill="#e8a020" opacity=".7"/>
+          <circle cx="140" cy="74" r="5" fill="#3a8a3a" opacity=".7"/>
+          <rect x="160" y="67" width="260" height="14" rx="3" fill="#1a1208" stroke="#3a2a18" stroke-width="1" opacity=".7"/>
+          <text x="168" y="77" fill="#6a5a3a" font-size="8" font-family="monospace">dashboard.html</text>
+          <rect x="100" y="102" width="200" height="14" rx="3" fill="#c8230e" opacity=".32"/>
+          <rect x="100" y="124" width="145" height="7" rx="2" fill="#4a3520" opacity=".5"/>
+          <rect x="100" y="138" width="168" height="7" rx="2" fill="#4a3520" opacity=".4"/>
+          <rect x="100" y="152" width="120" height="7" rx="2" fill="#4a3520" opacity=".35"/>
+          <rect x="318" y="152" width="14" height="52" rx="2" fill="#c8230e" opacity=".52"/>
+          <rect x="340" y="128" width="14" height="76" rx="2" fill="#e8a020" opacity=".52"/>
+          <rect x="362" y="140" width="14" height="64" rx="2" fill="#c8230e" opacity=".42"/>
+          <rect x="384" y="116" width="14" height="88" rx="2" fill="#e8a020" opacity=".42"/>
+          <rect x="406" y="136" width="14" height="68" rx="2" fill="#c8230e" opacity=".32"/>
+          <text x="80" y="328" fill="#c8230e" font-size="11" font-family="monospace" opacity=".32">&#60;html&#62; Interactive Dashboard &#183; Claude Artifact &#183; No install required &#60;/html&#62;</text>
+        </svg>
+      </div>
+      <span class="chip chip-slate" style="margin-bottom:9px">Claude &#183; HTML Artifact</span>
+      <h3 class="hl">สร้าง Presentation แบบใหม่ด้วย Claude &#8212; ได้ HTML Dashboard ที่คลิกได้ เปิดในเบราว์เซอร์ได้ทุกที่</h3>
+      <p class="excerpt">แทนที่จะได้ slide นิ่งๆ Claude สร้าง HTML artifact ที่มี animation, filter, chart แบบ interactive ได้เลย ไม่ต้องติดตั้ง software แชร์ผ่านลิงก์หรืออีเมลได้ง่าย เหมาะสำหรับ executive briefing และ audit report</p>
+      <div class="byline">เทคนิคแนะนำ &#183; ทีมบรรณาธิการ</div>
+    </article>
+
+  </div>
+
+  <hr class="rule">
+
+  <div class="section-label fu"><span class="slabel-text">รู้จักเทคโนโลยี &#8212; เข้าใจง่ายใน 3 นาที</span></div>
+
+  <div class="explainer-grid fu d1" id="explainer-grid">
+
+    <div class="explainer-card" data-cat="concept">
+      <svg viewBox="0 0 600 192" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="192" fill="#0d0d0b"/>
+        <rect x="0" y="0" width="600" height="22" fill="#1a1a18"/>
+        <circle cx="18" cy="11" r="5" fill="#c8230e" opacity=".7"/>
+        <circle cx="34" cy="11" r="5" fill="#e8a020" opacity=".7"/>
+        <circle cx="50" cy="11" r="5" fill="#3a8a3a" opacity=".7"/>
+        <text x="20" y="50" fill="#4ade80" font-size="13" font-family="monospace">$ claude --version</text>
+        <text x="20" y="70" fill="#555" font-size="13" font-family="monospace">Claude Code 1.8.2</text>
+        <text x="20" y="95" fill="#4ade80" font-size="13" font-family="monospace">$ python briefing.py --date today</text>
+        <text x="20" y="115" fill="#555" font-size="13" font-family="monospace">&#10003; Fetching 8 headlines...</text>
+        <text x="20" y="133" fill="#555" font-size="13" font-family="monospace">&#10003; Summarizing with Claude API...</text>
+        <text x="20" y="151" fill="#4ade80" font-size="13" font-family="monospace">&#10003; Posted to Notion in 4.2s</text>
+        <text x="20" y="175" fill="#4a90e2" font-size="13" font-family="monospace">$</text>
+        <rect x="32" y="163" width="8" height="14" fill="#4a90e2" opacity=".8"/>
+      </svg>
+      <div class="kicker">พื้นฐาน Tech &#183; สำหรับผู้เริ่มต้น</div>
+      <h3 class="hl">CLI คืออะไร? หน้าต่างดำที่ดูน่ากลัว แต่ซ่อนพลังไว้มหาศาล</h3>
+      <p class="excerpt">CLI หรือ Command Line Interface คือการสั่งงานคอมพิวเตอร์ด้วยตัวอักษรแทนการคลิก ลองนึกภาพว่าแทนที่จะคลิก "ลบไฟล์" คุณพิมพ์ rm ชื่อไฟล์ แล้วกด Enter ผลเหมือนกัน แต่ทำซ้ำได้อัตโนมัติ และ AI tool ยุคใหม่อย่าง Claude Code ล้วนทำงานผ่านนี้ทั้งสิ้น</p>
+      <div class="tag-row">
+        <span class="tag">Terminal</span><span class="tag">PowerShell</span><span class="tag">Claude Code</span><span class="tag">n8n CLI</span>
+      </div>
+    </div>
+
+    <div class="explainer-card" data-cat="concept">
+      <svg viewBox="0 0 600 192" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="192" fill="#101010"/>
+        <rect x="28" y="38" width="124" height="116" rx="8" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1.5"/>
+        <text x="62" y="70" fill="white" font-size="16" font-family="sans-serif" font-weight="700" opacity=".88">API</text>
+        <rect x="44" y="82" width="92" height="6" rx="3" fill="#333"/>
+        <rect x="44" y="96" width="70" height="6" rx="3" fill="#2e2e2e"/>
+        <rect x="44" y="110" width="82" height="6" rx="3" fill="#2e2e2e"/>
+        <rect x="44" y="124" width="58" height="6" rx="3" fill="#2e2e2e"/>
+        <text x="50" y="148" fill="#666" font-size="9" font-family="sans-serif">Fixed menu only</text>
+        <text x="230" y="102" fill="#c8230e" font-size="20" font-family="sans-serif" font-weight="700" opacity=".9">VS</text>
+        <rect x="302" y="26" width="270" height="140" rx="8" fill="#1a1208" stroke="#c8230e" stroke-width="1.5" opacity=".72"/>
+        <text x="330" y="56" fill="#e8a020" font-size="16" font-family="sans-serif" font-weight="700">MCP</text>
+        <circle cx="375" cy="102" r="22" fill="#c8230e" opacity=".82"/>
+        <text x="363" y="108" fill="white" font-size="14" font-family="sans-serif" font-weight="700">AI</text>
+        <line x1="397" y1="90" x2="428" y2="78" stroke="#c8230e" stroke-width="1.5" opacity=".55" stroke-dasharray="4,2"/>
+        <line x1="397" y1="102" x2="428" y2="102" stroke="#e8a020" stroke-width="1.5" opacity=".55" stroke-dasharray="4,2"/>
+        <line x1="397" y1="114" x2="428" y2="126" stroke="#4a90e2" stroke-width="1.5" opacity=".55" stroke-dasharray="4,2"/>
+        <rect x="428" y="68" width="62" height="16" rx="3" fill="#1c1c1a" stroke="#444" stroke-width="1"/>
+        <text x="436" y="80" fill="#777" font-size="9" font-family="sans-serif">Outlook</text>
+        <rect x="428" y="94" width="62" height="16" rx="3" fill="#1c1c1a" stroke="#444" stroke-width="1"/>
+        <text x="436" y="106" fill="#777" font-size="9" font-family="sans-serif">SharePoint</text>
+        <rect x="428" y="118" width="62" height="16" rx="3" fill="#1c1c1a" stroke="#444" stroke-width="1"/>
+        <text x="436" y="130" fill="#777" font-size="9" font-family="sans-serif">Notion</text>
+        <text x="308" y="158" fill="#c8230e" font-size="9" font-family="sans-serif" opacity=".55">Dynamic context &#183; See your real data live</text>
+      </svg>
+      <div class="kicker">แนวคิด AI &#183; ทำไมทุกคนพูดถึง</div>
+      <h3 class="hl">API vs MCP ต่างกันอย่างไร? มาตรฐานที่ AI ทุกตัวกำลังเปลี่ยนไปใช้ในปี 2569</h3>
+      <p class="excerpt">API เหมือนเมนูร้านอาหาร สั่งได้ตามที่กำหนดไว้เท่านั้น แต่ MCP เหมือนให้เชฟออกมาดูตู้เย็นจริงของคุณแล้วปรุงให้ตรงกับของที่มี ทำให้ AI เข้าใจ context จริงๆ ทุก platform ใหญ่ตั้งแต่ Claude, Copilot ไปถึง Cursor กำลังใช้ MCP อยู่ตอนนี้</p>
+      <div class="tag-row">
+        <span class="tag">Anthropic MCP</span><span class="tag">REST API</span><span class="tag">Claude.ai</span><span class="tag">Copilot Studio</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="table-section fu" style="margin-bottom:0">
+    <h2>&#128203; สรุป 8 หัวข่าว &#8212; ใครทำได้ ใช้ได้จากไทย และฟรีไหม</h2>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr><th>#</th><th>หัวข่าว</th><th>ทำอะไรได้</th><th>ใช้ได้จากไทย</th><th>ฟรี?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Gemini 3.1 Flash Live</strong></td><td style="color:#4a4a47">คุยกับ AI ด้วยเสียงแบบ real-time ไร้ความหน่วง</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี (Gemini App)</span></td></tr>
+          <tr><td>2</td><td><strong>Google Translate Live TH</strong></td><td style="color:#4a4a47">แปลเสียงผ่านหูฟัง real-time รองรับไทย</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี</span></td></tr>
+          <tr><td>3</td><td><strong>Copilot Cowork</strong></td><td style="color:#4a4a47">AI รับ task ทำงานแทนข้าม Word/Excel/Outlook</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge no">&#10007; ต้องมี M365 Copilot</span></td></tr>
+          <tr><td>4</td><td><strong>Claude &#215; Microsoft 365</strong></td><td style="color:#4a4a47">Claude อ่าน email/ไฟล์/Teams โดยตรง</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี ทุก Plan</span></td></tr>
+          <tr><td>5</td><td><strong>NotebookLM Video + Slides</strong></td><td style="color:#4a4a47">เอกสาร &#8594; วิดีโออธิบาย + สไลด์สวยงาม</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge part">&#9889; ฟรี (จำกัดจำนวน)</span></td></tr>
+          <tr><td>6</td><td><strong>HTML Presentation จาก Claude</strong></td><td style="color:#4a4a47">สร้าง dashboard interactive เปิดใน browser ได้เลย</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี (ใน Claude.ai)</span></td></tr>
+          <tr><td>7</td><td><strong>CLI คืออะไร</strong></td><td style="color:#4a4a47">Command Line สำหรับผู้เริ่มต้น อ่านจบเข้าใจได้เลย</td><td><span class="badge yes">&#10003; built-in ทุก OS</span></td><td><span class="badge yes">&#10003; ฟรี</span></td></tr>
+          <tr><td>8</td><td><strong>API vs MCP</strong></td><td style="color:#4a4a47">อธิบายความต่างที่ทุก AI platform ใช้อยู่ตอนนี้</td><td><span class="badge yes">&#10003; ใช้ได้ทุกที่</span></td><td><span class="badge yes">&#10003; ฟรี (concept)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <strong>TechBrief</strong> &#183; สรุปข่าวเทคโนโลยีและ AI ประจำสัปดาห์ &#183; เนื้อหาเรียบเรียงโดย AI เพื่อการศึกษา &#183; 7 เมษายน 2569
+</footer>
+
+<script>
+(function(){
+  var tabs = document.querySelectorAll('#tab-list a');
+  var cards = document.querySelectorAll('[data-cat]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(e){
+      e.preventDefault();
+      tabs.forEach(function(t){ t.classList.remove('tab-active'); });
+      this.classList.add('tab-active');
+      var f = this.getAttribute('data-filter');
+      cards.forEach(function(c){
+        if(f==='all' || c.getAttribute('data-cat')===f){
+          c.classList.remove('hidden-card');
+        } else {
+          c.classList.add('hidden-card');
+        }
+      });
+      var hg = document.getElementById('hero-grid');
+      var hItems = hg.querySelectorAll('[data-cat]');
+      var anyVis = Array.from(hItems).some(function(c){ return !c.classList.contains('hidden-card'); });
+      hg.style.display = anyVis ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>

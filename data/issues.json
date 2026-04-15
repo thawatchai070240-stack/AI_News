@@ -1,0 +1,108 @@
+{
+  "generated_at": "2026-04-15T12:10:39",
+  "count": 2,
+  "issues": [
+    {
+      "id": 2,
+      "slug": "issue-02",
+      "source_file": "AI-news_2.html",
+      "output_file": "issues/issue-02.html",
+      "title": "TechBrief — สรุปข่าวเทคโนโลยีและ AI ประจำสัปดาห์",
+      "tagline": "สรุปข่าวเทคโนโลยีและ AI รายสัปดาห์ · ฉบับภาษาไทย",
+      "date_th": "15 เมษายน 2569",
+      "date_iso": "2026-04-15",
+      "week": 15,
+      "edition": "ฉบับพิเศษ AI Race",
+      "headline_count": 8,
+      "hero_headline": "Claude Mythos — AI ที่แข็งแกร่งเกินกว่าจะปล่อยให้ใครก็ใช้ได้",
+      "hero_excerpt": "ค้นพบ Zero-day หลายพันช่องโหว่ใน OS และเบราว์เซอร์ทุกค่ายโดยอัตโนมัติ Anthropic จึงจำกัดการใช้เฉพาะ Project Glasswing กับพันธมิตรกว่า 50 องค์กร",
+      "headlines": [
+        "Claude Mythos — AI ที่แข็งแกร่งเกินกว่าจะปล่อยให้ใครก็ใช้ได้",
+        "Muse Spark — ผลงานแรกของ Alexander Wang ฟรีทุก Function",
+        "GLM-5.1 เขย่า Silicon Valley — อันดับ 1 SWE-Bench Pro บน Hardware จีนล้วน",
+        "Gemma 4 — Claude Code ฟรีได้แล้ว ไม่ต้องจ่าย API ใช้ได้ทันที",
+        "Advisor Strategy — ลด AI Cost 85% โดยไม่เสียคุณภาพ",
+        "Firecrawl — เว็บ → Markdown/JSON พร้อมป้อน AI ใน 1 API Call",
+        "Second Brain by Obsidian — ยุค Wiki แทน Vector Database",
+        "CodeWiki — แปลโค้ดเป็นภาษาคน อัปเดตตัวเองอัตโนมัติ"
+      ],
+      "categories": [
+        {
+          "key": "all",
+          "label": "ทั้งหมด"
+        },
+        {
+          "key": "opensource",
+          "label": "Open Source AI"
+        },
+        {
+          "key": "anthropic",
+          "label": "Anthropic"
+        },
+        {
+          "key": "google",
+          "label": "Google"
+        },
+        {
+          "key": "tools",
+          "label": "Tools & Apps"
+        },
+        {
+          "key": "concept",
+          "label": "Concept"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "slug": "issue-01",
+      "source_file": "AI-news_1.html",
+      "output_file": "issues/issue-01.html",
+      "title": "TechBrief — สรุปข่าวเทคโนโลยีประจำสัปดาห์",
+      "tagline": "สรุปข่าวเทคโนโลยีและ AI ที่คุณพลาดไม่ได้",
+      "date_th": "7 เมษายน 2569",
+      "date_iso": "2026-04-07",
+      "week": 14,
+      "edition": "ฉบับที่ 52",
+      "headline_count": 8,
+      "hero_headline": "Google ปล่อย Gemini 3.1 Flash Live — คุยกับ AI ได้ลื่นเหมือนโทรหาเพื่อน ไม่มีการหน่วงอีกต่อไป",
+      "hero_excerpt": "AI voice รุ่นใหม่ที่ฟัง-คิด-ตอบได้ในขั้นตอนเดียว กรองเสียงรบกวนได้แม้อยู่บนถนน รองรับ 90+ ภาษา ใช้ได้ใน 200+ ประเทศรวมถึงไทย",
+      "headlines": [
+        "Google ปล่อย Gemini 3.1 Flash Live — คุยกับ AI ได้ลื่นเหมือนโทรหาเพื่อน ไม่มีการหน่วงอีกต่อไป",
+        "Google Translate เปิด Live Translation ในไทยแล้ว — แปลผ่านหูฟัง real-time ไม่ต้องพิมพ์แม้แต่ตัวเดียว",
+        "Copilot Cowork เปิดตัวอย่างเป็นทางการ — ใช้ Claude ทำงานแทนคุณข้าม Word, Excel, Outlook พร้อมกัน",
+        "Claude เปิด Microsoft 365 ฟรีทุก Plan — อ่าน Outlook, OneDrive, SharePoint โดยไม่ต้องจ่ายเพิ่ม",
+        "โยน PDF เข้า NotebookLM — ได้วิดีโออธิบายและ Slides สวยงามออกมาใน 5 นาที",
+        "สร้าง Presentation แบบใหม่ด้วย Claude — ได้ HTML Dashboard ที่คลิกได้ เปิดในเบราว์เซอร์ได้ทุกที่",
+        "CLI คืออะไร? หน้าต่างดำที่ดูน่ากลัว แต่ซ่อนพลังไว้มหาศาล",
+        "API vs MCP ต่างกันอย่างไร? มาตรฐานที่ AI ทุกตัวกำลังเปลี่ยนไปใช้ในปี 2569"
+      ],
+      "categories": [
+        {
+          "key": "all",
+          "label": "ทั้งหมด"
+        },
+        {
+          "key": "google",
+          "label": "Google AI"
+        },
+        {
+          "key": "microsoft",
+          "label": "Microsoft"
+        },
+        {
+          "key": "anthropic",
+          "label": "Anthropic"
+        },
+        {
+          "key": "tools",
+          "label": "Tools & Apps"
+        },
+        {
+          "key": "concept",
+          "label": "พื้นฐาน Tech"
+        }
+      ]
+    }
+  ]
+}

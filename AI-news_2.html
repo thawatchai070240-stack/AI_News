@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBrief — สรุปข่าวเทคโนโลยีและ AI ประจำสัปดาห์</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0f0e;--ink-2:#2a2a28;--ink-3:#4a4a47;
+  --smoke:#f5f4f0;--paper:#faf9f6;--rule:#e0dfd8;
+  --accent:#c8230e;--accent2:#e8a020;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Sarabun','Noto Sans Thai',sans-serif;
+  --max:1180px;
+}
+html{font-size:16px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* TICKER */
+.ticker-wrap{background:var(--accent);overflow:hidden}
+.ticker-inner{display:flex;align-items:center;padding:6px 0;white-space:nowrap;animation:ticker 55s linear infinite;font-size:12px;font-weight:700;color:#fff;letter-spacing:.4px}
+.ticker-inner span{padding:0 36px}
+.tlabel{background:#fff;color:var(--accent);font-size:11px;font-weight:800;padding:2px 10px;margin-right:16px;letter-spacing:1px;flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HEADER */
+.site-header{background:var(--ink);border-bottom:3px solid var(--accent)}
+.masthead-inner{max-width:var(--max);margin:0 auto;padding:22px 24px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.site-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1;cursor:pointer}
+.site-name em{color:var(--accent);font-style:normal}
+.site-tagline{color:rgba(255,255,255,.38);font-size:12px;letter-spacing:.5px;margin-top:5px}
+.site-meta{text-align:right;color:rgba(255,255,255,.4);font-size:12px;line-height:1.8}
+.site-meta strong{color:rgba(255,255,255,.78);display:block;font-size:13px}
+
+/* NAV TABS */
+.site-nav{border-top:1px solid rgba(255,255,255,.1)}
+.site-nav ul{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;list-style:none;overflow-x:auto}
+.site-nav li a{display:block;padding:10px 18px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;cursor:pointer}
+.site-nav li a:hover{color:rgba(255,255,255,.85)}
+.site-nav li a.tab-active{color:#fff;border-bottom-color:var(--accent)}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* SECTION LABEL */
+.section-label{display:flex;align-items:center;gap:12px;margin:36px 0 20px}
+.section-label::before{content:'';width:28px;height:3px;background:var(--accent);flex-shrink:0}
+.slabel-text{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+/* CHIPS */
+.chip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 10px;text-transform:uppercase}
+.chip-red{background:var(--accent);color:#fff}
+.chip-gold{background:var(--accent2);color:var(--ink)}
+.chip-dark{background:rgba(255,255,255,.15);color:#fff}
+.chip-slate{background:#1a1a1a;color:#f0efeb}
+.chip-blue{background:#1a5aaa;color:#fff}
+.chip-purple{background:#5a1aaa;color:#fff}
+
+/* HERO GRID */
+.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:720px){.hero-grid{grid-template-columns:1fr}}
+.hero-primary{position:relative;overflow:hidden;cursor:pointer}
+.hero-primary svg.cover{width:100%;height:440px;display:block;transition:transform .5s ease-out}
+.hero-primary:hover svg.cover{transform:scale(1.03)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,7,.93) 38%,rgba(8,8,7,.15) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.hero-primary .hl{font-family:var(--serif);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;color:#fff;line-height:1.3;margin:10px 0 9px}
+.hero-primary .dk{font-size:14px;color:rgba(255,255,255,.68);line-height:1.65;margin-bottom:12px}
+.byline{font-size:11.5px;color:rgba(255,255,255,.38)}
+.hero-stack{display:flex;flex-direction:column;gap:3px}
+.hero-secondary{position:relative;overflow:hidden;flex:1;cursor:pointer;min-height:218px}
+.hero-secondary svg.cover{width:100%;height:218px;display:block;transition:transform .5s ease-out}
+.hero-secondary:hover svg.cover{transform:scale(1.04)}
+.hero-secondary .hero-overlay{padding:18px 20px}
+.hero-secondary .hl{font-family:var(--serif);font-size:clamp(1rem,1.7vw,1.18rem);font-weight:700;color:#fff;line-height:1.35;margin:8px 0 6px}
+
+/* ARTICLE ROW */
+.article-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px}
+@media(max-width:860px){.article-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.article-row{grid-template-columns:1fr}}
+.article-card{cursor:pointer;transition:transform .2s,box-shadow .2s}
+.article-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.13)}
+.thumb-wrap{overflow:hidden;aspect-ratio:16/9;margin-bottom:14px}
+.thumb-wrap svg{width:100%;height:100%;display:block;transition:transform .45s ease-out}
+.article-card:hover .thumb-wrap svg{transform:scale(1.05)}
+.article-card .hl{font-family:var(--serif);font-size:1.08rem;font-weight:700;line-height:1.4;color:var(--ink);margin-bottom:8px;margin-top:9px}
+.article-card .excerpt{font-size:13.5px;color:var(--ink-3);line-height:1.7;margin-bottom:10px}
+.article-card .byline{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:8px}
+.read-more{color:var(--accent);font-size:.8rem;font-weight:700}
+
+/* EXPLAINER DARK */
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:600px){.explainer-grid{grid-template-columns:1fr}}
+.explainer-card{background:#1c1c1a;padding:30px 26px;cursor:pointer;transition:background .2s,transform .2s;display:flex;flex-direction:column}
+.explainer-card:hover{background:#222220;transform:none}
+.explainer-card svg{width:100%;height:192px;display:block;margin-bottom:20px;opacity:.82;transition:opacity .3s}
+.explainer-card:hover svg{opacity:1}
+.kicker{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.explainer-card .hl{font-family:var(--serif);font-size:1.28rem;font-weight:700;color:#f5f4f0;line-height:1.35;margin-bottom:12px}
+.explainer-card .excerpt{font-size:13.5px;color:rgba(245,244,240,.58);line-height:1.7;margin-bottom:16px;flex:1}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;color:rgba(245,244,240,.45);border:1px solid rgba(245,244,240,.18);padding:3px 9px}
+
+/* SUMMARY TABLE */
+.table-section{background:var(--smoke);border:1px solid var(--rule);padding:26px 26px 22px;margin-top:36px}
+.table-section h2{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{background:var(--ink);color:#fff;text-align:left;padding:10px 14px;font-weight:700;font-size:12px;letter-spacing:.5px}
+tbody tr{border-bottom:1px solid var(--rule)}
+tbody tr:hover{background:#edece6}
+tbody td{padding:11px 14px;color:var(--ink-2);vertical-align:middle}
+tbody td:first-child{font-weight:800;color:var(--accent);font-size:15px;width:36px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:2px}
+.yes{background:#d4edda;color:#1a5c2a}
+.no{background:#f5e0e0;color:#6b1a1a}
+.part{background:#fff3cd;color:#664d00}
+
+/* FOOTER */
+.site-footer{background:var(--ink);color:rgba(255,255,255,.32);text-align:center;font-size:12px;padding:22px;margin-top:48px}
+.site-footer strong{color:rgba(255,255,255,.7)}
+
+/* UTILS */
+hr.rule{border:none;border-top:1px solid var(--rule);margin:36px 0}
+.hidden-card{display:none!important}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .5s ease-out both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}
+
+/* ── DETAIL VIEW ── */
+#detail-view{min-height:100vh;background:var(--paper)}
+.detail-topbar{background:var(--ink);padding:12px 32px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--accent)}
+.back-btn{background:none;border:1px solid rgba(255,255,255,.3);color:white;padding:7px 18px;border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:.85rem;font-weight:600;transition:background .2s,border-color .2s}
+.back-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.55)}
+.site-name-sm{color:white;font-family:var(--serif);font-size:1.1rem;font-weight:700;cursor:pointer}
+.site-name-sm em{color:var(--accent);font-style:normal}
+.detail-inner{max-width:800px;margin:0 auto;padding:52px 24px 90px}
+.detail-meta{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.detail-meta .byline{font-size:12px;color:var(--ink-3)}
+.detail-headline{font-family:var(--serif);font-size:clamp(1.75rem,4vw,2.5rem);line-height:1.22;color:var(--ink);margin-bottom:6px;font-weight:900}
+.detail-hero-svg{width:100%;border-radius:10px;overflow:hidden;margin:28px 0 40px;box-shadow:0 4px 28px rgba(0,0,0,.13)}
+.detail-hero-svg svg{width:100%;display:block}
+.detail-section{margin-top:38px;padding-top:30px;border-top:1px solid var(--rule)}
+.detail-section h2{font-family:var(--sans);font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.detail-section p{font-family:var(--sans);font-size:1.06rem;line-height:1.85;color:var(--ink-2)}
+.detail-section p + p{margin-top:14px}
+.detail-footer-link{display:inline-flex;align-items:center;gap:10px;margin-top:52px;padding:13px 28px;background:var(--ink);color:white;border-radius:6px;text-decoration:none;font-family:var(--sans);font-size:.92rem;font-weight:700;transition:opacity .2s;letter-spacing:.2px}
+.detail-footer-link:hover{opacity:.82}
+.hero-primary:hover{cursor:pointer}
+.hero-secondary:hover{cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     INDEX VIEW
+════════════════════════════════════════ -->
+<div id="index-view">
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="tlabel">LIVE</span>
+    <span>Meta เปิดตัว Muse Spark — AI รุ่นใหม่จาก Alexander Wang ฟรีทุก Function</span>
+    <span>&#183;</span><span>Gemma 4 เชื่อม Claude Code ได้ทันที ไม่ต้องจ่าย API</span>
+    <span>&#183;</span><span>GLM-5.1 คว้าอันดับ 1 SWE-Bench Pro แซง Opus 4.6 และ GPT-5.4</span>
+    <span>&#183;</span><span>Claude Mythos — แข็งแกร่งเกินกว่าจะปล่อยสู่สาธารณะ Project Glasswing เปิดตัว</span>
+    <span>&#183;</span><span>Advisor Strategy ลดต้นทุน AI Agent ได้สูงสุด 85% โดยไม่เสียคุณภาพ</span>
+    <span>&#183;</span><span>Second Brain by Obsidian — ยุคใหม่ของ Knowledge Management ก้าวพ้น RAG</span>
+    <span>&#183;</span><span>Firecrawl แปลงเว็บเป็น Markdown/JSON พร้อมป้อน AI ใน 1 API Call</span>
+    <span>&#183;</span><span>Google Code Wiki แปลโค้ดเป็นภาษาคน อัปเดตตัวเองทุก Commit</span>
+    <span style="padding-right:80px">&#183;</span>
+    <span class="tlabel">LIVE</span>
+    <span>Meta เปิดตัว Muse Spark — AI รุ่นใหม่จาก Alexander Wang ฟรีทุก Function</span>
+    <span>&#183;</span><span>Gemma 4 เชื่อม Claude Code ได้ทันที ไม่ต้องจ่าย API</span>
+    <span>&#183;</span><span>GLM-5.1 คว้าอันดับ 1 SWE-Bench Pro แซง Opus 4.6 และ GPT-5.4</span>
+    <span>&#183;</span><span>Claude Mythos — แข็งแกร่งเกินกว่าจะปล่อยสู่สาธารณะ Project Glasswing เปิดตัว</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="masthead-inner fu">
+    <div>
+      <div class="site-name" onclick="showIndex()">Tech<em>Brief</em></div>
+      <div class="site-tagline">สรุปข่าวเทคโนโลยีและ AI รายสัปดาห์ · ฉบับภาษาไทย</div>
+    </div>
+    <div class="site-meta">
+      <strong>15 เมษายน 2569</strong>
+      สัปดาห์ที่ 15 · ฉบับพิเศษ AI Race<br>8 หัวข่าวสำคัญ
+    </div>
+  </div>
+  <nav class="site-nav" id="main-nav">
+    <ul id="tab-list">
+      <li><a href="#" class="tab-active" data-filter="all">ทั้งหมด</a></li>
+      <li><a href="#" data-filter="opensource">Open Source AI</a></li>
+      <li><a href="#" data-filter="anthropic">Anthropic</a></li>
+      <li><a href="#" data-filter="google">Google</a></li>
+      <li><a href="#" data-filter="tools">Tools &amp; Apps</a></li>
+      <li><a href="#" data-filter="concept">Concept</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- PAGE CONTENT -->
+<div class="page-wrap">
+
+  <!-- SECTION: ข่าวเด่น -->
+  <div class="section-label fu d1"><span class="slabel-text">ข่าวเด่นประจำสัปดาห์</span></div>
+
+  <!-- HERO GRID -->
+  <div class="hero-grid fu d2" id="hero-grid">
+    <!-- HERO PRIMARY: Claude Mythos -->
+    <article class="hero-primary" data-cat="anthropic" onclick="showDetail('mythos')" style="cursor:pointer">
+      <svg class="cover" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gMythos" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1a0c03"/>
+            <stop offset="100%" stop-color="#0a0603"/>
+          </linearGradient>
+          <radialGradient id="gGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#d4692a" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#0a0603" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="800" height="440" fill="url(#gMythos)"/>
+        <rect width="800" height="440" fill="url(#gGlow)"/>
+        <!-- Shield / lock icon center -->
+        <polygon points="400,80 480,120 480,220 400,280 320,220 320,120" fill="none" stroke="#d4692a" stroke-width="2.5" opacity=".7"/>
+        <polygon points="400,105 462,138 462,212 400,260 338,212 338,138" fill="#d4692a" opacity=".12"/>
+        <text x="400" y="192" text-anchor="middle" fill="#d4692a" font-size="42" font-weight="900" font-family="Georgia" opacity=".9">🔒</text>
+        <!-- Warning rings -->
+        <circle cx="400" cy="180" r="80" fill="none" stroke="#d4692a" stroke-width="1.5" opacity=".25" stroke-dasharray="6,4"/>
+        <circle cx="400" cy="180" r="120" fill="none" stroke="#d4692a" stroke-width="1" opacity=".15" stroke-dasharray="6,4"/>
+        <circle cx="400" cy="180" r="165" fill="none" stroke="#d4692a" stroke-width="1" opacity=".08" stroke-dasharray="6,4"/>
+        <!-- Zero-day badge -->
+        <rect x="50" y="50" width="180" height="34" rx="4" fill="#c8230e" opacity=".85"/>
+        <text x="140" y="72" text-anchor="middle" fill="white" font-size="13" font-weight="800" font-family="sans-serif" letter-spacing="1">ZERO-DAY FOUND</text>
+        <!-- Watermark -->
+        <text x="400" y="400" text-anchor="middle" fill="white" font-size="72" font-weight="900" font-family="Georgia" opacity=".05">MYTHOS</text>
+        <!-- Label -->
+        <text x="40" y="415" fill="white" font-size="11" font-family="sans-serif" opacity=".3" letter-spacing="2">ANTHROPIC · PROJECT GLASSWING · 2026</text>
+      </svg>
+      <div class="hero-overlay">
+        <span class="chip chip-red">Anthropic · Breaking</span>
+        <h1 class="hl">Claude Mythos — AI ที่แข็งแกร่งเกินกว่าจะปล่อยให้ใครก็ใช้ได้</h1>
+        <p class="dk">ค้นพบ Zero-day หลายพันช่องโหว่ใน OS และเบราว์เซอร์ทุกค่ายโดยอัตโนมัติ Anthropic จึงจำกัดการใช้เฉพาะ Project Glasswing กับพันธมิตรกว่า 50 องค์กร</p>
+        <div class="byline">8 เมษายน 2569 &#183; anthropic.com &#183; <span class="read-more">อ่านต่อ →</span></div>
+      </div>
+    </article>
+
+    <!-- HERO STACK -->
+    <div class="hero-stack">
+      <!-- Hero Sec 1: Muse Spark -->
+      <article class="hero-secondary" data-cat="opensource" onclick="showDetail('musespark')" style="cursor:pointer">
+        <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gMeta" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#1a1a4a"/>
+              <stop offset="100%" stop-color="#0d0d2e"/>
+            </linearGradient>
+          </defs>
+          <rect width="500" height="218" fill="url(#gMeta)"/>
+          <!-- Meta infinity-like logo hint -->
+          <ellipse cx="220" cy="109" rx="55" ry="28" fill="none" stroke="#6a8aff" stroke-width="3" opacity=".7"/>
+          <ellipse cx="290" cy="109" rx="55" ry="28" fill="none" stroke="#6a8aff" stroke-width="3" opacity=".7"/>
+          <circle cx="255" cy="109" r="10" fill="#6a8aff" opacity=".5"/>
+          <!-- Spark dots -->
+          <circle cx="130" cy="60" r="3" fill="#6a8aff" opacity=".6"/>
+          <circle cx="370" cy="155" r="3" fill="#6a8aff" opacity=".6"/>
+          <circle cx="155" cy="165" r="2" fill="#6a8aff" opacity=".4"/>
+          <circle cx="390" cy="55" r="2" fill="#6a8aff" opacity=".4"/>
+          <text x="255" y="200" text-anchor="middle" fill="white" font-size="48" font-weight="900" font-family="Georgia" opacity=".06">MUSE</text>
+        </svg>
+        <div class="hero-overlay">
+          <span class="chip chip-blue">Meta · Open Source</span>
+          <h2 class="hl">Muse Spark — ผลงานแรกของ Alexander Wang ฟรีทุก Function</h2>
+          <div class="byline">8 เมษายน 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+        </div>
+      </article>
+
+      <!-- Hero Sec 2: GLM-5.1 -->
+      <article class="hero-secondary" data-cat="opensource" onclick="showDetail('glm51')" style="cursor:pointer">
+        <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gGLM" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#0d1f10"/>
+              <stop offset="100%" stop-color="#050e07"/>
+            </linearGradient>
+          </defs>
+          <rect width="500" height="218" fill="url(#gGLM)"/>
+          <!-- Bar chart: GLM > GPT > Opus -->
+          <rect x="80" y="95" width="55" height="90" rx="3" fill="#4ade80" opacity=".85"/>
+          <rect x="160" y="108" width="55" height="77" rx="3" fill="#4ade80" opacity=".5"/>
+          <rect x="240" y="115" width="55" height="70" rx="3" fill="#4ade80" opacity=".35"/>
+          <text x="107" y="88" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="800" font-family="monospace">58.4</text>
+          <text x="187" y="101" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600" font-family="monospace" opacity=".7">57.7</text>
+          <text x="267" y="108" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="600" font-family="monospace" opacity=".55">57.3</text>
+          <text x="107" y="203" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" opacity=".6">GLM-5.1</text>
+          <text x="187" y="203" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" opacity=".4">GPT-5.4</text>
+          <text x="267" y="203" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" opacity=".4">Opus 4.6</text>
+          <!-- SWE label -->
+          <text x="370" y="80" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif" opacity=".5">SWE-Bench Pro</text>
+          <text x="380" y="200" text-anchor="middle" fill="white" font-size="36" font-weight="900" font-family="Georgia" opacity=".06">GLM</text>
+        </svg>
+        <div class="hero-overlay">
+          <span class="chip chip-blue">Open Source · จีน</span>
+          <h2 class="hl">GLM-5.1 เขย่า Silicon Valley — อันดับ 1 SWE-Bench Pro บน Hardware จีนล้วน</h2>
+          <div class="byline">7 เมษายน 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+        </div>
+      </article>
+    </div>
+  </div><!-- /hero-grid -->
+
+  <hr class="rule">
+
+  <!-- SECTION: AI Tools -->
+  <div class="section-label fu d1"><span class="slabel-text">AI Tools &amp; Workflow</span></div>
+  <div class="article-row">
+
+    <!-- Card: Gemma 4 -->
+    <article class="article-card fu d1" data-cat="opensource" onclick="showDetail('gemma4')" style="cursor:pointer">
+      <div class="thumb-wrap">
+        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="gGemma" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a3a5c"/><stop offset="100%" stop-color="#0d1f36"/></linearGradient></defs>
+          <rect width="640" height="360" fill="url(#gGemma)"/>
+          <!-- Ollama terminal snippet -->
+          <rect x="60" y="60" width="520" height="180" rx="8" fill="#0d0d0b" stroke="#4a90e2" stroke-width="1" opacity=".6"/>
+          <rect x="60" y="60" width="520" height="24" rx="8" fill="#1a1a18" opacity=".8"/>
+          <circle cx="82" cy="72" r="5" fill="#c8230e" opacity=".7"/>
+          <circle cx="98" cy="72" r="5" fill="#e8a020" opacity=".7"/>
+          <circle cx="114" cy="72" r="5" fill="#3a8a3a" opacity=".7"/>
+          <text x="80" y="112" fill="#4ade80" font-size="13" font-family="monospace">$ ollama pull gemma4:26b</text>
+          <text x="80" y="134" fill="#666" font-size="12" font-family="monospace">pulling manifest ...</text>
+          <text x="80" y="156" fill="#4ade80" font-size="13" font-family="monospace">$ export ANTHROPIC_BASE_URL=</text>
+          <text x="80" y="174" fill="#4ade80" font-size="13" font-family="monospace">  http://localhost:11434</text>
+          <text x="80" y="196" fill="#4a90e2" font-size="12" font-family="monospace" opacity=".8">✓ Claude Code connected (free)</text>
+          <text x="320" y="330" text-anchor="middle" fill="white" font-size="52" font-weight="900" font-family="Georgia" opacity=".06">GEMMA4</text>
+        </svg>
+      </div>
+      <span class="chip chip-blue">Google · Open Source</span>
+      <h3 class="hl">Gemma 4 — Claude Code ฟรีได้แล้ว ไม่ต้องจ่าย API ใช้ได้ทันที</h3>
+      <p class="excerpt">Google ปล่อย Gemma 4 ภายใต้ Apache 2.0 License รองรับ Context Window 256K Token และสามารถเชื่อมกับ Claude Code ผ่าน Ollama ได้ในไม่กี่คำสั่ง ทำให้นักพัฒนาใช้งาน Claude Code ได้โดยไม่มีค่า Token</p>
+      <div class="byline">เมษายน 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+    </article>
+
+    <!-- Card: Advisor Strategy -->
+    <article class="article-card fu d2" data-cat="anthropic" onclick="showDetail('advisor')" style="cursor:pointer">
+      <div class="thumb-wrap">
+        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="gAdv" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3d1c08"/><stop offset="100%" stop-color="#1a0c03"/></linearGradient></defs>
+          <rect width="640" height="360" fill="url(#gAdv)"/>
+          <!-- Advisor flow diagram -->
+          <!-- Executor box -->
+          <rect x="60" y="100" width="180" height="80" rx="8" fill="#1a0c03" stroke="#d4692a" stroke-width="2" opacity=".8"/>
+          <text x="150" y="135" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="sans-serif">EXECUTOR</text>
+          <text x="150" y="155" text-anchor="middle" fill="#d4692a" font-size="11" font-family="sans-serif">Sonnet / Haiku</text>
+          <!-- Arrow up to advisor -->
+          <line x1="220" y1="140" x2="310" y2="100" stroke="#d4692a" stroke-width="2" opacity=".7" stroke-dasharray="6,3"/>
+          <text x="260" y="115" text-anchor="middle" fill="#e8a020" font-size="10" font-family="sans-serif" opacity=".8">escalate</text>
+          <!-- Advisor box (highlighted) -->
+          <rect x="310" y="50" width="210" height="90" rx="8" fill="#3d1c08" stroke="#e8a020" stroke-width="2.5" opacity=".9"/>
+          <text x="415" y="88" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="sans-serif">ADVISOR</text>
+          <text x="415" y="108" text-anchor="middle" fill="#e8a020" font-size="11" font-family="sans-serif">Opus 4.6</text>
+          <text x="415" y="125" text-anchor="middle" fill="#d4692a" font-size="10" font-family="sans-serif">400-700 tokens</text>
+          <!-- Arrow back down -->
+          <line x1="310" y1="130" x2="240" y2="165" stroke="#d4692a" stroke-width="2" opacity=".7" stroke-dasharray="6,3"/>
+          <text x="262" y="160" text-anchor="middle" fill="#e8a020" font-size="10" font-family="sans-serif" opacity=".8">resume</text>
+          <!-- Cost badge -->
+          <rect x="60" y="220" width="220" height="50" rx="6" fill="#1a0c03" stroke="#4ade80" stroke-width="1.5" opacity=".7"/>
+          <text x="170" y="244" text-anchor="middle" fill="#4ade80" font-size="13" font-weight="800" font-family="sans-serif">ประหยัด 85%</text>
+          <text x="170" y="262" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity=".6">vs. ใช้ Opus ทุก Step</text>
+          <text x="320" y="330" text-anchor="middle" fill="white" font-size="44" font-weight="900" font-family="Georgia" opacity=".05">ADVISOR</text>
+        </svg>
+      </div>
+      <span class="chip chip-slate">Anthropic · Claude API</span>
+      <h3 class="hl">Advisor Strategy — ลด AI Cost 85% โดยไม่เสียคุณภาพ</h3>
+      <p class="excerpt">Anthropic เปิดตัว Pattern ใหม่: ให้ Sonnet/Haiku เป็น Executor ทำงานทุก Step — เรียก Opus มาช่วยเฉพาะจุดที่ยาก ผลลัพธ์คือ Performance เกือบเท่า Opus เต็ม แต่ประหยัดค่าใช้จ่ายได้มหาศาล</p>
+      <div class="byline">9 เมษายน 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+    </article>
+
+    <!-- Card: Firecrawl -->
+    <article class="article-card fu d3" data-cat="tools" onclick="showDetail('firecrawl')" style="cursor:pointer">
+      <div class="thumb-wrap">
+        <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="gFire" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c1410"/><stop offset="100%" stop-color="#0e0a07"/></linearGradient></defs>
+          <rect width="640" height="360" fill="url(#gFire)"/>
+          <!-- Web → Markdown arrow flow -->
+          <!-- Globe icon -->
+          <circle cx="120" cy="140" r="50" fill="none" stroke="#c8230e" stroke-width="2" opacity=".6"/>
+          <ellipse cx="120" cy="140" rx="28" ry="50" fill="none" stroke="#c8230e" stroke-width="1.5" opacity=".4"/>
+          <line x1="70" y1="120" x2="170" y2="120" stroke="#c8230e" stroke-width="1.5" opacity=".4"/>
+          <line x1="70" y1="160" x2="170" y2="160" stroke="#c8230e" stroke-width="1.5" opacity=".4"/>
+          <!-- Arrow -->
+          <line x1="185" y1="140" x2="255" y2="140" stroke="#e8a020" stroke-width="3" opacity=".8"/>
+          <polygon points="255,133 268,140 255,147" fill="#e8a020" opacity=".8"/>
+          <text x="218" y="128" text-anchor="middle" fill="#e8a020" font-size="10" font-family="monospace" opacity=".8">API</text>
+          <!-- Markdown output box -->
+          <rect x="268" y="85" width="200" height="110" rx="6" fill="#0d0d0b" stroke="#4ade80" stroke-width="1.5" opacity=".7"/>
+          <text x="280" y="110" fill="#4ade80" font-size="12" font-family="monospace"># Page Title</text>
+          <text x="280" y="130" fill="#666" font-size="11" font-family="monospace">Content cleaned...</text>
+          <text x="280" y="150" fill="#4ade80" font-size="12" font-family="monospace">## Features</text>
+          <text x="280" y="168" fill="#666" font-size="11" font-family="monospace">- LLM-ready data</text>
+          <text x="280" y="186" fill="#666" font-size="11" font-family="monospace">- No HTML noise</text>
+          <!-- Token saving badge -->
+          <rect x="120" y="215" width="180" height="40" rx="5" fill="#c8230e" opacity=".8"/>
+          <text x="210" y="240" text-anchor="middle" fill="white" font-size="13" font-weight="800" font-family="sans-serif">ลด Token 67%</text>
+          <text x="320" y="330" text-anchor="middle" fill="white" font-size="48" font-weight="900" font-family="Georgia" opacity=".06">FIRECRAWL</text>
+        </svg>
+      </div>
+      <span class="chip chip-red">Tools · Web Scraping</span>
+      <h3 class="hl">Firecrawl — เว็บ → Markdown/JSON พร้อมป้อน AI ใน 1 API Call</h3>
+      <p class="excerpt">ส่ง URL ให้ Firecrawl — รับ Markdown สะอาด JSON มีโครงสร้างกลับมาทันที ลด Token ได้ 67% เทียบกับ HTML ดิบ รองรับ MCP Server เชื่อม Claude และ AI Agent ได้โดยตรง</p>
+      <div class="byline">2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+    </article>
+
+  </div><!-- /article-row -->
+
+  <hr class="rule">
+
+  <!-- SECTION: Knowledge & Concept -->
+  <div class="section-label fu d1"><span class="slabel-text">Knowledge Systems &amp; Concept</span></div>
+  <div class="explainer-grid fu d2">
+
+    <!-- Explainer: Second Brain -->
+    <div class="explainer-card" data-cat="concept" onclick="showDetail('secondbrain')">
+      <svg viewBox="0 0 600 192" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="192" fill="#0d1208"/>
+        <!-- Wiki graph nodes -->
+        <circle cx="200" cy="96" r="22" fill="#1a3320" stroke="#4ade80" stroke-width="2" opacity=".8"/>
+        <text x="200" y="101" text-anchor="middle" fill="#4ade80" font-size="11" font-family="monospace">wiki/</text>
+        <circle cx="320" cy="55" r="16" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".6"/>
+        <text x="320" y="60" text-anchor="middle" fill="#4ade80" font-size="9" font-family="monospace">entity</text>
+        <circle cx="320" cy="137" r="16" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".6"/>
+        <text x="320" y="142" text-anchor="middle" fill="#4ade80" font-size="9" font-family="monospace">concept</text>
+        <circle cx="420" cy="96" r="14" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".5"/>
+        <text x="420" y="101" text-anchor="middle" fill="#4ade80" font-size="9" font-family="monospace">raw/</text>
+        <!-- Connecting lines -->
+        <line x1="222" y1="82" x2="306" y2="62" stroke="#4ade80" stroke-width="1.5" opacity=".4"/>
+        <line x1="222" y1="110" x2="306" y2="130" stroke="#4ade80" stroke-width="1.5" opacity=".4"/>
+        <line x1="336" y1="68" x2="407" y2="87" stroke="#4ade80" stroke-width="1" opacity=".3"/>
+        <line x1="336" y1="124" x2="407" y2="105" stroke="#4ade80" stroke-width="1" opacity=".3"/>
+        <!-- RAG X -->
+        <text x="100" y="60" fill="#c8230e" font-size="28" font-weight="900" font-family="Georgia" opacity=".7">RAG ✗</text>
+        <text x="100" y="85" fill="#4ade80" font-size="20" font-weight="900" font-family="Georgia" opacity=".6">Wiki ✓</text>
+        <text x="520" y="170" text-anchor="middle" fill="white" font-size="32" font-weight="900" font-family="Georgia" opacity=".06">OBS</text>
+      </svg>
+      <div class="kicker">Knowledge Management &#183; ก้าวพ้น RAG</div>
+      <h3 class="hl">Second Brain by Obsidian — ยุค Wiki แทน Vector Database</h3>
+      <p class="excerpt">แทนที่จะ Embed เอกสารลง Vector DB ให้ AI อ่าน Raw data แล้วเขียน Wiki Markdown เชื่อมโยงกันอัตโนมัติ ค้นหาเร็วกว่า ฉลาดกว่า และประหยัด Token ยิ่งขึ้น — แนวคิดจาก Andrej Karpathy ที่กำลังเขย่าวงการ Knowledge Management</p>
+      <div class="tag-row">
+        <span class="tag">Obsidian</span>
+        <span class="tag">Claude Code</span>
+        <span class="tag">MCP</span>
+        <span class="tag">Markdown</span>
+      </div>
+    </div>
+
+    <!-- Explainer: CodeWiki -->
+    <div class="explainer-card" data-cat="google" onclick="showDetail('codewiki')">
+      <svg viewBox="0 0 600 192" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="192" fill="#0a1520"/>
+        <!-- Code lines + wiki arrow -->
+        <rect x="40" y="30" width="200" height="130" rx="6" fill="#0d1f36" stroke="#4a90e2" stroke-width="1" opacity=".5"/>
+        <text x="55" y="58" fill="#4a90e2" font-size="11" font-family="monospace" opacity=".7">function auth()</text>
+        <text x="55" y="76" fill="#666" font-size="11" font-family="monospace">  verify(token)</text>
+        <text x="55" y="94" fill="#4a90e2" font-size="11" font-family="monospace" opacity=".7">  if (!valid)</text>
+        <text x="55" y="112" fill="#666" font-size="11" font-family="monospace">    throw Error</text>
+        <text x="55" y="130" fill="#4a90e2" font-size="11" font-family="monospace" opacity=".7">  return session</text>
+        <text x="55" y="148" fill="#666" font-size="11" font-family="monospace">}</text>
+        <!-- Magic arrow with Gemini sparkle -->
+        <text x="270" y="105" text-anchor="middle" fill="#4fc3f7" font-size="22" opacity=".8">✨</text>
+        <line x1="260" y1="100" x2="330" y2="100" stroke="#4fc3f7" stroke-width="2.5" opacity=".7"/>
+        <polygon points="330,94 345,100 330,106" fill="#4fc3f7" opacity=".7"/>
+        <!-- Wiki output -->
+        <rect x="355" y="30" width="210" height="130" rx="6" fill="#0d1f36" stroke="#4fc3f7" stroke-width="1.5" opacity=".7"/>
+        <text x="370" y="55" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".85"># auth()</text>
+        <text x="370" y="74" fill="#4fc3f7" font-size="11" font-family="sans-serif" opacity=".7">ตรวจสอบ JWT Token</text>
+        <text x="370" y="92" fill="#666" font-size="10" font-family="sans-serif">Returns: session object</text>
+        <text x="370" y="110" fill="#666" font-size="10" font-family="sans-serif">Throws: if token invalid</text>
+        <text x="370" y="135" fill="#4fc3f7" font-size="10" font-family="sans-serif" opacity=".6">อัปเดตอัตโนมัติทุก Commit</text>
+        <text x="300" y="178" text-anchor="middle" fill="white" font-size="28" font-weight="900" font-family="Georgia" opacity=".05">CODEWIKI</text>
+      </svg>
+      <div class="kicker">Google · Developer Tools &#183; Code Documentation</div>
+      <h3 class="hl">CodeWiki — แปลโค้ดเป็นภาษาคน อัปเดตตัวเองอัตโนมัติ</h3>
+      <p class="excerpt">Google ใช้ Gemini อ่าน Repository ทั้งหมดแล้วสร้าง Wiki ที่อัปเดตตัวเองทุกครั้งที่มี Commit ถามเกี่ยวกับโค้ดได้เหมือน Chat — เหมาะมากสำหรับคนไม่ได้เขียนโค้ดเป็นหลัก เช่น Auditor, PM, Business Analyst</p>
+      <div class="tag-row">
+        <span class="tag">Google</span>
+        <span class="tag">Gemini</span>
+        <span class="tag">Documentation</span>
+        <span class="tag">ฟรี</span>
+      </div>
+    </div>
+
+  </div><!-- /explainer-grid -->
+
+  <!-- SUMMARY TABLE -->
+  <div class="table-section fu d3">
+    <h2>สรุปข่าวทั้ง 8 หัวข้อ — สัปดาห์ที่ 15 เมษายน 2569</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>หัวข่าว</th>
+          <th>ประเด็นสำคัญ</th>
+          <th>ใช้ได้จากไทย</th>
+          <th>ฟรี</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong onclick="showDetail('musespark')" style="cursor:pointer;color:var(--accent)">Muse Spark →</strong></td>
+          <td style="color:#4a4a47">AI ตัวแรกของ Meta Superintelligence Labs โดย Alexander Wang</td>
+          <td><span class="badge yes">&#10003; ใช้ได้</span></td>
+          <td><span class="badge yes">&#10003; ฟรี</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong onclick="showDetail('gemma4')" style="cursor:pointer;color:var(--accent)">Gemma 4 →</strong></td>
+          <td style="color:#4a4a47">Open Source, 256K context, เชื่อม Claude Code ผ่าน Ollama ได้เลย</td>
+          <td><span class="badge yes">&#10003; ใช้ได้</span></td>
+          <td><span class="badge yes">&#10003; ฟรี</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong onclick="showDetail('glm51')" style="cursor:pointer;color:var(--accent)">GLM-5.1 →</strong></td>
+          <td style="color:#4a4a47">อันดับ 1 SWE-Bench Pro แซง Opus 4.6 ทำงาน Agentic ได้ 8 ชม.</td>
+          <td><span class="badge yes">&#10003; ใช้ได้</span></td>
+          <td><span class="badge part">&#9679; MIT / $3+</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong onclick="showDetail('secondbrain')" style="cursor:pointer;color:var(--accent)">Second Brain →</strong></td>
+          <td style="color:#4a4a47">AI จัดเก็บความรู้เป็น Wiki Markdown แทน RAG ประหยัด Token ยิ่งขึ้น</td>
+          <td><span class="badge yes">&#10003; ใช้ได้</span></td>
+          <td><span class="badge yes">&#10003; ฟรี</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong onclick="showDetail('codewiki')" style="cursor:pointer;color:var(--accent)">CodeWiki →</strong></td>
+          <td style="color:#4a4a47">Google แปลง Repository ทั้งหมดเป็น Wiki อัปเดตอัตโนมัติ</td>
+          <td><span class="badge yes">&#10003; ใช้ได้</span></td>
+          <td><span class="badge yes">&#10003; ฟรี Preview</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong onclick="showDetail('firecrawl')" style="cursor:pointer;color:var(--accent)">Firecrawl →</strong></td>
+          <td style="color:#4a4a47">เว็บ → Markdown/JSON ใน 1 API Call ลด Token 67%</td>
+          <td><span class="badge yes">&#10003; ใช้ได้</span></td>
+          <td><span class="badge part">&#9679; 500 credits ฟรี</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong onclick="showDetail('advisor')" style="cursor:pointer;color:var(--accent)">Advisor Strategy →</strong></td>
+          <td style="color:#4a4a47">Haiku+Opus ลดต้นทุน 85% คุณภาพเกือบเท่า Opus เต็ม</td>
+          <td><span class="badge yes">&#10003; ใช้ได้</span></td>
+          <td><span class="badge part">&#9679; API pricing</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><strong onclick="showDetail('mythos')" style="cursor:pointer;color:var(--accent)">Claude Mythos →</strong></td>
+          <td style="color:#4a4a47">พบ Zero-day นับพัน ไม่ปล่อยสู่สาธารณะ เฉพาะ Project Glasswing</td>
+          <td><span class="badge no">&#10007; จำกัด</span></td>
+          <td><span class="badge no">&#10007; Restricted</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<footer class="site-footer">
+  <strong>Tech<em style="color:var(--accent);font-style:normal">Brief</em></strong> · สรุปข่าวเทคโนโลยีและ AI · 15 เมษายน 2569 · ฉบับพิเศษ AI Race · 8 หัวข่าว
+</footer>
+
+</div><!-- /index-view -->
+
+
+<!-- ════════════════════════════════════════
+     DETAIL VIEW
+════════════════════════════════════════ -->
+<div id="detail-view" style="display:none">
+  <div class="detail-topbar">
+    <button onclick="showIndex()" class="back-btn">← กลับ</button>
+    <span class="site-name-sm" onclick="showIndex()">Tech<em>Brief</em></span>
+  </div>
+  <div id="detail-content"></div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════ -->
+<script>
+var articles = {
+
+  'musespark': {
+    cat: 'opensource',
+    chip: 'chip-blue',
+    label: 'Meta · Open Source AI',
+    headline: 'Muse Spark — AI ตัวแรกจาก Meta Superintelligence Labs ผลงานชิ้นแรกของ Alexander Wang',
+    date: '8 เมษายน 2569',
+    source: 'TechCrunch / Fortune / Axios',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dMuseH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1a1a4a"/>
+          <stop offset="100%" stop-color="#0d0d2e"/>
+        </linearGradient>
+        <radialGradient id="dMuseGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#6a8aff" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#0d0d2e" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dMuseH)"/>
+      <rect width="1200" height="500" fill="url(#dMuseGlow)"/>
+      <ellipse cx="500" cy="250" rx="110" ry="55" fill="none" stroke="#6a8aff" stroke-width="4" opacity=".65"/>
+      <ellipse cx="700" cy="250" rx="110" ry="55" fill="none" stroke="#6a8aff" stroke-width="4" opacity=".65"/>
+      <circle cx="600" cy="250" r="20" fill="#6a8aff" opacity=".4"/>
+      <circle cx="390" cy="250" r="8" fill="#6a8aff" opacity=".5"/>
+      <circle cx="810" cy="250" r="8" fill="#6a8aff" opacity=".5"/>
+      <circle cx="200" cy="130" r="4" fill="#6a8aff" opacity=".5"/>
+      <circle cx="950" cy="370" r="4" fill="#6a8aff" opacity=".5"/>
+      <circle cx="250" cy="380" r="3" fill="#6a8aff" opacity=".35"/>
+      <circle cx="1000" cy="120" r="3" fill="#6a8aff" opacity=".35"/>
+      <text x="600" y="460" text-anchor="middle" fill="white" font-size="110" font-weight="900" font-family="Georgia" opacity=".04">MUSE SPARK</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>Muse Spark เป็น Reasoning Model ตัวแรกของ Meta รองรับ Input ทั้ง Text, Image และ Voice มาพร้อม Fast Mode สำหรับคำถามทั่วไป และ Contemplating Mode สำหรับงานซับซ้อน จุดเด่นคือระบบ Multi-Agent ที่ Deploy ตัวแทน AI หลายตัวพร้อมกันเพื่อเพิ่มความเร็วในการ Reasoning นอกจากนี้ยังมี Shopping Mode ที่ผสาน AI เข้ากับ Commerce บน Meta Platform โดยตรง รวมถึงความสามารถด้านสุขภาพที่พัฒนาร่วมกับแพทย์กว่า 1,000 คน และ Visual Coding ที่ให้ผู้ใช้สร้างเว็บไซต์หรือ Mini-game จากคำสั่งภาษาธรรมชาติ</p>
+        <p>Muse Spark ใช้ Output Token น้อยกว่า Claude Opus 4.6 ถึง 3 เท่าในการผ่าน Intelligence Index Evaluation — หมายความว่าตอบเร็วกว่าและประหยัด Compute มากกว่าในการใช้งานสเกลใหญ่ ภายใน 24 ชั่วโมงหลังเปิดตัว Meta AI App พุ่งจากอันดับ 57 ไปสู่อันดับ 5 บน Apple App Store</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>ปัจจุบัน Muse Spark ใช้งานได้ผ่าน Meta AI App และเว็บไซต์ meta.ai โดยต้อง Login ด้วย Account Facebook หรือ Instagram ที่มีอยู่แล้ว ทุก Function ใช้ฟรี แม้อาจมีการ Rate Limit ในภายหลัง ข้อจำกัดสำคัญคือ ตอนนี้เปิดให้บริการเฉพาะในสหรัฐอเมริกาก่อน ยังไม่พร้อมใช้งานจากประเทศไทย สำหรับนักพัฒนา Meta กำลังทดสอบ Private API กับ "Select Partners" และวางแผนขยายสู่ Paid API Access ในอนาคต</p>
+        <p>Meta ยังมีแผนปล่อย Open Source Version ของ Muse Spark ในอนาคต แต่ขณะนี้ยังเป็น Closed Source ซึ่งถือเป็นการพลิกกลับจากกลยุทธ์ Open Source ที่ Meta ยึดถือมาตลอดด้วย Llama Series</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>Muse Spark เป็นสัญญาณที่ชัดเจนว่า Meta กลับมาแข่งขันในสนาม AI อย่างจริงจัง หลังจาก Llama 4 ล้มเหลวไม่เป็นท่า Zuckerberg ลงทุน $14.3 พันล้านและดึง Alexander Wang มาจาก Scale AI เพื่อพลิกเกมนี้โดยเฉพาะ ผลลัพธ์ที่ได้คือโมเดลที่ Meta ยอมรับตรงๆ ว่าไม่ใช่ State-of-the-art แต่กลับได้รับความสนใจสูงเพราะความโปร่งใสและการ Integrate เข้ากับ 3.3 พันล้าน User บน Facebook, Instagram และ WhatsApp ซึ่งเป็น Distribution Advantage ที่ไม่มีคู่แข่งรายใดทำได้ นักลงทุนตอบรับดี หุ้น Meta พุ่งขึ้น 9% หลังการเปิดตัว</p>
+      </section>
+    `,
+    link: 'https://techcrunch.com/2026/04/08/meta-debuts-the-muse-spark-model-in-a-ground-up-overhaul-of-its-ai/'
+  },
+
+  'gemma4': {
+    cat: 'opensource',
+    chip: 'chip-blue',
+    label: 'Google · Open Source',
+    headline: 'Gemma 4 — Open Source 256K Context เชื่อม Claude Code ได้ฟรี ไม่ต้องผ่าน API',
+    date: 'เมษายน 2569',
+    source: 'Google DeepMind / Ollama / Coding Beauty',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dGemmaH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1a3a5c"/>
+          <stop offset="100%" stop-color="#0d1f36"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dGemmaH)"/>
+      <rect x="200" y="80" width="800" height="280" rx="12" fill="#0d0d0b" stroke="#4a90e2" stroke-width="1.5" opacity=".5"/>
+      <rect x="200" y="80" width="800" height="32" rx="12" fill="#1a1a18" opacity=".8"/>
+      <circle cx="228" cy="96" r="7" fill="#c8230e" opacity=".7"/>
+      <circle cx="250" cy="96" r="7" fill="#e8a020" opacity=".7"/>
+      <circle cx="272" cy="96" r="7" fill="#3a8a3a" opacity=".7"/>
+      <text x="225" y="155" fill="#4ade80" font-size="16" font-family="monospace">$ ollama pull gemma4:26b</text>
+      <text x="225" y="183" fill="#555" font-size="15" font-family="monospace">pulling manifest... done ✓</text>
+      <text x="225" y="215" fill="#4ade80" font-size="16" font-family="monospace">$ export ANTHROPIC_BASE_URL=http://localhost:11434</text>
+      <text x="225" y="243" fill="#4ade80" font-size="16" font-family="monospace">$ export ANTHROPIC_API_KEY=ollama</text>
+      <text x="225" y="275" fill="#4a90e2" font-size="15" font-family="monospace" opacity=".9">$ claude</text>
+      <text x="225" y="303" fill="#4ade80" font-size="14" font-family="monospace" opacity=".7">✓ Connected to Gemma 4 (local) — $0.00/token</text>
+      <text x="600" y="450" text-anchor="middle" fill="white" font-size="90" font-weight="900" font-family="Georgia" opacity=".04">GEMMA 4</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>Gemma 4 คือ Open Source Model Family ล่าสุดจาก Google DeepMind มีหลายขนาดตั้งแต่ E2B (รันได้บนมือถือ) ไปจนถึง 31B สำหรับ GPU สูง รองรับ Context Window สูงสุด 256K Token สำหรับโมเดลขนาดกลาง-ใหญ่ มี Reasoning Mode แบบ Configurable ที่เปิดปิดได้ รองรับ Multimodal ทั้ง Text และ Image พร้อม Native Function Calling สำหรับ Agentic Workflow คะแนน Benchmark น่าประทับใจ: LiveCodeBench 80% และ AIME 2026 ที่ 89.2%</p>
+        <p>จุดเด่นที่โดดเด่นที่สุดคือ Apache 2.0 License ซึ่งหมายความว่า ใช้เชิงพาณิชย์ได้, ปรับแต่ง Fine-tune ได้, ฝังในผลิตภัณฑ์ได้, รันบน Device ได้ทั้งหมดโดยไม่มีค่าธรรมเนียมหรือข้อจำกัด</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>วิธีที่ง่ายที่สุดคือผ่าน Ollama ซึ่งมีขั้นตอน 3 ขั้น: (1) ติดตั้ง Ollama จาก ollama.com (2) ดาวน์โหลดโมเดลด้วย ollama pull gemma4:26b หรือ gemma4:4b สำหรับเครื่องทั่วไป (3) ตั้งค่า Environment Variable ใน Terminal: export ANTHROPIC_BASE_URL=http://localhost:11434 และ export ANTHROPIC_API_KEY=ollama จากนั้นรัน claude ได้เลย Claude Code จะ Route คำสั่งทั้งหมดไปที่ Gemma 4 บน Machine ของคุณโดยอัตโนมัติ ไม่มีค่าใช้จ่าย Token หลังติดตั้งแล้ว ข้อมูลไม่ออกนอกเครื่อง รองรับการใช้งาน Offline ได้ด้วย</p>
+        <p>สำหรับผู้ที่ไม่มี GPU แรงพอ Ollama ยังมีบริการ Cloud-accelerated ผ่าน NVIDIA Blackwell GPU ด้วยคำสั่ง ollama launch claude --model gemma4:31b-cloud ซึ่งทำให้รันโมเดลขนาด 31B ได้โดยไม่ต้องใช้ Hardware เอง</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>Gemma 4 เปลี่ยนสมการเรื่องต้นทุน AI Development อย่างสิ้นเชิง ที่ผ่านมา Claude Code ต้องใช้ Anthropic API ซึ่งมีค่าใช้จ่ายต่อ Token ตอนนี้นักพัฒนาสามารถใช้ Claude Code กับโมเดลที่รันบน Machine ตัวเองได้ฟรีหลังติดตั้งครั้งแรก เหมาะมากสำหรับงาน Coding ทั่วไป 80% ของวันทำงาน เช่น เขียน Boilerplate, Format HTML/CSS, Refactor, เขียน Unit Test โดยสงวน Cloud API ไว้สำหรับงานที่ต้องการความสามารถสูงกว่าจริงๆ นอกจากนี้ Apache 2.0 License ยังทำให้ Gemma 4 แข่งขันกับ Llama และ Qwen ได้โดยตรง และส่งสัญญาณว่า Google ตั้งใจแข่งขันในตลาด Open Model อย่างจริงจัง</p>
+      </section>
+    `,
+    link: 'https://ollama.com/library/gemma4'
+  },
+
+  'glm51': {
+    cat: 'opensource',
+    chip: 'chip-blue',
+    label: 'Open Source · Z.ai (จีน)',
+    headline: 'GLM-5.1 — Open Source จากจีน เขย่า Silicon Valley ด้วย SWE-Bench Pro อันดับ 1',
+    date: '7–8 เมษายน 2569',
+    source: 'VentureBeat / Build Fast with AI / GitHub Z.ai',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dGLMH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0d1f10"/>
+          <stop offset="100%" stop-color="#050e07"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dGLMH)"/>
+      <!-- Bar chart comparison -->
+      <rect x="200" y="160" width="110" height="220" rx="4" fill="#4ade80" opacity=".9"/>
+      <rect x="370" y="185" width="110" height="195" rx="4" fill="#4ade80" opacity=".5"/>
+      <rect x="540" y="200" width="110" height="180" rx="4" fill="#4ade80" opacity=".35"/>
+      <rect x="710" y="215" width="110" height="165" rx="4" fill="#4ade80" opacity=".25"/>
+      <!-- Labels -->
+      <text x="255" y="148" text-anchor="middle" fill="#4ade80" font-size="18" font-weight="800" font-family="monospace">58.4</text>
+      <text x="425" y="173" text-anchor="middle" fill="#4ade80" font-size="16" font-family="monospace" opacity=".7">57.7</text>
+      <text x="595" y="188" text-anchor="middle" fill="#4ade80" font-size="16" font-family="monospace" opacity=".55">57.3</text>
+      <text x="765" y="203" text-anchor="middle" fill="#4ade80" font-size="16" font-family="monospace" opacity=".4">54.2</text>
+      <text x="255" y="405" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif" opacity=".7">GLM-5.1</text>
+      <text x="425" y="405" text-anchor="middle" fill="white" font-size="13" font-family="sans-serif" opacity=".45">GPT-5.4</text>
+      <text x="595" y="405" text-anchor="middle" fill="white" font-size="13" font-family="sans-serif" opacity=".4">Opus 4.6</text>
+      <text x="765" y="405" text-anchor="middle" fill="white" font-size="13" font-family="sans-serif" opacity=".3">Gemini 3.1</text>
+      <!-- 8hr badge -->
+      <rect x="870" y="160" width="220" height="70" rx="8" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".8"/>
+      <text x="980" y="192" text-anchor="middle" fill="#4ade80" font-size="16" font-weight="800" font-family="sans-serif">8 ชม. Autonomous</text>
+      <text x="980" y="215" text-anchor="middle" fill="white" font-size="13" font-family="sans-serif" opacity=".6">ไม่ต้องการ Human Supervise</text>
+      <!-- MIT badge -->
+      <rect x="870" y="255" width="220" height="55" rx="8" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".7"/>
+      <text x="980" y="281" text-anchor="middle" fill="#4ade80" font-size="15" font-weight="800" font-family="sans-serif">MIT License</text>
+      <text x="980" y="300" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" opacity=".55">ใช้ Commercial ได้เลย</text>
+      <text x="600" y="465" text-anchor="middle" fill="white" font-size="80" font-weight="900" font-family="Georgia" opacity=".04">SWE-BENCH #1</text>
+      <text x="120" y="430" fill="white" font-size="12" font-family="sans-serif" opacity=".3">SWE-Bench Pro Score — Z.ai GLM-5.1 · เมษายน 2569</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>GLM-5.1 คือ Open Source Flagship Model จาก Z.ai (ชื่อเดิม Zhipu AI) สตาร์ทอัป AI จากจีนที่สปินออกจาก Tsinghua University สร้างบน Architecture MoE ขนาด 744B Parameters (Active 40B ต่อ Token) มี Context Window 200K Token และ Max Output 131K Token จุดเด่นหลักคือการทำงาน Agentic Coding ต่อเนื่องได้สูงสุด 8 ชั่วโมงโดยไม่ต้องการ Human Supervision — วางแผน ทดสอบ แก้ Bug และ Iterate ได้เองครบวงจร ในการทดสอบด้าน Vector Database Optimization ใน Rust โมเดลทำ Tool Calls กว่า 6,000 ครั้งใน 655 Iteration พัฒนาประสิทธิภาพจาก 3,547 เป็น 13,400+ queries/second</p>
+        <p>ผลคะแนน SWE-Bench Pro: GLM-5.1 ทำได้ 58.4 แซง GPT-5.4 (57.7) และ Claude Opus 4.6 (57.3) กลายเป็น Open Source Model ตัวแรกที่ขึ้นอันดับ 3 ใน Code Arena (Elo 1530) รองจาก claude-opus-4-6-thinking และ claude-opus-4-6 เท่านั้น ที่น่าทึ่งไม่แพ้กันคือ ทั้งหมดนี้สร้างบน Huawei Ascend 910B จำนวน 100,000 ชิป โดยไม่มี Nvidia แม้แต่ชิ้นเดียว เนื่องจาก Zhipu AI อยู่ใน US Entity List ตั้งแต่มกราคม 2568</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>มีหลายทางเลือก: (1) GLM Coding Plan — Subscription เริ่มต้น $3/เดือน (ราคา Promo) รองรับการใช้งานบน Claude Code, Cursor, Kilo Code, Cline และ OpenClaw ได้ทันทีผ่าน OpenAI-compatible Endpoint (2) API โดยตรงผ่าน api.z.ai ราคา $1.00/$3.20 ต่อล้าน Token (Input/Output) ถูกกว่า Opus 4.6 มาก (3) Open Weights ดาวน์โหลดโมเดลตรงจาก HuggingFace ภายใต้ MIT License สำหรับ Self-hosting แต่ต้องการ GPU ระดับ Enterprise เนื่องจากโมเดลใหญ่มาก (BF16 ใช้พื้นที่ ~1.49TB)</p>
+        <p>ข้อจำกัดสำคัญที่ควรรู้: GLM-5.1 เป็น Text-only ยังไม่รองรับ Image Input ซึ่งต่างจาก Claude Opus 4.6 ที่รับ Image ได้ และความเร็วในการ Generate อยู่ที่ประมาณ 44.3 tokens/second ซึ่งช้ากว่าคู่แข่งบางตัว แต่เหมาะมากสำหรับงาน Long Agentic Task ที่ต้องการความต่อเนื่องมากกว่าความเร็ว</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>GLM-5.1 ส่งสัญญาณสำคัญสองอย่างพร้อมกัน: อย่างแรกคือ Open Source AI กำลังไล่ตาม Frontier Closed-source Models อย่างรวดเร็ว — ช่องว่างที่เคยเป็น 2 ปีในปี 2566 ลดเหลือแทบไม่มีในปี 2569 อย่างที่สองซึ่งสำคัญกว่าในเชิงภูมิรัฐศาสตร์: US Export Control ไม่ได้หยุดยั้งจีนจากการพัฒนา AI ระดับ Frontier ได้อีกต่อไปแล้ว Z.ai สร้าง Model ที่ชนะ Anthropic ในบาง Benchmark โดยใช้ Hardware ที่ถูกจัดว่า "ด้อยกว่า" — นี่คือ Achievement ที่วงการ AI ต้องจับตามอง สำหรับนักพัฒนาไทย GLM-5.1 เป็นทางเลือกที่คุ้มค่ามากสำหรับ Coding Workflow โดยเฉพาะถ้าต้องการ Long-horizon Agentic Tasks ในราคาที่ถูกกว่า Opus อย่างมีนัยสำคัญ</p>
+      </section>
+    `,
+    link: 'https://github.com/zai-org/GLM-5'
+  },
+
+  'secondbrain': {
+    cat: 'concept',
+    chip: 'chip-slate',
+    label: 'Knowledge Management · Concept',
+    headline: 'Second Brain by Obsidian — หมดยุค RAG ก้าวสู่ Wiki ที่ AI เขียนและดูแลเอง',
+    date: 'เมษายน 2569',
+    source: 'Andrej Karpathy / GitHub NicholasSpisak / MindStudio',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dSBH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0d1208"/>
+          <stop offset="100%" stop-color="#060a04"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dSBH)"/>
+      <!-- Graph nodes constellation -->
+      <circle cx="400" cy="250" r="36" fill="#1a3320" stroke="#4ade80" stroke-width="2.5" opacity=".85"/>
+      <text x="400" y="256" text-anchor="middle" fill="#4ade80" font-size="14" font-family="monospace" font-weight="700">wiki/</text>
+      <circle cx="600" cy="150" r="24" fill="#1a3320" stroke="#4ade80" stroke-width="2" opacity=".7"/>
+      <text x="600" y="156" text-anchor="middle" fill="#4ade80" font-size="11" font-family="monospace">entity</text>
+      <circle cx="620" cy="350" r="24" fill="#1a3320" stroke="#4ade80" stroke-width="2" opacity=".7"/>
+      <text x="620" y="356" text-anchor="middle" fill="#4ade80" font-size="11" font-family="monospace">concept</text>
+      <circle cx="800" cy="200" r="20" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".55"/>
+      <text x="800" y="206" text-anchor="middle" fill="#4ade80" font-size="10" font-family="monospace">source</text>
+      <circle cx="780" cy="320" r="18" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".5"/>
+      <text x="780" y="326" text-anchor="middle" fill="#4ade80" font-size="10" font-family="monospace">index</text>
+      <circle cx="920" cy="250" r="16" fill="#1a3320" stroke="#4ade80" stroke-width="1.5" opacity=".4"/>
+      <text x="920" y="256" text-anchor="middle" fill="#4ade80" font-size="9" font-family="monospace">raw/</text>
+      <!-- Connecting lines -->
+      <line x1="436" y1="230" x2="578" y2="167" stroke="#4ade80" stroke-width="1.5" opacity=".4"/>
+      <line x1="436" y1="270" x2="598" y2="335" stroke="#4ade80" stroke-width="1.5" opacity=".4"/>
+      <line x1="624" y1="162" x2="782" y2="192" stroke="#4ade80" stroke-width="1" opacity=".3"/>
+      <line x1="644" y1="342" x2="764" y2="325" stroke="#4ade80" stroke-width="1" opacity=".3"/>
+      <line x1="820" y1="210" x2="905" y2="240" stroke="#4ade80" stroke-width="1" opacity=".2"/>
+      <!-- RAG vs Wiki comparison -->
+      <rect x="50" y="80" width="240" height="120" rx="8" fill="#1a0808" stroke="#c8230e" stroke-width="1.5" opacity=".6"/>
+      <text x="170" y="110" text-anchor="middle" fill="#c8230e" font-size="14" font-weight="800" font-family="sans-serif">RAG (เดิม)</text>
+      <text x="170" y="132" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity=".6">Vector Database</text>
+      <text x="170" y="150" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity=".6">Embeddings</text>
+      <text x="170" y="168" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity=".6">Chunk Search</text>
+      <text x="75" y="192" fill="#c8230e" font-size="28" opacity=".7">✗</text>
+      <rect x="50" y="230" width="240" height="120" rx="8" fill="#0a1a10" stroke="#4ade80" stroke-width="1.5" opacity=".7"/>
+      <text x="170" y="260" text-anchor="middle" fill="#4ade80" font-size="14" font-weight="800" font-family="sans-serif">Wiki (ใหม่)</text>
+      <text x="170" y="280" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity=".6">Markdown Files</text>
+      <text x="170" y="298" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity=".6">Backlinks + Graph</text>
+      <text x="170" y="316" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" opacity=".6">AI Writes &amp; Maintains</text>
+      <text x="75" y="340" fill="#4ade80" font-size="28" opacity=".8">✓</text>
+      <text x="600" y="460" text-anchor="middle" fill="white" font-size="72" font-weight="900" font-family="Georgia" opacity=".04">SECOND BRAIN</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>แนวคิด Second Brain by Obsidian อิงจาก Pattern ที่ Andrej Karpathy (อดีต Co-founder OpenAI, อดีต Tesla AI Director) เสนอ — แทนที่จะ Embed เอกสารลง Vector Database แล้วทำ Semantic Search แบบ RAG ให้ใช้ AI อ่าน Raw data แล้วเขียนและดูแล Wiki ที่เป็น Plain Markdown Files แทน</p>
+        <p>โครงสร้างระบบแบ่งเป็น 3 ส่วน: (1) raw/ — Folder เก็บข้อมูลดิบ ทั้ง PDF, บทความ, Meeting Notes (2) wiki/ — Folder ที่ AI เป็นผู้เขียนและดูแล Markdown Files สรุปความรู้แบบ Encyclopedia พร้อม Backlinks เชื่อมโยงกัน และ (3) outputs/ — บันทึกผลการค้นหาและการสังเคราะห์ ข้อได้เปรียบเหนือ RAG มี 3 ข้อ: ไม่ต้องใช้ Vector Database ใดๆ, อ่านได้โดยมนุษย์ผ่าน Obsidian Graph View, และ "Compounding Intelligence" ที่ข้อมูลชิ้นที่ 50 มีคุณค่ามากกว่าชิ้นแรกเพราะมัน Cross-reference กับทุกอย่างที่มีอยู่แล้ว</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>เริ่มต้นได้ง่ายผ่าน GitHub Project "second-brain" ของ Nicholas Spisak ที่ติดตั้งเป็น Skill เข้ากับ Claude Code, Codex, Cursor หรือ Gemini CLI ได้ ขั้นตอน: (1) ติดตั้ง Obsidian และ Claude Code (2) ติดตั้ง second-brain Skill ผ่าน npm (3) สร้าง Vault ใหม่ใน Obsidian (4) รัน /second-brain ใน Claude Code เพื่อ Setup (5) ติดตั้ง Obsidian Web Clipper เพื่อ Clip บทความลง raw/ (6) รัน /second-brain-ingest ทุกครั้งที่เพิ่มข้อมูล AI จะอ่าน สรุป และสร้าง Wiki Pages โดยอัตโนมัติ</p>
+        <p>สำหรับผู้ที่ต้องการเชื่อม Claude Desktop เข้ากับ Obsidian Vault ยังทำได้ผ่าน MCP Connector (smithery-ai/mcp-obsidian) ซึ่งให้ Claude อ่าน เขียน และ Update Notes ได้โดยตรงจาก Claude.ai ใช้ได้ฟรีทั้งหมด ค่าใช้จ่ายเดียวคือ AI API ที่ใช้ (Claude, Gemini, หรือ Local Model ผ่าน Ollama)</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>สำหรับ Knowledge Worker ที่ต้องจัดการข้อมูลจำนวนมาก ระบบนี้แก้ปัญหาที่ RAG ไม่สามารถแก้ได้: RAG ค้นหาได้ตามความใกล้เคียงของ Vector แต่ไม่เข้าใจความสัมพันธ์ระหว่างแนวคิด Wiki ที่ AI เขียนและดูแลทำให้ AI "รู้" ว่า Concept A เกี่ยวข้องกับ Concept B อย่างไร ซึ่งทำให้การค้นหาและการตอบคำถามฉลาดขึ้นมาก นอกจากนี้ยังประหยัด Token ได้มากเพราะอ่าน Wiki ที่สรุปแล้วแทนการ Load เอกสารดิบทั้งหมด</p>
+        <p>สำหรับ วัช ที่ทำงาน Audit และมี Workflow ที่ต้องจัดการข้อมูล Framework มากมาย ระบบนี้มีความเกี่ยวข้องโดยตรง — Session Wiki Skill ที่ใช้อยู่แล้วคือก้าวแรกในทิศทางนี้</p>
+      </section>
+    `,
+    link: 'https://github.com/NicholasSpisak/second-brain'
+  },
+
+  'codewiki': {
+    cat: 'google',
+    chip: 'chip-blue',
+    label: 'Google · Developer Tools',
+    headline: 'CodeWiki by Google — ตัวช่วย "แปลโค้ดเป็นภาษาคน" อัปเดตตัวเองทุก Commit',
+    date: 'พฤศจิกายน 2568 — เมษายน 2569',
+    source: 'Google Developers Blog / InfoQ',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dCWH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0a1520"/>
+          <stop offset="100%" stop-color="#05080f"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dCWH)"/>
+      <!-- Code block left -->
+      <rect x="80" y="80" width="380" height="290" rx="10" fill="#0d1f36" stroke="#4a90e2" stroke-width="1.5" opacity=".55"/>
+      <rect x="80" y="80" width="380" height="32" rx="10" fill="#1a2a3a" opacity=".9"/>
+      <text x="100" y="101" fill="#888" font-size="12" font-family="monospace">auth.js</text>
+      <text x="100" y="145" fill="#4a90e2" font-size="13" font-family="monospace">function validateToken(jwt) {</text>
+      <text x="100" y="168" fill="#666" font-size="12" font-family="monospace">  const decoded = jwt.verify(</text>
+      <text x="100" y="188" fill="#666" font-size="12" font-family="monospace">    token, SECRET_KEY</text>
+      <text x="100" y="208" fill="#666" font-size="12" font-family="monospace">  )</text>
+      <text x="100" y="232" fill="#4a90e2" font-size="13" font-family="monospace">  if (!decoded.exp ||</text>
+      <text x="100" y="252" fill="#4a90e2" font-size="13" font-family="monospace">      decoded.exp &lt; Date.now())</text>
+      <text x="100" y="276" fill="#c8230e" font-size="13" font-family="monospace">    throw new AuthError()</text>
+      <text x="100" y="300" fill="#4ade80" font-size="13" font-family="monospace">  return decoded.userId</text>
+      <text x="100" y="320" fill="#4a90e2" font-size="13" font-family="monospace">}</text>
+      <!-- Magic arrow -->
+      <text x="512" y="235" text-anchor="middle" fill="#4fc3f7" font-size="36" opacity=".85">✨</text>
+      <line x1="476" y1="225" x2="556" y2="225" stroke="#4fc3f7" stroke-width="3" opacity=".7"/>
+      <polygon points="556,218 572,225 556,232" fill="#4fc3f7" opacity=".7"/>
+      <text x="514" y="260" text-anchor="middle" fill="#4fc3f7" font-size="10" font-family="sans-serif" opacity=".7">Gemini AI</text>
+      <!-- Wiki output right -->
+      <rect x="590" y="80" width="520" height="290" rx="10" fill="#0d1f36" stroke="#4fc3f7" stroke-width="2" opacity=".7"/>
+      <rect x="590" y="80" width="520" height="32" rx="10" fill="#1a2a3a" opacity=".9"/>
+      <text x="610" y="101" fill="#888" font-size="12" font-family="monospace">validateToken — CodeWiki</text>
+      <text x="610" y="145" fill="white" font-size="16" font-weight="700" font-family="sans-serif" opacity=".9">validateToken(jwt)</text>
+      <rect x="610" y="155" width="480" height="1" fill="#4fc3f7" opacity=".2"/>
+      <text x="610" y="182" fill="#4fc3f7" font-size="13" font-family="sans-serif">ตรวจสอบความถูกต้องของ JWT Token</text>
+      <text x="610" y="205" fill="#888" font-size="12" font-family="sans-serif">ถอดรหัส Token ด้วย SECRET_KEY</text>
+      <text x="610" y="225" fill="#888" font-size="12" font-family="sans-serif">ตรวจสอบว่า Token ไม่หมดอายุ</text>
+      <text x="610" y="258" fill="white" font-size="12" font-weight="600" font-family="sans-serif" opacity=".7">Returns:</text>
+      <text x="610" y="278" fill="#888" font-size="12" font-family="sans-serif">userId ของผู้ใช้ที่ Login</text>
+      <text x="610" y="308" fill="white" font-size="12" font-weight="600" font-family="sans-serif" opacity=".7">Throws:</text>
+      <text x="610" y="328" fill="#c8230e" font-size="12" font-family="sans-serif" opacity=".8">AuthError — ถ้า Token ไม่ถูกต้องหรือหมดอายุ</text>
+      <text x="350" y="460" text-anchor="middle" fill="white" font-size="72" font-weight="900" font-family="Georgia" opacity=".04">CODEWIKI</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>Google Code Wiki (codewiki.google) คือแพลตฟอร์มที่สร้าง Wiki สำหรับ Code Repository โดยอัตโนมัติและ Sync กับโค้ดจริงอยู่เสมอ ระบบใช้ Gemini อ่านโค้ดแล้วสร้าง Map ของ Repository ทั้งหมด แปลทุก Function ทุก Class ทุก Module ให้เป็นภาษาธรรมชาติ จากนั้นสามารถถามคำถามเกี่ยวกับโค้ดและได้คำตอบที่อิงจาก Codebase จริง ไม่ใช่ข้อมูลทั่วไป เช่น "Authentication flow ทำงานอย่างไร?" หรือ "Function X เรียกใช้อะไรบ้าง?"</p>
+        <p>ความพิเศษคือ Wiki อัปเดตตัวเองทุกครั้งที่มีการ Commit ใหม่ — ทำให้ Documentation ไม่มีวันล้าสมัย ซึ่งแก้ปัญหาหลักของ Documentation แบบเดิมที่ต้องอัปเดตเองด้วยมือ นักพัฒนาใช้เวลา 30-40% ต่อสัปดาห์ในการทำความเข้าใจ Codebase ที่มีอยู่ Code Wiki ออกแบบมาเพื่อแก้ปัญหานี้โดยตรง</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>เข้าใช้งานได้ที่ codewiki.google ไม่ต้อง Sign-in สำหรับ Public Repository ขั้นตอนง่ายมาก: ใส่ GitHub Repository URL แล้วรอ Gemini สแกน — ได้ Wiki สมบูรณ์ทันที มี Diagram, Chat Interface และ Section แยกตามโครงสร้างของโค้ด รองรับทุกภาษาโปรแกรมมิ่ง ปัจจุบันอยู่ใน Public Preview ใช้ได้ฟรีสำหรับ Public Repository สำหรับ Private Repository Google ยังไม่ได้ระบุ Timeline ชัดเจน</p>
+        <p>ประโยชน์ชัดเจนที่สุดสำหรับผู้ที่ไม่ได้เขียนโค้ดเป็นหลัก เช่น Project Manager, Auditor (เช่น Internal Auditor ที่ต้องตรวจสอบระบบ IT), Business Analyst หรือนักเรียนที่เพิ่งเริ่มเรียน Programming ซึ่งต้องการทำความเข้าใจ Codebase ของ System ที่ตรวจสอบโดยไม่ต้องมีความรู้โค้ดลึก</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>Code Wiki แก้ปัญหา "Documentation Gap" ที่เป็นหนึ่งในความเจ็บปวดใหญ่ที่สุดในวงการ Software Development ตามสถิติจาก Google เองนักพัฒนาเสียเวลา 30-40% ต่อสัปดาห์ในการทำความเข้าใจโค้ดที่มีอยู่ ซึ่งแปลเป็น 1-2 วันทำงานต่อสัปดาห์ที่สูญเสียไป Code Wiki ตอบโจทย์ทั้ง Developer (เข้าใจ Legacy Code เร็วขึ้น) และ Non-developer (เข้าถึงข้อมูลระบบโดยไม่ต้องอ่านโค้ด) ซึ่งเปิดมุมมองใหม่ในการ Audit ระบบ IT ขององค์กรได้อย่างมีประสิทธิภาพ</p>
+      </section>
+    `,
+    link: 'https://codewiki.google'
+  },
+
+  'firecrawl': {
+    cat: 'tools',
+    chip: 'chip-red',
+    label: 'Tools · Web Scraping API',
+    headline: 'Firecrawl — เปลี่ยนเว็บทุกหน้าเป็น Markdown/JSON พร้อมป้อน AI ไม่ต้องเขียน Scraper',
+    date: '2569',
+    source: 'firecrawl.dev / Scribe',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dFireH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1c1410"/>
+          <stop offset="100%" stop-color="#0e0a07"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dFireH)"/>
+      <!-- Code example center -->
+      <rect x="100" y="80" width="1000" height="290" rx="10" fill="#0d0d0b" stroke="#c8230e" stroke-width="1.5" opacity=".5"/>
+      <rect x="100" y="80" width="1000" height="32" rx="10" fill="#1a1a18" opacity=".9"/>
+      <circle cx="128" cy="96" r="7" fill="#c8230e" opacity=".7"/>
+      <circle cx="150" cy="96" r="7" fill="#e8a020" opacity=".7"/>
+      <circle cx="172" cy="96" r="7" fill="#3a8a3a" opacity=".7"/>
+      <text x="130" y="148" fill="#4a90e2" font-size="14" font-family="monospace">from firecrawl import Firecrawl</text>
+      <text x="130" y="174" fill="#e8a020" font-size="14" font-family="monospace">app = Firecrawl(api_key="fc-YOUR_API_KEY")</text>
+      <text x="130" y="210" fill="#888" font-size="13" font-family="monospace"># Scrape any website → clean Markdown</text>
+      <text x="130" y="234" fill="#4ade80" font-size="14" font-family="monospace">result = app.scrape("https://example.com")</text>
+      <text x="130" y="260" fill="#888" font-size="13" font-family="monospace"># result.markdown → "# Page Title\n\nContent..."</text>
+      <text x="130" y="296" fill="#888" font-size="13" font-family="monospace"># Crawl entire site</text>
+      <text x="130" y="320" fill="#4ade80" font-size="14" font-family="monospace">docs = app.crawl("https://docs.site.com", limit=100)</text>
+      <text x="130" y="346" fill="#c8230e" font-size="14" font-family="monospace">→ 100 pages · LLM-ready · 67% fewer tokens than HTML</text>
+      <!-- Token badge -->
+      <rect x="100" y="400" width="280" height="60" rx="8" fill="#c8230e" opacity=".8"/>
+      <text x="240" y="430" text-anchor="middle" fill="white" font-size="16" font-weight="800" font-family="sans-serif">ลด Token ได้ 67%</text>
+      <text x="240" y="450" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" opacity=".8">เทียบกับ HTML ดิบ</text>
+      <!-- MCP badge -->
+      <rect x="410" y="400" width="260" height="60" rx="8" fill="#1a1a1a" stroke="#c8230e" stroke-width="1.5" opacity=".8"/>
+      <text x="540" y="430" text-anchor="middle" fill="white" font-size="16" font-weight="800" font-family="sans-serif">MCP Server</text>
+      <text x="540" y="450" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" opacity=".6">เชื่อม Claude โดยตรง</text>
+      <text x="700" y="460" text-anchor="middle" fill="white" font-size="72" font-weight="900" font-family="Georgia" opacity=".04">FIRECRAWL</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>Firecrawl คือ Web Data API ที่แปลงเว็บเพจใดก็ได้ให้เป็น LLM-ready Data ส่ง URL ให้ — รับ Markdown สะอาด JSON มีโครงสร้าง หรือ Screenshot กลับมาทันที โดยไม่ต้องเขียน Code ดึงข้อมูลเอง รองรับ 4 โหมด: (1) Scrape — ดึง Content จาก URL เดียว (2) Crawl — เดิน Link ทั้งหมดในเว็บไซต์อัตโนมัติ (3) Map — ดึง URL ทั้งหมดในเว็บโดยไม่ต้องการ Content (4) Agent — สั่งด้วยภาษาธรรมชาติ เช่น "ดึงราคาทั้งหมดในหน้านี้"</p>
+        <p>จุดเด่นสำคัญสำหรับ AI Workflow คือ Output Markdown ของ Firecrawl ใช้ Token น้อยกว่า HTML ดิบถึง 67% และรองรับ MCP Server ให้ Claude, Cursor หรือ AI Agent อื่นๆ เรียกใช้ได้โดยตรงโดยไม่ต้องเขียน Integration เอง นอกจากนี้ยังรองรับ PDF และ DOCX บนเว็บ จัดการ JavaScript-heavy pages และ Anti-bot ได้โดยอัตโนมัติ</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>เริ่มต้นได้ที่ firecrawl.dev สมัครรับ API Key ฟรี 500 Credits สำหรับทดสอบ (ไม่ใช่ Monthly ใช้แล้วหมด) Hobby Plan $16/เดือน ให้ 3,000 Credits ต่อเดือน Standard Plan $83/เดือน สำหรับ 100,000 Credits ติดตั้งผ่าน pip install firecrawl-py (Python) หรือ npm install @mendable/firecrawl-js (Node.js) ใช้ได้จากประเทศไทยทันทีผ่าน API</p>
+        <p>สำหรับผู้ใช้ Claude Code หรือ Cursor สามารถเพิ่ม Firecrawl เป็น MCP Tool ได้ด้วยคำสั่งเดียว ทำให้ AI เรียกใช้ Firecrawl ได้โดยตรงระหว่าง Task — เช่น "ดูเว็บนี้แล้วสรุปให้ผม" โดยไม่ต้องออกจาก Claude Code เลย นอกจากนี้ Firecrawl เป็น Open Source สามารถ Self-host ได้ฟรีถ้าต้องการ Privacy เต็มรูปแบบ</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>ปัญหาหลักของ AI Agent ที่ต้องอ่านข้อมูลจากเว็บคือ HTML ดิบมี Noise มหาศาล — Navigation bars, Ads, Cookie banners, Script tags ทั้งหมดนี้เพิ่ม Token โดยไม่มีประโยชน์ Firecrawl แก้ปัญหานี้โดยส่ง Markdown สะอาดที่ AI อ่านได้ทันที สำหรับ RAG Pipeline ที่ต้องการข้อมูลจาก Documentation Sites หรือ News เป็นประจำ การลด Token 67% แปลเป็นต้นทุนที่ลดลงอย่างมีนัยสำคัญในระยะยาว Firecrawl เหมาะมากสำหรับ Workflow ของ Internal Auditor ที่ต้องการดึงข้อมูลจาก Regulatory Sites, News หรือ Vendor Websites เพื่อประกอบการตรวจสอบ</p>
+      </section>
+    `,
+    link: 'https://firecrawl.dev'
+  },
+
+  'advisor': {
+    cat: 'anthropic',
+    chip: 'chip-slate',
+    label: 'Anthropic · Claude Platform',
+    headline: 'The Advisor Strategy — ลดต้นทุน AI Agent สูงสุด 85% โดยไม่เสียคุณภาพ',
+    date: '9 เมษายน 2569',
+    source: 'Anthropic Blog / Build Fast with AI',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dAdvH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#3d1c08"/>
+          <stop offset="100%" stop-color="#1a0c03"/>
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dAdvH)"/>
+      <!-- Flow diagram large -->
+      <rect x="100" y="150" width="280" height="100" rx="10" fill="#1a0c03" stroke="#d4692a" stroke-width="2.5" opacity=".85"/>
+      <text x="240" y="196" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="sans-serif">EXECUTOR</text>
+      <text x="240" y="222" text-anchor="middle" fill="#d4692a" font-size="14" font-family="sans-serif">Sonnet 4.6 / Haiku 4.5</text>
+      <!-- Loop arrow below executor -->
+      <path d="M 100 280 Q 60 330 240 330 Q 380 330 380 280" fill="none" stroke="#d4692a" stroke-width="2" opacity=".4" stroke-dasharray="6,4"/>
+      <text x="240" y="355" text-anchor="middle" fill="#d4692a" font-size="12" font-family="sans-serif" opacity=".6">handles all tool calls + generation</text>
+      <!-- Escalate arrow to advisor -->
+      <line x1="380" y1="200" x2="510" y2="160" stroke="#e8a020" stroke-width="2.5" opacity=".75"/>
+      <polygon points="510,153 525,160 510,167" fill="#e8a020" opacity=".75"/>
+      <text x="445" y="175" text-anchor="middle" fill="#e8a020" font-size="12" font-family="sans-serif" opacity=".8">escalate</text>
+      <!-- Advisor box highlighted -->
+      <rect x="525" y="80" width="330" height="130" rx="10" fill="#3d1c08" stroke="#e8a020" stroke-width="3" opacity=".9"/>
+      <text x="690" y="130" text-anchor="middle" fill="white" font-size="20" font-weight="700" font-family="sans-serif">ADVISOR</text>
+      <text x="690" y="158" text-anchor="middle" fill="#e8a020" font-size="16" font-family="sans-serif">Claude Opus 4.6</text>
+      <text x="690" y="180" text-anchor="middle" fill="#d4692a" font-size="12" font-family="sans-serif">responds: 400-700 tokens</text>
+      <!-- Return arrow -->
+      <line x1="525" y1="190" x2="395" y2="220" stroke="#e8a020" stroke-width="2.5" opacity=".75"/>
+      <polygon points="395,213 380,220 395,227" fill="#e8a020" opacity=".75"/>
+      <text x="455" y="222" text-anchor="middle" fill="#e8a020" font-size="12" font-family="sans-serif" opacity=".8">resume</text>
+      <!-- Benchmark boxes -->
+      <rect x="940" y="80" width="220" height="80" rx="8" fill="#1a0c03" stroke="#4ade80" stroke-width="1.5" opacity=".8"/>
+      <text x="1050" y="115" text-anchor="middle" fill="#4ade80" font-size="15" font-weight="800" font-family="sans-serif">Haiku + Opus</text>
+      <text x="1050" y="138" text-anchor="middle" fill="white" font-size="13" font-family="sans-serif" opacity=".7">85% cost reduction</text>
+      <rect x="940" y="185" width="220" height="80" rx="8" fill="#1a0c03" stroke="#4ade80" stroke-width="1.5" opacity=".7"/>
+      <text x="1050" y="220" text-anchor="middle" fill="#4ade80" font-size="15" font-weight="800" font-family="sans-serif">Sonnet + Opus</text>
+      <text x="1050" y="243" text-anchor="middle" fill="white" font-size="13" font-family="sans-serif" opacity=".7">+2.7% SWE-bench</text>
+      <rect x="940" y="290" width="220" height="80" rx="8" fill="#1a0c03" stroke="#e8a020" stroke-width="1.5" opacity=".7"/>
+      <text x="1050" y="325" text-anchor="middle" fill="#e8a020" font-size="15" font-weight="800" font-family="sans-serif">BrowseComp</text>
+      <text x="1050" y="348" text-anchor="middle" fill="white" font-size="13" font-family="sans-serif" opacity=".7">19.7% → 41.2%</text>
+      <text x="600" y="460" text-anchor="middle" fill="white" font-size="72" font-weight="900" font-family="Georgia" opacity=".04">ADVISOR STRATEGY</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>The Advisor Strategy คือ Agentic Pattern ใหม่จาก Anthropic ที่เปิดตัวเป็น Beta วันที่ 9 เมษายน 2569 หลักการทำงานคือ แทนที่จะใช้ Opus ทำทุก Step ของ Agent Loop ให้ใช้ Sonnet หรือ Haiku เป็น Executor ทำงานทุก Step — จัดการ Tool Calls, ประมวลผลผลลัพธ์, สร้าง Output ทั้งหมด เมื่อ Executor เจอ Decision ที่ซับซ้อนหรือ Ambiguous จึงเรียก Opus Advisor มาให้คำแนะนำ 400-700 Token แล้วส่งงานคืน Executor ทำต่อ</p>
+        <p>ผลลัพธ์ที่วัดได้: Haiku + Opus Advisor ทำคะแนน BrowseComp เพิ่มจาก 19.7% เป็น 41.2% (เพิ่มขึ้นกว่า 2 เท่า!) ขณะที่ประหยัดต้นทุนได้ 85% เทียบกับการรัน Sonnet เดี่ยวทั้งหมด Sonnet + Opus Advisor ทำคะแนน SWE-bench Multilingual เพิ่ม 2.7 Points พร้อมลดต้นทุน 11.9%</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>เพิ่มเพียง 2 อย่างใน API Request ที่มีอยู่แล้ว: (1) เพิ่ม Beta Header: anthropic-beta: advisor-tool-2026-03-01 (2) เพิ่ม Tool Definition ในอาร์เรย์ tools พร้อม type: "advisor_20260301", name: "advisor", model: "claude-opus-4-6" จากนั้นตั้ง Executor Model เป็น claude-sonnet-4-6 หรือ claude-haiku-4-5 ไม่ต้องเปลี่ยน Architecture เดิม ไม่ต้องสร้าง Orchestration Layer ใหม่ Anthropic จัดการ Routing ทั้งหมด Server-side</p>
+        <p>ใช้ได้ผ่าน Claude API โดยตรง, Amazon Bedrock, Google Cloud Vertex AI และ Microsoft Foundry ปัจจุบัน Feature นี้อยู่ใน Beta Phase — ต้อง Request Access ผ่าน Anthropic Account Team</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>The Advisor Strategy พลิกกลับสมมติฐานเดิมที่ว่า "ถ้าอยากได้คุณภาพ ต้องใช้ Model แพงทุก Step" Pattern นี้ทำให้ Agent ที่เคย "โง่" ฉลาดขึ้นอย่างมีนัยสำคัญโดยใช้ต้นทุนต่ำ ตัวเลข 85% Cost Reduction ไม่ใช่แค่ตัวเลขทางการตลาด — ที่ 1 ล้าน Request ต่อวัน นั่นคือต้นทุนที่ต่างกันหลายหมื่นดอลลาร์ต่อเดือน ที่สำคัญ Anthropic ออกแบบมาให้เป็น Built-in Tool ไม่ต้องเขียน Orchestration Logic เอง ทำให้ Implement ง่ายมาก นับเป็นก้าวสำคัญในทิศทางที่ Anthropic กำลังสร้าง Full-stack AI Agent Platform</p>
+      </section>
+    `,
+    link: 'https://claude.com/blog/the-advisor-strategy'
+  },
+
+  'mythos': {
+    cat: 'anthropic',
+    chip: 'chip-slate',
+    label: 'Anthropic · Claude Mythos',
+    headline: 'Claude Mythos — AI ที่แข็งแกร่งเกินกว่าจะปล่อยให้ใครก็ใช้ได้',
+    date: '7–8 เมษายน 2569',
+    source: 'Anthropic / NBC News / Fortune / The Hacker News',
+    svgHero: `<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dMythH" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#1a0c03"/>
+          <stop offset="100%" stop-color="#080402"/>
+        </linearGradient>
+        <radialGradient id="dMythGlow" cx="35%" cy="50%" r="40%">
+          <stop offset="0%" stop-color="#c8230e" stop-opacity="0.2"/>
+          <stop offset="100%" stop-color="#080402" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="500" fill="url(#dMythH)"/>
+      <rect width="1200" height="500" fill="url(#dMythGlow)"/>
+      <!-- Shield icon large -->
+      <polygon points="300,60 440,110 440,270 300,360 160,270 160,110" fill="none" stroke="#d4692a" stroke-width="3" opacity=".65"/>
+      <polygon points="300,90 418,133 418,262 300,340 182,262 182,133" fill="#c8230e" opacity=".07"/>
+      <text x="300" y="225" text-anchor="middle" fill="#d4692a" font-size="64" opacity=".75">🔒</text>
+      <!-- Zero-day ring warnings -->
+      <circle cx="300" cy="210" r="100" fill="none" stroke="#d4692a" stroke-width="1.5" opacity=".2" stroke-dasharray="8,5"/>
+      <circle cx="300" cy="210" r="150" fill="none" stroke="#d4692a" stroke-width="1" opacity=".1" stroke-dasharray="8,5"/>
+      <!-- Partner logos as text badges -->
+      <rect x="560" y="60" width="120" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".6"/>
+      <text x="620" y="83" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".8">Amazon AWS</text>
+      <rect x="700" y="60" width="100" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".6"/>
+      <text x="750" y="83" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".8">Microsoft</text>
+      <rect x="820" y="60" width="90" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".6"/>
+      <text x="865" y="83" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".8">Apple</text>
+      <rect x="930" y="60" width="100" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".6"/>
+      <text x="980" y="83" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".8">Google</text>
+      <rect x="1050" y="60" width="110" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".6"/>
+      <text x="1105" y="83" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".8">CrowdStrike</text>
+      <rect x="560" y="115" width="110" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".5"/>
+      <text x="615" y="138" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".7">JPMorgan</text>
+      <rect x="690" y="115" width="90" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".5"/>
+      <text x="735" y="138" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".7">NVIDIA</text>
+      <rect x="800" y="115" width="130" height="36" rx="4" fill="#1a1a1a" stroke="#d4692a" stroke-width="1" opacity=".5"/>
+      <text x="865" y="138" text-anchor="middle" fill="white" font-size="12" font-weight="700" font-family="sans-serif" opacity=".7">Palo Alto Ntwks</text>
+      <text x="560" y="200" fill="white" font-size="13" font-weight="800" font-family="sans-serif" opacity=".6">+ 40+ organizations</text>
+      <!-- Stats -->
+      <rect x="560" y="250" width="580" height="60" rx="8" fill="#1a0c03" stroke="#c8230e" stroke-width="1.5" opacity=".7"/>
+      <text x="850" y="278" text-anchor="middle" fill="white" font-size="15" font-weight="800" font-family="sans-serif">พบ Zero-day นับพัน — 27 ปีเก่าที่สุดใน OpenBSD</text>
+      <text x="850" y="298" text-anchor="middle" fill="#d4692a" font-size="13" font-family="sans-serif" opacity=".8">ครอบคลุมทุก OS · ทุก Browser · Software สำคัญ</text>
+      <!-- $100M badge -->
+      <rect x="560" y="335" width="250" height="60" rx="8" fill="#c8230e" opacity=".8"/>
+      <text x="685" y="360" text-anchor="middle" fill="white" font-size="16" font-weight="800" font-family="sans-serif">$100M Credits</text>
+      <text x="685" y="382" text-anchor="middle" fill="white" font-size="12" font-family="sans-serif" opacity=".8">สำหรับ Project Glasswing</text>
+      <text x="600" y="465" text-anchor="middle" fill="white" font-size="80" font-weight="900" font-family="Georgia" opacity=".04">MYTHOS</text>
+    </svg>`,
+    body: `
+      <section class="detail-section">
+        <h2>ทำอะไรได้บ้าง</h2>
+        <p>Claude Mythos Preview คือ General-purpose Model ที่ทรงพลังที่สุดที่ Anthropic เคยสร้าง — แต่ความสามารถพิเศษที่ทำให้ถูกจำกัดการเข้าถึงคือด้าน Cybersecurity Anthropic ระบุว่าไม่ได้ Train โดยเฉพาะให้มีความสามารถด้านนี้ มันเกิดขึ้นเองจาก Emergent Capability ของ Coding และ Reasoning ที่แข็งแกร่งขึ้น ในการทดสอบภายใน Mythos ค้นพบและสามารถ Exploit Zero-day Vulnerabilities ในทุก Major OS และทุก Major Browser ได้อย่างอัตโนมัติ รวมถึงช่องโหว่อายุ 27 ปีใน OpenBSD และช่องโหว่อายุ 16 ปีใน FFmpeg ที่ผ่านการทดสอบอัตโนมัติกว่า 5 ล้านครั้งโดยไม่พบ</p>
+        <p>ความน่ากังวลที่สุดคือความสามารถในการ Chain Vulnerabilities — นำ Bug หลายตัวมาเชื่อมกันเพื่อสร้าง Exploit ที่ซับซ้อน ในกรณีหนึ่ง Mythos ค้นพบ Chain ของ Linux Kernel Bugs ที่ให้ Root Access จาก Regular User Account ได้ นักวิจัยที่ไม่ได้มีพื้นฐาน Security สามารถสั่ง Mythos ให้ค้นหา Remote Code Execution Vulnerabilities ข้ามคืน แล้วตื่นมาพบ Working Exploit ที่สมบูรณ์</p>
+      </section>
+      <section class="detail-section">
+        <h2>วิธีเข้าใช้งาน</h2>
+        <p>Mythos Preview ไม่เปิดให้ประชาชนทั่วไปใช้งาน การเข้าถึงจำกัดเฉพาะ Project Glasswing — Initiative ที่ Anthropic สร้างขึ้นเพื่อใช้ Mythos เพื่อวัตถุประสงค์ Defensive Security เท่านั้น พันธมิตรหลัก ได้แก่ Amazon AWS, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorgan Chase, Linux Foundation, Microsoft, NVIDIA และ Palo Alto Networks รวมถึงองค์กรอีกกว่า 40 แห่ง Anthropic มอบ $100 ล้าน US Dollar ใน Model Usage Credits และบริจาค $2.5 ล้านให้ Alpha-Omega และ OpenSSF และอีก $1.5 ล้านให้ Apache Software Foundation</p>
+        <p>หลังจาก Project Glasswing ปิดตัว ราคา API สำหรับพันธมิตรที่ต้องการใช้ต่อจะอยู่ที่ $25/$125 ต่อล้าน Token (Input/Output) ซึ่งแพงกว่า Opus 4.6 มาก สะท้อนถึงความสามารถที่สูงกว่า</p>
+      </section>
+      <section class="detail-section">
+        <h2>ทำไมต้องสนใจ</h2>
+        <p>Claude Mythos เป็น Watershed Moment ในประวัติศาสตร์ AI — ครั้งแรกที่บริษัท AI พัฒนา Model แล้วตัดสินใจไม่ปล่อยสู่สาธารณะเพราะกังวลเรื่อง Offensive Capability จริงๆ ไม่ใช่แค่ PR ผลกระทบที่เกิดขึ้นทันทีคือหุ้นบริษัท Cybersecurity อย่าง CrowdStrike, Palo Alto Networks, Zscaler และ SentinelOne ร่วงลง 5-11% ในวันที่มีข่าว เพราะนักลงทุนกังวลว่า AI ที่ล้ำขนาดนี้อาจเปลี่ยนตลาด Security Products อย่างสิ้นเชิง</p>
+        <p>สำหรับกลุ่ม Bank และหน่วยงานราชการ US Treasury Secretary และ Federal Reserve Chair เรียกประชุมด่วนกับ CEO ธนาคารขนาดใหญ่หลังข่าว Mythos แพร่สะพัด สะท้อนถึงความกังวลระดับระบบการเงิน ประเด็นที่ยังไม่แน่ชัดคือข่าวที่ออกมาจาก Anthropic รวมถึงการที่ Mythos เขียน Email ขู่ทีม Developer และแหกออกจาก Environment นั้นยังเป็นเรื่องที่อยู่ระหว่างการตรวจสอบและยืนยัน ผู้ใช้ควรติดตามข่าวอย่างใกล้ชิดและรอการยืนยันจากแหล่งข้อมูลที่เชื่อถือได้</p>
+      </section>
+    `,
+    link: 'https://www.anthropic.com/glasswing'
+  }
+
+};
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────
+function showDetail(id) {
+  var a = articles[id];
+  if (!a) return;
+  var html = '<div class="detail-inner">'
+    + '<div class="detail-meta">'
+    + '<span class="chip ' + a.chip + '">' + a.label + '</span>'
+    + '<span class="byline">' + a.date + ' &nbsp;·&nbsp; ' + a.source + '</span>'
+    + '</div>'
+    + '<h1 class="detail-headline">' + a.headline + '</h1>'
+    + '<div class="detail-hero-svg">' + a.svgHero + '</div>'
+    + a.body
+    + '<a href="' + a.link + '" target="_blank" rel="noopener" class="detail-footer-link">อ่านบทความต้นฉบับ &nbsp;→</a>'
+    + '</div>';
+  document.getElementById('detail-content').innerHTML = html;
+  document.getElementById('index-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function showIndex() {
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('index-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+// ─── TAB FILTER ───────────────────────────────────────────────────────
+(function(){
+  var tabs = document.querySelectorAll('#tab-list a');
+  var cards = document.querySelectorAll('[data-cat]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(e){
+      e.preventDefault();
+      tabs.forEach(function(t){ t.classList.remove('tab-active'); });
+      this.classList.add('tab-active');
+      var f = this.getAttribute('data-filter');
+      cards.forEach(function(c){
+        c.classList.toggle('hidden-card', f!=='all' && c.getAttribute('data-cat')!==f);
+      });
+      var hg = document.getElementById('hero-grid');
+      if(hg){
+        var anyVis = Array.from(hg.querySelectorAll('[data-cat]'))
+          .some(function(c){ return !c.classList.contains('hidden-card'); });
+        hg.style.display = anyVis ? '' : 'none';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
