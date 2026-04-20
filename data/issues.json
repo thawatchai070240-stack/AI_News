@@ -1,7 +1,39 @@
 {
-  "generated_at": "2026-04-15T12:10:39",
-  "count": 2,
+  "generated_at": "2026-04-20T00:00:00",
+  "count": 3,
   "issues": [
+    {
+      "id": 3,
+      "slug": "issue-03",
+      "source_file": "AI-news_3.html",
+      "output_file": "issues/issue-03.html",
+      "title": "TechBrief — สรุปข่าวเทคโนโลยีและ AI รายสัปดาห์",
+      "tagline": "สรุปข่าวเทคโนโลยีและ AI รายสัปดาห์ · ฉบับภาษาไทย",
+      "date_th": "19 เมษายน 2569",
+      "date_iso": "2026-04-19",
+      "week": 16,
+      "edition": "ฉบับที่ 03",
+      "headline_count": 8,
+      "hero_headline": "Claude Opus 4.7 — โมเดล Agentic Coding ที่นักพัฒนาทั้งโลกรอคอย",
+      "hero_excerpt": "Anthropic เปิดตัว Claude Opus 4.7 โมเดลที่ถูกออกแบบมาเพื่องาน Agentic Coding โดยเฉพาะ พร้อมความสามารถใหม่ที่นักพัฒนาทั่วโลกรอคอย",
+      "headlines": [
+        "Claude Opus 4.7 — โมเดล Agentic Coding ที่นักพัฒนาทั้งโลกรอคอย",
+        "Claude Design ลงสนามดีไซน์ — Figma ดิ่ง 7% ในชั่วโมงเดียว",
+        "Claude for Word เปิด Public Beta — แก้สัญญาในเอกสารด้วย Tracked Changes",
+        "ThaiLLM — AI ภาษาไทยจากคนไทย เปิดให้ใช้ฟรีทั้งประเทศ",
+        "Codex App อัปเกรด — OpenAI ตอบโต้ Claude Code ด้วย Skill & Computer Use",
+        "Hermes Agent — Agent ที่เก่งขึ้นเองโดยไม่ต้องสั่ง",
+        "Qwen3-Coder 480B — Alibaba ส่งโมเดล Open Source ลงสนาม Agentic",
+        "Google Flow Music — สร้างเพลงต้นฉบับ 3 นาทีด้วย Prompt อย่างเดียว"
+      ],
+      "categories": [
+        { "key": "all", "label": "ทั้งหมด" },
+        { "key": "anthropic", "label": "Anthropic" },
+        { "key": "opensource", "label": "Open Source AI" },
+        { "key": "tools", "label": "Tools & Apps" },
+        { "key": "concept", "label": "Concept" }
+      ]
+    },
     {
       "id": 2,
       "slug": "issue-02",
