@@ -3,73 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI News Hub — รวมข่าว AI รายสัปดาห์</title>
-<meta name="description" content="รวมข่าว AI และเทคโนโลยี อัปเดตรายสัปดาห์ ฉบับภาษาไทย — เพื่ออัพเดทความรู้ AI">
+<title>TechBrief — รวมข่าว AI รายสัปดาห์</title>
+<meta name="description" content="รวมข่าว AI และเทคโนโลยี อัปเดตรายสัปดาห์ ฉบับภาษาไทย">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
-<link rel="alternate" type="application/rss+xml" title="AI News Hub RSS" href="rss.xml">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0a0a08;
+    --red: #c8230e;
+    --gold: #e8a020;
+    --paper: #f5f3ee;
+    --serif: 'Playfair Display', serif;
+    --sans: 'Sarabun', sans-serif;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    min-height: 100vh;
+  }
+
+  .site-header {
+    background: var(--ink);
+    color: #fff;
+    padding: 40px 24px 32px;
+    text-align: center;
+  }
+  .site-name {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+  .site-name em { color: var(--red); font-style: normal; }
+  .site-tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,.5);
+    margin-top: 8px;
+    letter-spacing: .5px;
+  }
+
+  .page-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 44px 20px 72px;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 8px;
+    margin-bottom: 32px;
+  }
+
+  .issue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .issue-card {
+    display: flex;
+    align-items: stretch;
+    background: #fff;
+    border: 1px solid #e0ded8;
+    border-radius: 4px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .issue-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.12);
+  }
+  .issue-card.latest { border-left: 4px solid var(--red); }
+
+  .num-block {
+    background: var(--ink);
+    color: #fff;
+    min-width: 88px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 14px;
+    flex-shrink: 0;
+  }
+  .issue-card.latest .num-block { background: var(--red); }
+  .num-block .num {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .num-block .num-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,.45);
+    margin-top: 5px;
+    text-transform: uppercase;
+  }
+
+  .card-body {
+    padding: 22px 26px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .card-meta {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,.38);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .badge-new {
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+  .card-headline {
+    font-family: var(--serif);
+    font-size: clamp(1rem, 2.4vw, 1.25rem);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .card-excerpt {
+    font-size: 14px;
+    color: rgba(0,0,0,.52);
+    line-height: 1.65;
+  }
+  .card-cta {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  .site-footer {
+    background: var(--ink);
+    color: rgba(255,255,255,.4);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 520px) {
+    .num-block { min-width: 64px; }
+    .num-block .num { font-size: 1.5rem; }
+    .card-body { padding: 16px 16px; }
+  }
+</style>
 </head>
 <body>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker-inner" id="ticker-inner">
-    <span class="tlabel">LOADING</span>
-    <span>กำลังโหลดข่าวล่าสุด...</span>
-  </div>
-</div>
-
-<!-- HEADER -->
 <header class="site-header">
-  <div class="masthead-inner">
-    <div>
-      <div class="site-name">AI <em>News</em> Hub</div>
-      <div class="site-tagline">รวมข่าว AI และเทคโนโลยีรายสัปดาห์ · ฉบับภาษาไทย</div>
-    </div>
-    <div class="site-meta">
-      <strong id="header-date">—</strong>
-      อัปเดตล่าสุด · <span id="header-count">— ฉบับ</span><br>
-      อัปเดตทุกสัปดาห์
-    </div>
-  </div>
-  <div class="search-bar">
-    <div class="search-inner">
-      <input type="search" id="search-input" class="search-input" placeholder="ค้นหาในชื่อฉบับ หัวข่าว หรือคำสำคัญ..." autocomplete="off">
-      <select id="month-select" class="month-select" aria-label="กรองตามเดือน">
-        <option value="">ทุกเดือน</option>
-      </select>
-      <span class="search-stats" id="search-stats">— ฉบับ</span>
-    </div>
-  </div>
+  <div class="site-name">Tech<em>Brief</em></div>
+  <div class="site-tagline">สรุปข่าว AI และเทคโนโลยีรายสัปดาห์ · ฉบับภาษาไทย</div>
 </header>
 
-<!-- PAGE CONTENT -->
 <main class="page-wrap">
 
-  <div class="section-label fu d1"><span class="slabel-text">ฉบับล่าสุด</span></div>
-  <div id="latest-issue"></div>
+  <div class="section-title">เลือกฉบับที่ต้องการอ่าน</div>
 
-  <div class="section-label fu d2"><span class="slabel-text">ฉบับย้อนหลัง</span></div>
-  <div class="archive-grid" id="archive-grid"></div>
+  <div class="issue-list">
+
+    <a class="issue-card latest" href="AI-news_3.html">
+      <div class="num-block">
+        <div class="num">03</div>
+        <div class="num-label">ฉบับที่</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="badge-new">ล่าสุด</span>
+          19 เมษายน 2569 · สัปดาห์ที่ 16
+        </div>
+        <div class="card-headline">Claude Opus 4.7 — โมเดล Agentic Coding ที่นักพัฒนาทั้งโลกรอคอย</div>
+        <div class="card-excerpt">ThaiLLM เปิดให้ใช้ฟรีทั้งประเทศ · Codex App อัปเกรด · Google Flow Music · Qwen3-Coder 480B · Hermes Agent และอีกมาก</div>
+        <div class="card-cta">อ่านฉบับนี้ →</div>
+      </div>
+    </a>
+
+    <a class="issue-card" href="AI-news_2.html">
+      <div class="num-block">
+        <div class="num">02</div>
+        <div class="num-label">ฉบับที่</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">15 เมษายน 2569 · สัปดาห์ที่ 15</div>
+        <div class="card-headline">Claude Mythos — AI ที่แข็งแกร่งเกินกว่าจะปล่อยให้ใครก็ใช้ได้</div>
+        <div class="card-excerpt">GLM-5.1 เขย่า Silicon Valley · Gemma 4 · Firecrawl · Second Brain by Obsidian · CodeWiki และอีกมาก</div>
+        <div class="card-cta">อ่านฉบับนี้ →</div>
+      </div>
+    </a>
+
+    <a class="issue-card" href="AI-news_1.html">
+      <div class="num-block">
+        <div class="num">01</div>
+        <div class="num-label">ฉบับที่</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">7 เมษายน 2569 · สัปดาห์ที่ 14</div>
+        <div class="card-headline">Google ปล่อย Gemini 3.1 Flash Live — คุยกับ AI ได้ลื่นเหมือนโทรหาเพื่อน</div>
+        <div class="card-excerpt">Google Translate Live · Copilot Cowork · Claude + Microsoft 365 · NotebookLM Video · CLI และ API vs MCP</div>
+        <div class="card-cta">อ่านฉบับนี้ →</div>
+      </div>
+    </a>
+
+  </div>
 
 </main>
 
-<!-- FOOTER -->
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <strong>AI News Hub</strong> · สรุปข่าว AI รายสัปดาห์ © 2026<br>
-      สร้างเพื่อเผยแพร่ความรู้ด้าน AI สู่ผู้อ่านชาวไทย
-    </div>
-    <div>
-      <a href="rss.xml">RSS Feed</a> ·
-      <a href="README.md">วิธีเพิ่มฉบับใหม่</a>
-    </div>
-  </div>
+  TechBrief · สรุปข่าว AI รายสัปดาห์ © 2569
 </footer>
 
-<script src="assets/app.js"></script>
 </body>
 </html>
