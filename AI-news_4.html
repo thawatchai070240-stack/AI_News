@@ -12,31 +12,34 @@
   --accent:#c8230e; --accent2:#e8a020;
   --serif:'Playfair Display',Georgia,serif;
   --sans:'Sarabun','Noto Sans Thai',sans-serif;
+  --max:1280px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 
 /* TICKER */
-.ticker{background:var(--ink);color:#f0ece0;overflow:hidden;border-bottom:1px solid #222}
-.ticker-inner{display:flex;white-space:nowrap;animation:scroll 50s linear infinite;padding:10px 0}
-.ticker span{padding:0 28px;font-size:.78rem;letter-spacing:.05em}
-.ticker em{color:var(--accent2);font-style:normal;font-weight:700;margin-right:8px}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-wrap{background:var(--accent);overflow:hidden}
+.ticker-inner{display:flex;align-items:center;padding:6px 0;white-space:nowrap;animation:ticker 55s linear infinite;font-size:12px;font-weight:700;color:#fff;letter-spacing:.4px}
+.ticker-inner span{padding:0 36px}
+.tlabel{background:#fff;color:var(--accent);font-size:11px;font-weight:800;padding:2px 10px;margin-right:16px;letter-spacing:1px;flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* HEADER */
-.masthead{background:var(--paper);border-bottom:2px solid var(--ink);padding:28px 32px 8px;text-align:center}
-.brand{font-family:var(--serif);font-weight:900;font-size:clamp(2.4rem,5vw,3.5rem);letter-spacing:-.02em;line-height:1}
-.brand em{color:var(--accent);font-style:normal}
-.tagline{font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
-.date-line{font-size:.72rem;letter-spacing:.12em;color:var(--ink-3);margin-top:6px;text-transform:uppercase}
+.site-header{background:var(--ink);border-bottom:3px solid var(--accent)}
+.masthead-inner{max-width:var(--max);margin:0 auto;padding:22px 24px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.site-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.site-name em{color:var(--accent);font-style:normal}
+.site-tagline{color:rgba(255,255,255,.38);font-size:12px;letter-spacing:.5px;margin-top:5px}
+.site-meta{text-align:right;color:rgba(255,255,255,.4);font-size:12px;line-height:1.8}
+.site-meta strong{color:rgba(255,255,255,.78);display:block;font-size:13px}
 
-/* NAV */
-.nav{background:var(--paper);border-bottom:1px solid var(--rule);padding:0 32px}
-.nav ul{display:flex;flex-wrap:wrap;justify-content:center;list-style:none;gap:4px;padding:8px 0}
-.nav a{display:block;padding:9px 16px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:600;border-radius:4px;cursor:pointer;transition:.15s}
-.nav a:hover{background:var(--smoke)}
-.nav a.tab-active{background:var(--ink);color:white}
+/* NAV TABS */
+.site-nav{border-top:1px solid rgba(255,255,255,.1)}
+.site-nav ul{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;list-style:none;overflow-x:auto}
+.site-nav li a{display:block;padding:10px 18px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;cursor:pointer}
+.site-nav li a:hover{color:rgba(255,255,255,.85)}
+.site-nav li a.tab-active{color:#fff;border-bottom-color:var(--accent)}
 
 /* SECTION LABEL */
 .section-lbl{max-width:1280px;margin:32px auto 14px;padding:0 32px;display:flex;align-items:center;gap:16px}
@@ -137,14 +140,14 @@ footer em{color:var(--accent2);font-style:normal;font-weight:700}
   .hero-secondary{height:200px}
   .article-grid{grid-template-columns:repeat(2,1fr)}
   .explainer{grid-template-columns:1fr;padding:28px 22px}
-  .masthead{padding:22px 18px 6px}
+  .masthead-inner{padding:18px 18px 14px}
   .wrap{padding:0 18px 50px}
   .section-lbl{padding:0 18px}
 }
 @media (max-width:600px){
   .article-grid{grid-template-columns:1fr}
-  .nav ul{gap:2px}
-  .nav a{padding:8px 11px;font-size:.7rem}
+  .site-nav ul{gap:0}
+  .site-nav li a{padding:8px 12px;font-size:12px}
   table.summary th,table.summary td{padding:10px 8px;font-size:.78rem}
 }
 </style>
@@ -154,49 +157,56 @@ footer em{color:var(--accent2);font-style:normal;font-weight:700}
 <div id="index-view">
 
 <!-- TICKER -->
-<div class="ticker">
+<div class="ticker-wrap">
   <div class="ticker-inner">
-    <span><em>BREAKING</em> OpenAI ปล่อย GPT-5.5 — ChatGPT กลับขึ้นอันดับ 1</span>
-    <span><em>AGENT</em> Kimi K2.6 รัน 300 sub-agent ต่อเนื่อง 12 ชั่วโมง</span>
-    <span><em>IMAGE</em> ChatGPT Images 2.0 — โมเดลภาพตัวแรกที่ "คิดก่อนวาด"</span>
-    <span><em>ENTERPRISE</em> Google เปิดตัว Gemini Enterprise Agent Platform</span>
-    <span><em>WORKSPACE</em> OpenAI Workspace Agents มาแทน Custom GPTs</span>
-    <span><em>EXCEL</em> Claude Add-in อ่าน Workbook หลายแท็บได้</span>
-    <span><em>OPEN SOURCE</em> Ollama รัน Local AI กว่า 4,500 โมเดล</span>
-    <span><em>MCP</em> n8n + MCP — สร้าง workflow ด้วยภาษาธรรมชาติ</span>
-    <span><em>DEBATE</em> Vibe Code vs Agentic Code — เลือกข้างไหน?</span>
-    <!-- duplicate for loop -->
-    <span><em>BREAKING</em> OpenAI ปล่อย GPT-5.5 — ChatGPT กลับขึ้นอันดับ 1</span>
-    <span><em>AGENT</em> Kimi K2.6 รัน 300 sub-agent ต่อเนื่อง 12 ชั่วโมง</span>
-    <span><em>IMAGE</em> ChatGPT Images 2.0 — โมเดลภาพตัวแรกที่ "คิดก่อนวาด"</span>
-    <span><em>ENTERPRISE</em> Google เปิดตัว Gemini Enterprise Agent Platform</span>
-    <span><em>WORKSPACE</em> OpenAI Workspace Agents มาแทน Custom GPTs</span>
-    <span><em>EXCEL</em> Claude Add-in อ่าน Workbook หลายแท็บได้</span>
-    <span><em>OPEN SOURCE</em> Ollama รัน Local AI กว่า 4,500 โมเดล</span>
-    <span><em>MCP</em> n8n + MCP — สร้าง workflow ด้วยภาษาธรรมชาติ</span>
-    <span><em>DEBATE</em> Vibe Code vs Agentic Code — เลือกข้างไหน?</span>
+    <span class="tlabel">TECHBRIEF</span>
+    <span>GPT-5.5 ดัน ChatGPT กลับขึ้นอันดับ 1 ทุก benchmark</span><span>·</span>
+    <span>Kimi K2.6 รัน 300 sub-agent ต่อเนื่อง 12 ชั่วโมง</span><span>·</span>
+    <span>ChatGPT Images 2.0 — โมเดลภาพตัวแรกที่ "คิดก่อนวาด"</span><span>·</span>
+    <span>Google เปิดตัว Gemini Enterprise Agent Platform</span><span>·</span>
+    <span>OpenAI Workspace Agents มาแทน Custom GPTs</span><span>·</span>
+    <span>Claude Excel Add-in อ่าน Workbook หลายแท็บได้</span><span>·</span>
+    <span>Ollama รัน Local AI กว่า 4,500 โมเดล</span><span>·</span>
+    <span>n8n + MCP — สร้าง workflow ด้วยภาษาธรรมชาติ</span><span>·</span>
+    <span>Vibe Code vs Agentic Code — สองโลกของการเขียนโปรแกรมยุค AI</span><span>·</span>
+    <span class="tlabel">TECHBRIEF</span>
+    <span>GPT-5.5 ดัน ChatGPT กลับขึ้นอันดับ 1 ทุก benchmark</span><span>·</span>
+    <span>Kimi K2.6 รัน 300 sub-agent ต่อเนื่อง 12 ชั่วโมง</span><span>·</span>
+    <span>ChatGPT Images 2.0 — โมเดลภาพตัวแรกที่ "คิดก่อนวาด"</span><span>·</span>
+    <span>Google เปิดตัว Gemini Enterprise Agent Platform</span><span>·</span>
+    <span>OpenAI Workspace Agents มาแทน Custom GPTs</span><span>·</span>
+    <span>Claude Excel Add-in อ่าน Workbook หลายแท็บได้</span><span>·</span>
+    <span>Ollama รัน Local AI กว่า 4,500 โมเดล</span><span>·</span>
+    <span>n8n + MCP — สร้าง workflow ด้วยภาษาธรรมชาติ</span><span>·</span>
+    <span>Vibe Code vs Agentic Code — สองโลกของการเขียนโปรแกรมยุค AI</span><span>·</span>
   </div>
 </div>
 
-<!-- MASTHEAD -->
-<header class="masthead">
-  <div class="brand">Tech<em>Brief</em></div>
-  <div class="tagline">สรุปข่าวเทคโนโลยีและ AI ประจำสัปดาห์</div>
-  <div class="date-line">ฉบับที่ 4 · 28 เมษายน 2569</div>
+<!-- HEADER -->
+<header class="site-header">
+  <div class="masthead-inner">
+    <div>
+      <div class="site-name">Tech<em>Brief</em></div>
+      <div class="site-tagline">สรุปข่าวเทคโนโลยีและ AI รายสัปดาห์ · ฉบับภาษาไทย</div>
+    </div>
+    <div class="site-meta">
+      <strong>ฉบับที่ 04</strong>
+      28 เมษายน 2569 (2026)<br>
+      9 ข่าวสำคัญประจำสัปดาห์
+    </div>
+  </div>
+  <nav class="site-nav">
+    <ul id="tab-list">
+      <li><a href="#" data-filter="all" class="tab-active">ทั้งหมด</a></li>
+      <li><a href="#" data-filter="openai">OpenAI</a></li>
+      <li><a href="#" data-filter="google">Google</a></li>
+      <li><a href="#" data-filter="anthropic">Anthropic</a></li>
+      <li><a href="#" data-filter="opensource">Open Source</a></li>
+      <li><a href="#" data-filter="tools">Tools</a></li>
+      <li><a href="#" data-filter="concept">Concept</a></li>
+    </ul>
+  </nav>
 </header>
-
-<!-- NAV -->
-<nav class="nav">
-  <ul id="tab-list">
-    <li><a href="#" data-filter="all" class="tab-active">ทั้งหมด</a></li>
-    <li><a href="#" data-filter="openai">OpenAI</a></li>
-    <li><a href="#" data-filter="google">Google</a></li>
-    <li><a href="#" data-filter="anthropic">Anthropic</a></li>
-    <li><a href="#" data-filter="opensource">Open Source</a></li>
-    <li><a href="#" data-filter="tools">Tools</a></li>
-    <li><a href="#" data-filter="concept">Concept</a></li>
-  </ul>
-</nav>
 
 <!-- SECTION LABEL -->
 <div class="section-lbl"><h2>ข่าวเด่นประจำสัปดาห์</h2></div>
