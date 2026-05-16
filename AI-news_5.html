@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBrief — สรุปข่าวเทคโนโลยีและ AI ฉบับที่ 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f0f0e; --ink-2:#2a2a28; --ink-3:#4a4a47;
+  --smoke:#f5f4f0; --paper:#faf9f6; --rule:#e0dfd8;
+  --accent:#c8230e; --accent2:#e8a020;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Sarabun','Noto Sans Thai',sans-serif;
+  --max:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* TICKER */
+.ticker-wrap{background:var(--accent);overflow:hidden}
+.ticker-inner{display:flex;align-items:center;padding:6px 0;white-space:nowrap;animation:ticker 55s linear infinite;font-size:12px;font-weight:700;color:#fff;letter-spacing:.4px}
+.ticker-inner span{padding:0 36px}
+.tlabel{background:#fff;color:var(--accent);font-size:11px;font-weight:800;padding:2px 10px;margin-right:16px;letter-spacing:1px;flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HEADER */
+.site-header{background:var(--ink);border-bottom:3px solid var(--accent)}
+.masthead-inner{max-width:var(--max);margin:0 auto;padding:22px 24px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.site-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.site-name em{color:var(--accent);font-style:normal}
+.site-tagline{color:rgba(255,255,255,.38);font-size:12px;letter-spacing:.5px;margin-top:5px}
+.site-meta{text-align:right;color:rgba(255,255,255,.4);font-size:12px;line-height:1.8}
+.site-meta strong{color:rgba(255,255,255,.78);display:block;font-size:13px}
+
+/* NAV TABS */
+.site-nav{border-top:1px solid rgba(255,255,255,.1)}
+.site-nav ul{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;list-style:none;overflow-x:auto}
+.site-nav li a{display:block;padding:10px 18px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;cursor:pointer}
+.site-nav li a:hover{color:rgba(255,255,255,.85)}
+.site-nav li a.tab-active{color:#fff;border-bottom-color:var(--accent)}
+
+/* SECTION LABEL */
+.section-lbl{max-width:1280px;margin:32px auto 14px;padding:0 32px;display:flex;align-items:center;gap:16px}
+.section-lbl::before{content:'';flex:1;height:1px;background:var(--ink)}
+.section-lbl::after{content:'';flex:1;height:1px;background:var(--ink)}
+.section-lbl h2{font-family:var(--serif);font-size:1.4rem;letter-spacing:.04em;font-weight:700}
+
+/* PAGE WRAP */
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px 60px}
+
+/* HERO */
+.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-bottom:34px}
+.hero-primary,.hero-secondary{position:relative;border-radius:6px;overflow:hidden;background:var(--ink);min-height:200px}
+.hero-primary{height:440px}
+.hero-secondary{height:211px}
+.hero-stack{display:flex;flex-direction:column;gap:18px}
+.cover{width:100%;height:100%;display:block;object-fit:cover}
+.hero-overlay{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;background:linear-gradient(0deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 60%,transparent 100%);color:white}
+.hero-primary .hero-overlay{padding:30px 32px}
+.hero-overlay h1,.hero-overlay h2{font-family:var(--serif);line-height:1.15;margin:10px 0}
+.hero-primary .hl{font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:900}
+.hero-secondary .hl{font-size:1.05rem;font-weight:700}
+.hero-overlay .dk{font-size:.92rem;color:#eee;margin-top:6px;line-height:1.45}
+.hero-overlay .byline{margin-top:10px;font-size:.7rem;color:#cfcabb;letter-spacing:.05em}
+
+/* CHIP */
+.chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:3px}
+.chip-red{background:var(--accent);color:#fff}
+.chip-gold{background:var(--accent2);color:var(--ink)}
+.chip-dark{background:var(--ink);color:#fff}
+.chip-slate{background:#3a4a5a;color:#fff}
+.chip-blue{background:#2563eb;color:#fff}
+
+/* ARTICLE GRID */
+.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:24px 0 14px}
+.article-grid.two-col{grid-template-columns:repeat(2,1fr)}
+.article-card{background:transparent;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.article-card:hover,.hero-primary:hover,.hero-secondary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.article-card.fu{display:block}
+.thumb-wrap{border-radius:6px;overflow:hidden;margin-bottom:12px;background:var(--ink)}
+.thumb-wrap svg{display:block;width:100%;height:auto}
+.article-card .hl{font-family:var(--serif);font-size:1.05rem;font-weight:700;margin:6px 0;line-height:1.3}
+.article-card .excerpt{font-size:.88rem;color:var(--ink-3);line-height:1.55;margin-bottom:8px}
+.article-card .byline{font-size:.72rem;color:var(--ink-3);letter-spacing:.05em}
+
+/* EXPLAINER */
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;background:var(--ink);border-radius:8px;padding:28px;margin:30px 0}
+.explainer-card{background:rgba(255,255,255,.06);border-radius:6px;padding:20px;cursor:pointer;transition:background .2s}
+.explainer-card:hover{background:rgba(255,255,255,.10)}
+.explainer-card .thumb-wrap{background:transparent;margin-bottom:14px}
+.explainer-card .hl{color:#fff;font-family:var(--serif);font-size:1.05rem;margin:8px 0;line-height:1.3}
+.explainer-card .excerpt{color:rgba(255,255,255,.6);font-size:.85rem;line-height:1.6}
+.explainer-card .byline{color:rgba(255,255,255,.4);font-size:.7rem;margin-top:8px}
+
+/* SUMMARY TABLE */
+.summary-section{margin-top:48px}
+.summary-section h2{font-family:var(--serif);font-size:1.3rem;margin-bottom:16px}
+.summary-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.summary-table th{text-align:left;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:10px 12px;border-bottom:2px solid var(--ink)}
+.summary-table td{padding:12px;border-bottom:1px solid var(--rule);vertical-align:top}
+.summary-table tr:hover{background:rgba(0,0,0,.03)}
+.badge{font-size:.7rem;font-weight:700;padding:3px 8px;border-radius:3px;white-space:nowrap}
+.badge.yes{background:#e8f5e9;color:#2e7d32}
+.badge.no{background:#fbe9e7;color:#c62828}
+.badge.partial{background:#fff8e1;color:#f57f17}
+
+/* FOOTER */
+.site-footer{background:var(--ink);color:rgba(255,255,255,.4);text-align:center;padding:28px;font-size:13px;margin-top:40px}
+
+/* HIDDEN */
+.hidden-card{display:none!important}
+
+/* READ MORE */
+.read-more{color:var(--accent);font-size:.8rem;font-weight:600}
+
+/* DETAIL VIEW */
+#detail-view{min-height:100vh;background:var(--paper)}
+.detail-topbar{background:var(--ink);padding:12px 32px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:100}
+.back-btn{background:none;border:1px solid rgba(255,255,255,.3);color:white;padding:6px 16px;border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:.85rem}
+.back-btn:hover{background:rgba(255,255,255,.12)}
+.site-name-sm{color:white;font-family:var(--serif);font-size:1.1rem;font-weight:700}
+.site-name-sm em{color:var(--accent);font-style:normal}
+.detail-inner{max-width:780px;margin:0 auto;padding:48px 24px 80px}
+.detail-meta{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.detail-hero-svg{width:100%;border-radius:10px;overflow:hidden;margin-bottom:36px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+.detail-hero-svg svg{display:block;width:100%;height:auto}
+.detail-headline{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.25;color:var(--ink);margin-bottom:8px}
+.detail-section{margin-top:40px;padding-top:32px;border-top:1px solid var(--rule)}
+.detail-section h2{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.detail-section p{font-family:var(--sans);font-size:1.05rem;line-height:1.8;color:var(--ink-2)}
+.detail-footer-link{display:inline-flex;align-items:center;gap:8px;margin-top:48px;padding:12px 24px;background:var(--ink);color:white;border-radius:6px;text-decoration:none;font-family:var(--sans);font-size:.9rem;font-weight:600}
+.detail-footer-link:hover{opacity:.82}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-primary{height:300px}
+  .article-grid{grid-template-columns:1fr}
+  .article-grid.two-col{grid-template-columns:1fr}
+  .explainer-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .masthead-inner{flex-direction:column;align-items:flex-start}
+  .site-meta{text-align:left;margin-top:8px}
+  .wrap{padding:0 16px 40px}
+}
+</style>
+</head>
+<body>
+
+<div id="index-view">
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+<div class="ticker-inner">
+<span><span class="tlabel">TECHBRIEF</span> Google ทุ่ม $40B ใน Anthropic · มูลค่า $350B</span>
+<span><span class="tlabel">TECHBRIEF</span> DeepSeek V4: 1.6T params · SWE-bench 80.6% · MIT License</span>
+<span><span class="tlabel">TECHBRIEF</span> Grok Build Beta: Instruction + File + Function Skill</span>
+<span><span class="tlabel">TECHBRIEF</span> Claude Code /claude-api Skill: 8 ภาษา + Managed Agents</span>
+<span><span class="tlabel">TECHBRIEF</span> Gemini สร้าง PDF-Word-Excel ได้เลยในแชท</span>
+<span><span class="tlabel">TECHBRIEF</span> เปรียบเทียบ Claude Code vs Codex vs Gemini CLI vs OpenCode</span>
+<span><span class="tlabel">TECHBRIEF</span> Claude Cowork Developer Mode: Ollama + OpenRouter</span>
+<span><span class="tlabel">TECHBRIEF</span> Notion ขยับเป็น AI Agent Hub · 1M+ agents</span>
+<span><span class="tlabel">TECHBRIEF</span> MCP vs A2A: สอง protocol ที่ต้องรู้</span>
+<span><span class="tlabel">TECHBRIEF</span> artificialanalysis.ai: เช็ค AI แต่ละตัวเก่งด้านไหน</span>
+<span><span class="tlabel">TECHBRIEF</span> Google ทุ่ม $40B ใน Anthropic · มูลค่า $350B</span>
+<span><span class="tlabel">TECHBRIEF</span> DeepSeek V4: 1.6T params · SWE-bench 80.6% · MIT License</span>
+<span><span class="tlabel">TECHBRIEF</span> Grok Build Beta: Instruction + File + Function Skill</span>
+<span><span class="tlabel">TECHBRIEF</span> Claude Code /claude-api Skill: 8 ภาษา + Managed Agents</span>
+<span><span class="tlabel">TECHBRIEF</span> Gemini สร้าง PDF-Word-Excel ได้เลยในแชท</span>
+<span><span class="tlabel">TECHBRIEF</span> เปรียบเทียบ Claude Code vs Codex vs Gemini CLI vs OpenCode</span>
+<span><span class="tlabel">TECHBRIEF</span> Claude Cowork Developer Mode: Ollama + OpenRouter</span>
+<span><span class="tlabel">TECHBRIEF</span> Notion ขยับเป็น AI Agent Hub · 1M+ agents</span>
+<span><span class="tlabel">TECHBRIEF</span> MCP vs A2A: สอง protocol ที่ต้องรู้</span>
+<span><span class="tlabel">TECHBRIEF</span> artificialanalysis.ai: เช็ค AI แต่ละตัวเก่งด้านไหน</span>
+</div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+<div class="masthead-inner">
+  <div>
+    <div class="site-name">Tech<em>Brief</em></div>
+    <div class="site-tagline">สรุปข่าว AI และเทคโนโลยีรายสัปดาห์ · ฉบับภาษาไทย</div>
+  </div>
+  <div class="site-meta">
+    <strong>ฉบับที่ 05</strong>
+    16 พฤษภาคม 2569 (2026)<br>
+    10 ข่าวสำคัญประจำสัปดาห์
+  </div>
+</div>
+<nav class="site-nav">
+  <ul id="tab-list">
+    <li><a href="#" data-filter="all" class="tab-active">ทั้งหมด</a></li>
+    <li><a href="#" data-filter="google">Google</a></li>
+    <li><a href="#" data-filter="anthropic">Anthropic</a></li>
+    <li><a href="#" data-filter="opensource">Open Source</a></li>
+    <li><a href="#" data-filter="tools">Tools</a></li>
+    <li><a href="#" data-filter="concept">Concept</a></li>
+  </ul>
+</nav>
+</header>
+
+<div class="section-lbl"><h2>ข่าวเด่น</h2></div>
+
+<div class="wrap">
+
+<!-- HERO GRID -->
+<div class="hero-grid" id="hero-grid">
+
+<!-- Hero Primary: Google / Anthropic $40B -->
+<article class="hero-primary" data-cat="anthropic" onclick="showDetail('google-anthropic-40b')" style="cursor:pointer">
+<svg class="cover" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0d1b3e"/><stop offset="100%" style="stop-color:#041228"/></linearGradient></defs>
+<rect width="800" height="440" fill="url(#bg1)"/>
+<circle cx="180" cy="160" r="60" fill="#4285F4" opacity="0.8"/>
+<circle cx="280" cy="120" r="45" fill="#EA4335" opacity="0.7"/>
+<circle cx="130" cy="260" r="50" fill="#FBBC05" opacity="0.6"/>
+<circle cx="240" cy="300" r="40" fill="#34A853" opacity="0.7"/>
+<line x1="180" y1="160" x2="280" y2="120" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+<line x1="180" y1="160" x2="130" y2="260" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+<line x1="130" y1="260" x2="240" y2="300" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+<path d="M 500 150 A 90 90 0 1 0 500 290" fill="none" stroke="#d4692a" stroke-width="12" stroke-linecap="round"/>
+<text x="620" y="200" font-family="Georgia,serif" font-size="52" font-weight="900" fill="white" opacity="0.9">$40B</text>
+<text x="620" y="240" font-family="Georgia,serif" font-size="18" fill="rgba(255,255,255,0.6)">investment</text>
+<polyline points="500,380 550,340 600,320 650,270 700,200 750,150" fill="none" stroke="#34A853" stroke-width="3" opacity="0.7"/>
+<circle cx="750" cy="150" r="6" fill="#34A853"/>
+</svg>
+<div class="hero-overlay">
+  <span class="chip chip-slate">Anthropic</span>
+  <h1 class="hl">Google ทุ่ม $40 พันล้านเดิมพันใน Anthropic — ดีลที่ใหญ่ที่สุดในประวัติ AI</h1>
+  <p class="dk">มูลค่า Anthropic พุ่ง $350 พันล้าน พร้อม TPU compute 5 GW · รายได้ annualized $30B</p>
+  <div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</div>
+</article>
+
+<div class="hero-stack">
+
+<!-- Hero Sec 1: Gemini Files -->
+<article class="hero-secondary" data-cat="google" onclick="showDetail('gemini-files')" style="cursor:pointer">
+<svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1565C0"/><stop offset="100%" style="stop-color:#0a3d7a"/></linearGradient></defs>
+<rect width="500" height="218" fill="url(#bg2)"/>
+<rect x="60" y="55" width="70" height="90" rx="6" fill="#c8230e" opacity="0.9"/>
+<text x="95" y="107" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">PDF</text>
+<rect x="160" y="45" width="70" height="90" rx="6" fill="#2563eb" opacity="0.9"/>
+<text x="195" y="97" font-family="sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">DOCX</text>
+<rect x="260" y="58" width="70" height="90" rx="6" fill="#34A853" opacity="0.9"/>
+<text x="295" y="110" font-family="sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">XLSX</text>
+<polygon points="400,70 420,100 380,100" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+<line x1="400" y1="100" x2="400" y2="140" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+<text x="250" y="190" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.8)" text-anchor="middle">สร้างไฟล์ได้เลยในแชท · Download ทันที</text>
+</svg>
+<div class="hero-overlay">
+  <span class="chip chip-red">Google</span>
+  <h2 class="hl">Gemini สร้าง PDF, Word, Excel ได้เลยในแชท</h2>
+  <div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</div>
+</article>
+
+<!-- Hero Sec 2: DeepSeek V4 -->
+<article class="hero-secondary" data-cat="opensource" onclick="showDetail('deepseek-v4')" style="cursor:pointer">
+<svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1a1a4a"/><stop offset="100%" style="stop-color:#0d0d2e"/></linearGradient></defs>
+<rect width="500" height="218" fill="url(#bg3)"/>
+<circle cx="80" cy="109" r="10" fill="#6a8aff"/>
+<circle cx="160" cy="60" r="8" fill="#6a8aff" opacity="0.7"/>
+<circle cx="160" cy="109" r="8" fill="#6a8aff" opacity="0.7"/>
+<circle cx="160" cy="158" r="8" fill="#6a8aff" opacity="0.7"/>
+<circle cx="240" cy="80" r="8" fill="#4ade80"/>
+<circle cx="240" cy="138" r="8" fill="#4ade80"/>
+<line x1="80" y1="109" x2="160" y2="60" stroke="rgba(106,138,255,0.4)" stroke-width="1.5"/>
+<line x1="80" y1="109" x2="160" y2="109" stroke="rgba(106,138,255,0.4)" stroke-width="1.5"/>
+<line x1="80" y1="109" x2="160" y2="158" stroke="rgba(106,138,255,0.4)" stroke-width="1.5"/>
+<line x1="160" y1="60" x2="240" y2="80" stroke="rgba(74,222,128,0.4)" stroke-width="1.5"/>
+<line x1="160" y1="109" x2="240" y2="80" stroke="rgba(74,222,128,0.4)" stroke-width="1.5"/>
+<line x1="160" y1="109" x2="240" y2="138" stroke="rgba(74,222,128,0.4)" stroke-width="1.5"/>
+<line x1="160" y1="158" x2="240" y2="138" stroke="rgba(74,222,128,0.4)" stroke-width="1.5"/>
+<text x="360" y="125" font-family="Georgia,serif" font-size="64" font-weight="900" fill="rgba(106,138,255,0.7)">V4</text>
+<text x="280" y="196" font-family="sans-serif" font-size="12" fill="rgba(255,255,255,0.6)">SWE-bench 80.6% · 1.6T params · MIT</text>
+</svg>
+<div class="hero-overlay">
+  <span class="chip chip-blue">Open Source</span>
+  <h2 class="hl">DeepSeek V4 — โมเดล Open Source ที่ท้าชน GPT-5.5</h2>
+  <div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</div>
+</article>
+
+</div><!-- hero-stack -->
+</div><!-- hero-grid -->
+
+<!-- ARTICLE GRID ROW 1 -->
+<div class="article-grid">
+
+<!-- Grok Build -->
+<article class="article-card fu d1" data-cat="tools" onclick="showDetail('grok-skills')" style="cursor:pointer">
+<div class="thumb-wrap">
+<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="360" fill="#0d0d0b"/>
+<rect x="40" y="40" width="560" height="260" rx="8" fill="#1a1a18" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+<rect x="40" y="40" width="560" height="30" rx="8" fill="#2a2a28"/>
+<circle cx="70" cy="55" r="6" fill="#c8230e"/><circle cx="95" cy="55" r="6" fill="#e8a020"/><circle cx="120" cy="55" r="6" fill="#34A853"/>
+<text x="60" y="100" font-family="monospace" font-size="13" fill="#4ade80">$ grok build --plan</text>
+<text x="60" y="130" font-family="monospace" font-size="13" fill="rgba(255,255,255,0.6)">&#62; Loading Skills + AGENTS.md</text>
+<text x="60" y="160" font-family="monospace" font-size="13" fill="rgba(255,255,255,0.6)">&#62; Attaching: report.pdf [OK]</text>
+<text x="60" y="190" font-family="monospace" font-size="13" fill="#4ade80">&#62; Function Skill: code-generator</text>
+<text x="60" y="220" font-family="monospace" font-size="13" fill="rgba(255,255,255,0.6)">&#62; Multi-agent: Grok+Harper+Benjamin+Lucas</text>
+<text x="60" y="270" font-family="monospace" font-size="12" fill="#6a8aff">Grok Build Beta · SuperGrok Heavy</text>
+</svg>
+</div>
+<span class="chip chip-red" style="margin-bottom:9px">Tools</span>
+<h3 class="hl">Grok Build: กำหนด Instruction แนบเอกสาร สร้าง Code + Function Skill</h3>
+<p class="excerpt">xAI ปล่อย Grok Build beta พร้อม Plan Mode, file attachment, และระบบ multi-agent 4 ตัวทำงานพร้อมกัน</p>
+<div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</article>
+
+<!-- CLI Compare -->
+<article class="article-card fu d2" data-cat="concept" onclick="showDetail('cli-compare')" style="cursor:pointer">
+<div class="thumb-wrap">
+<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="360" fill="#0d0d0b"/>
+<rect x="30" y="50" width="130" height="70" rx="6" fill="#3d1c08" stroke="#d4692a" stroke-width="1.5"/>
+<text x="95" y="85" font-family="sans-serif" font-size="11" font-weight="700" fill="#d4692a" text-anchor="middle">Claude Code</text>
+<text x="95" y="103" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">128K output</text>
+<rect x="175" y="50" width="130" height="70" rx="6" fill="#0f2d5e" stroke="#0078D4" stroke-width="1.5"/>
+<text x="240" y="85" font-family="sans-serif" font-size="11" font-weight="700" fill="#4fc3f7" text-anchor="middle">Codex CLI</text>
+<text x="240" y="103" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">GitHub native</text>
+<rect x="320" y="50" width="130" height="70" rx="6" fill="#1a3a5c" stroke="#4a90e2" stroke-width="1.5"/>
+<text x="385" y="85" font-family="sans-serif" font-size="11" font-weight="700" fill="#4a90e2" text-anchor="middle">Gemini CLI</text>
+<text x="385" y="103" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">Free tier</text>
+<rect x="465" y="50" width="130" height="70" rx="6" fill="#1a1a1a" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+<text x="530" y="85" font-family="sans-serif" font-size="11" font-weight="700" fill="rgba(255,255,255,0.8)" text-anchor="middle">OpenCode</text>
+<text x="530" y="103" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.5)" text-anchor="middle">Open Source</text>
+<text x="30" y="170" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">Benchmark:</text>
+<rect x="120" y="157" width="280" height="14" rx="3" fill="#d4692a" opacity="0.8"/>
+<rect x="120" y="180" width="265" height="14" rx="3" fill="#4fc3f7" opacity="0.7"/>
+<rect x="120" y="203" width="250" height="14" rx="3" fill="#4a90e2" opacity="0.7"/>
+<text x="320" y="260" font-family="sans-serif" font-size="12" fill="rgba(255,255,255,0.5)" text-anchor="middle">2026: ไม่มีผู้ชนะชัดเจน — ขึ้นกับ use case</text>
+<text x="320" y="300" font-family="monospace" font-size="11" fill="#4ade80" text-anchor="middle">$ Start free → gemini-cli --init</text>
+</svg>
+</div>
+<span class="chip chip-blue" style="margin-bottom:9px">Concept</span>
+<h3 class="hl">เปรียบเทียบ Claude Code, Codex CLI, Gemini CLI และ OpenCode</h3>
+<p class="excerpt">4 เครื่องมือ AI CLI ในปี 2026 converge มาที่ primitives เดียวกัน — เลือกตัวไหนดี?</p>
+<div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</article>
+
+<!-- Claude API Skill -->
+<article class="article-card fu d3" data-cat="anthropic" onclick="showDetail('claude-api-skill')" style="cursor:pointer">
+<div class="thumb-wrap">
+<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3d1c08"/><stop offset="100%" style="stop-color:#1a0c03"/></linearGradient></defs>
+<rect width="640" height="360" fill="url(#bg6)"/>
+<rect x="40" y="50" width="560" height="45" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(212,105,42,0.3)" stroke-width="1"/>
+<text x="60" y="80" font-family="monospace" font-size="13" fill="#d4692a">POST /v1/messages</text>
+<text x="60" y="140" font-family="monospace" font-size="12" fill="rgba(255,255,255,0.5)">Python · TypeScript · Java · Go</text>
+<text x="60" y="168" font-family="monospace" font-size="12" fill="rgba(255,255,255,0.5)">Ruby · C# · PHP · cURL</text>
+<text x="60" y="220" font-family="sans-serif" font-size="12" fill="rgba(255,255,255,0.7)">Tool use · Batch · Caching · Streaming</text>
+<text x="60" y="250" font-family="sans-serif" font-size="12" fill="rgba(255,255,255,0.7)">Structured outputs · Managed Agents</text>
+<rect x="40" y="285" width="140" height="30" rx="15" fill="#d4692a" opacity="0.9"/>
+<text x="110" y="305" font-family="sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">/claude-api</text>
+</svg>
+</div>
+<span class="chip chip-slate" style="margin-bottom:9px">Anthropic</span>
+<h3 class="hl">Claude Code กับ Skill /claude-api — เขียนแอพบน Anthropic SDK ง่ายขึ้น</h3>
+<p class="excerpt">Built-in skill ที่ให้ข้อมูล API reference สดๆ ใน Claude Code รองรับ 8 ภาษา + Managed Agents</p>
+<div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</article>
+
+</div><!-- article-grid -->
+
+<!-- EXPLAINER GRID (dark bg) -->
+<div class="explainer-grid">
+
+<!-- MCP vs A2A -->
+<article class="explainer-card" data-cat="concept" onclick="showDetail('mcp-a2a')" style="cursor:pointer">
+<div class="thumb-wrap">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="300" fill="transparent"/>
+<text x="160" y="30" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">MCP</text>
+<text x="160" y="48" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.5)" text-anchor="middle">Hub-and-Spoke</text>
+<circle cx="160" cy="140" r="24" fill="#d4692a"/>
+<text x="160" y="144" font-family="sans-serif" font-size="8" font-weight="700" fill="white" text-anchor="middle">Agent</text>
+<circle cx="90" cy="80" r="14" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1"/>
+<text x="90" y="84" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">DB</text>
+<circle cx="230" cy="80" r="14" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1"/>
+<text x="230" y="84" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">API</text>
+<circle cx="90" cy="200" r="14" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1"/>
+<text x="90" y="204" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">File</text>
+<circle cx="230" cy="200" r="14" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1"/>
+<text x="230" y="204" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">Tool</text>
+<line x1="160" y1="116" x2="90" y2="94" stroke="#d4692a" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="160" y1="116" x2="230" y2="94" stroke="#d4692a" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="160" y1="164" x2="90" y2="186" stroke="#d4692a" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="160" y1="164" x2="230" y2="186" stroke="#d4692a" stroke-width="1.5" stroke-dasharray="4,3"/>
+<line x1="320" y1="20" x2="320" y2="280" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="8,4"/>
+<text x="480" y="30" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">A2A</text>
+<text x="480" y="48" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.5)" text-anchor="middle">Peer Network</text>
+<circle cx="480" cy="110" r="18" fill="#4a90e2" opacity="0.9"/>
+<text x="480" y="114" font-family="sans-serif" font-size="7" font-weight="700" fill="white" text-anchor="middle">A</text>
+<circle cx="410" cy="180" r="16" fill="rgba(74,144,226,0.5)" stroke="#4a90e2" stroke-width="1"/>
+<text x="410" y="184" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">B</text>
+<circle cx="550" cy="180" r="16" fill="rgba(74,144,226,0.5)" stroke="#4a90e2" stroke-width="1"/>
+<text x="550" y="184" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">C</text>
+<circle cx="480" cy="240" r="16" fill="rgba(74,144,226,0.5)" stroke="#4a90e2" stroke-width="1"/>
+<text x="480" y="244" font-family="sans-serif" font-size="7" fill="white" text-anchor="middle">D</text>
+<line x1="480" y1="128" x2="410" y2="164" stroke="#4a90e2" stroke-width="1.5" opacity="0.6"/>
+<line x1="480" y1="128" x2="550" y2="164" stroke="#4a90e2" stroke-width="1.5" opacity="0.6"/>
+<line x1="410" y1="196" x2="480" y2="224" stroke="#4a90e2" stroke-width="1.5" opacity="0.6"/>
+<line x1="550" y1="196" x2="480" y2="224" stroke="#4a90e2" stroke-width="1.5" opacity="0.6"/>
+<line x1="410" y1="180" x2="550" y2="180" stroke="#4a90e2" stroke-width="1" opacity="0.3"/>
+</svg>
+</div>
+<h3 class="hl">MCP vs A2A — สองโปรโตคอล AI Agent ที่ต้องรู้</h3>
+<p class="excerpt">MCP เชื่อม AI กับ tools (hub-spoke) · A2A ให้ agents คุยกันเอง (peer network) · ใช้ร่วมกันได้</p>
+<div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</article>
+
+<!-- AI Analysis -->
+<article class="explainer-card" data-cat="concept" onclick="showDetail('ai-analysis')" style="cursor:pointer">
+<div class="thumb-wrap">
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="300" fill="transparent"/>
+<text x="40" y="30" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.5)">Intelligence Index v4.0 (artificialanalysis.ai)</text>
+<rect x="40" y="50" width="340" height="28" rx="3" fill="#10a37f" opacity="0.85"/>
+<text x="50" y="69" font-family="sans-serif" font-size="10" font-weight="700" fill="white">GPT-5.5 (xhigh)</text>
+<text x="388" y="69" font-family="sans-serif" font-size="10" fill="#10a37f">91.2</text>
+<rect x="40" y="88" width="310" height="28" rx="3" fill="#d4692a" opacity="0.85"/>
+<text x="50" y="107" font-family="sans-serif" font-size="10" font-weight="700" fill="white">Claude Opus 4.7</text>
+<text x="358" y="107" font-family="sans-serif" font-size="10" fill="#d4692a">88.8</text>
+<rect x="40" y="126" width="290" height="28" rx="3" fill="#4a90e2" opacity="0.85"/>
+<text x="50" y="145" font-family="sans-serif" font-size="10" font-weight="700" fill="white">Gemini 3.1 Pro</text>
+<text x="338" y="145" font-family="sans-serif" font-size="10" fill="#4a90e2">86.5</text>
+<rect x="40" y="164" width="270" height="28" rx="3" fill="#6a8aff" opacity="0.85"/>
+<text x="50" y="183" font-family="sans-serif" font-size="10" font-weight="700" fill="white">DeepSeek V4-Pro</text>
+<text x="318" y="183" font-family="sans-serif" font-size="10" fill="#6a8aff">84.1</text>
+<rect x="40" y="202" width="245" height="28" rx="3" fill="#10a37f" opacity="0.5"/>
+<text x="50" y="221" font-family="sans-serif" font-size="10" font-weight="700" fill="white">GPT-5.5 (high)</text>
+<text x="293" y="221" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.5)">82.3</text>
+<text x="40" y="270" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.4)">516+ models · Quality · Speed · Price · Latency</text>
+</svg>
+</div>
+<h3 class="hl">artificialanalysis.ai — เช็ค AI Model แต่ละตัวเก่งด้านไหน</h3>
+<p class="excerpt">เว็บเทียบ 516+ โมเดล AI ทุกมิติ: intelligence, speed, price — เลือก model ที่ใช่สำหรับงาน</p>
+<div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</article>
+
+</div><!-- explainer-grid -->
+
+<!-- ARTICLE GRID ROW 2 (2-col) -->
+<div class="article-grid two-col">
+
+<!-- Claude Cowork Developer -->
+<article class="article-card fu" data-cat="anthropic" onclick="showDetail('cowork-developer')" style="cursor:pointer">
+<div class="thumb-wrap">
+<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="bg9" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3d1c08"/><stop offset="100%" style="stop-color:#1a0c03"/></linearGradient></defs>
+<rect width="640" height="360" fill="url(#bg9)"/>
+<rect x="240" y="60" width="160" height="70" rx="8" fill="rgba(212,105,42,0.15)" stroke="#d4692a" stroke-width="2"/>
+<text x="320" y="95" font-family="sans-serif" font-size="12" font-weight="700" fill="#d4692a" text-anchor="middle">Claude Desktop</text>
+<text x="320" y="115" font-family="sans-serif" font-size="10" fill="rgba(255,255,255,0.6)" text-anchor="middle">Developer Mode</text>
+<rect x="40" y="190" width="110" height="45" rx="6" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+<text x="95" y="218" font-family="sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">OpenRouter</text>
+<rect x="170" y="190" width="110" height="45" rx="6" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1"/>
+<text x="225" y="218" font-family="sans-serif" font-size="10" font-weight="700" fill="#4ade80" text-anchor="middle">Ollama</text>
+<rect x="300" y="190" width="110" height="45" rx="6" fill="rgba(74,144,226,0.1)" stroke="#4a90e2" stroke-width="1"/>
+<text x="355" y="218" font-family="sans-serif" font-size="10" font-weight="700" fill="#4a90e2" text-anchor="middle">Bedrock</text>
+<rect x="430" y="190" width="110" height="45" rx="6" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+<text x="485" y="218" font-family="sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">LM Studio</text>
+<line x1="270" y1="130" x2="95" y2="190" stroke="rgba(212,105,42,0.5)" stroke-width="1.5" stroke-dasharray="6,3"/>
+<line x1="300" y1="130" x2="225" y2="190" stroke="rgba(212,105,42,0.5)" stroke-width="1.5" stroke-dasharray="6,3"/>
+<line x1="340" y1="130" x2="355" y2="190" stroke="rgba(212,105,42,0.5)" stroke-width="1.5" stroke-dasharray="6,3"/>
+<line x1="370" y1="130" x2="485" y2="190" stroke="rgba(212,105,42,0.5)" stroke-width="1.5" stroke-dasharray="6,3"/>
+<text x="320" y="290" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.5)" text-anchor="middle">ใช้ model ใดก็ได้ผ่าน Claude interface</text>
+</svg>
+</div>
+<span class="chip chip-slate" style="margin-bottom:9px">Anthropic</span>
+<h3 class="hl">Claude Cowork &amp; Code เปิด Developer Mode — ใช้ OpenRouter, Ollama ได้</h3>
+<p class="excerpt">สลับ model ระหว่าง local (Ollama) กับ cloud (OpenRouter, Bedrock) ผ่าน interface เดียวของ Claude</p>
+<div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</article>
+
+<!-- Notion AI Agent -->
+<article class="article-card fu" data-cat="tools" onclick="showDetail('notion-agents')" style="cursor:pointer">
+<div class="thumb-wrap">
+<svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+<rect width="640" height="360" fill="#0d0d0b"/>
+<rect x="260" y="30" width="120" height="100" rx="12" fill="white" opacity="0.9"/>
+<text x="320" y="75" font-family="Georgia,serif" font-size="30" font-weight="900" fill="#0d0d0b" text-anchor="middle">N</text>
+<text x="320" y="108" font-family="sans-serif" font-size="10" font-weight="700" fill="#555" text-anchor="middle">Notion Agents</text>
+<rect x="60" y="180" width="100" height="40" rx="6" fill="rgba(232,160,32,0.2)" stroke="#e8a020" stroke-width="1.5"/>
+<text x="110" y="205" font-family="sans-serif" font-size="10" font-weight="700" fill="#e8a020" text-anchor="middle">Trigger</text>
+<rect x="200" y="180" width="100" height="40" rx="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+<text x="250" y="205" font-family="sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle">AI Agent</text>
+<rect x="340" y="165" width="100" height="30" rx="6" fill="rgba(52,168,83,0.2)" stroke="#34A853" stroke-width="1"/>
+<text x="390" y="185" font-family="sans-serif" font-size="9" fill="#34A853" text-anchor="middle">Update DB</text>
+<rect x="340" y="205" width="100" height="30" rx="6" fill="rgba(52,168,83,0.2)" stroke="#34A853" stroke-width="1"/>
+<text x="390" y="225" font-family="sans-serif" font-size="9" fill="#34A853" text-anchor="middle">Send Report</text>
+<rect x="340" y="245" width="100" height="30" rx="6" fill="rgba(52,168,83,0.2)" stroke="#34A853" stroke-width="1"/>
+<text x="390" y="265" font-family="sans-serif" font-size="9" fill="#34A853" text-anchor="middle">Answer Q&amp;A</text>
+<line x1="160" y1="200" x2="200" y2="200" stroke="#e8a020" stroke-width="1.5"/>
+<line x1="300" y1="195" x2="340" y2="180" stroke="#34A853" stroke-width="1"/>
+<line x1="300" y1="200" x2="340" y2="220" stroke="#34A853" stroke-width="1"/>
+<line x1="300" y1="205" x2="340" y2="260" stroke="#34A853" stroke-width="1"/>
+<text x="320" y="320" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.4)" text-anchor="middle">1M+ agents created · Custom Agents v3.3+</text>
+</svg>
+</div>
+<span class="chip chip-gold" style="margin-bottom:9px">Tools</span>
+<h3 class="hl">Notion ไม่ใช่แค่โน้ต — กลายเป็นระบบสั่งงาน AI Agent แล้ว</h3>
+<p class="excerpt">Custom Agents ทำงาน 24/7 บน triggers/schedules + Workers สำหรับ custom code — มีคนสร้าง agents แล้วกว่าล้าน</p>
+<div class="byline">16 พฤษภาคม 2569 &#183; <span class="read-more">อ่านต่อ →</span></div>
+</article>
+
+</div><!-- article-grid two-col -->
+
+<!-- SUMMARY TABLE -->
+<div class="summary-section">
+<h2>สรุปข่าวทั้งหมด</h2>
+<table class="summary-table">
+<thead>
+<tr><th>#</th><th>หัวข้อ</th><th>ประเด็นหลัก</th><th>ใช้ได้จากไทย</th><th>ราคา</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td><strong onclick="showDetail('google-anthropic-40b')" style="cursor:pointer;color:var(--accent)">Google ลงทุน $40B ใน Anthropic →</strong></td><td style="color:#4a4a47">ดีลใหญ่สุดในประวัติ AI · มูลค่า $350B</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี/Pro</span></td></tr>
+<tr><td>2</td><td><strong onclick="showDetail('deepseek-v4')" style="cursor:pointer;color:var(--accent)">DeepSeek V4 →</strong></td><td style="color:#4a4a47">1.6T params · SWE-bench 80.6% · MIT License</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี/API</span></td></tr>
+<tr><td>3</td><td><strong onclick="showDetail('grok-skills')" style="cursor:pointer;color:var(--accent)">Grok Build + Function Skill →</strong></td><td style="color:#4a4a47">Plan Mode · File attachment · Multi-agent 4 ตัว</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge partial">SuperGrok</span></td></tr>
+<tr><td>4</td><td><strong onclick="showDetail('claude-api-skill')" style="cursor:pointer;color:var(--accent)">Claude Code /claude-api Skill →</strong></td><td style="color:#4a4a47">8 ภาษา · Managed Agents · Structured outputs</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; Pro</span></td></tr>
+<tr><td>5</td><td><strong onclick="showDetail('gemini-files')" style="cursor:pointer;color:var(--accent)">Gemini สร้างไฟล์ในแชท →</strong></td><td style="color:#4a4a47">PDF · Word · Excel · Sheets · Slides · Download ทันที</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี</span></td></tr>
+<tr><td>6</td><td><strong onclick="showDetail('cli-compare')" style="cursor:pointer;color:var(--accent)">เปรียบเทียบ AI CLI 4 ตัว →</strong></td><td style="color:#4a4a47">Claude Code vs Codex vs Gemini vs OpenCode</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge partial">ฟรี-$200</span></td></tr>
+<tr><td>7</td><td><strong onclick="showDetail('cowork-developer')" style="cursor:pointer;color:var(--accent)">Claude Developer Mode →</strong></td><td style="color:#4a4a47">Ollama · OpenRouter · Bedrock · Vertex AI</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี+</span></td></tr>
+<tr><td>8</td><td><strong onclick="showDetail('notion-agents')" style="cursor:pointer;color:var(--accent)">Notion AI Agent →</strong></td><td style="color:#4a4a47">24/7 Agents · Workers · 1M+ agents สร้างแล้ว</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge partial">Business+</span></td></tr>
+<tr><td>9</td><td><strong onclick="showDetail('mcp-a2a')" style="cursor:pointer;color:var(--accent)">MCP vs A2A →</strong></td><td style="color:#4a4a47">Tools protocol vs Agent-to-Agent · Linux Foundation</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี</span></td></tr>
+<tr><td>10</td><td><strong onclick="showDetail('ai-analysis')" style="cursor:pointer;color:var(--accent)">artificialanalysis.ai →</strong></td><td style="color:#4a4a47">เทียบ 516+ models · Intelligence · Speed · Price</td><td><span class="badge yes">&#10003; ใช้ได้</span></td><td><span class="badge yes">&#10003; ฟรี</span></td></tr>
+</tbody>
+</table>
+</div>
+
+</div><!-- wrap -->
+
+<footer class="site-footer">
+  TechBrief · สรุปข่าว AI รายสัปดาห์ ฉบับที่ 05 · 16 พฤษภาคม 2569 © 2569
+</footer>
+
+</div><!-- index-view -->
+
+<!-- DETAIL VIEW -->
+<div id="detail-view" style="display:none">
+<div class="detail-topbar">
+  <button onclick="showIndex()" class="back-btn">&#8592; กลับ</button>
+  <span class="site-name-sm">Tech<em>Brief</em></span>
+</div>
+<div id="detail-content"></div>
+</div>
+
+<script>
+var articles = {
+'google-anthropic-40b': {
+  cat:'anthropic', chip:'chip-slate', label:'Anthropic',
+  headline:'Google ทุ่ม $40 พันล้านเดิมพันใน Anthropic — ดีลที่ใหญ่ที่สุดในประวัติ AI',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dh1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0d1b3e"/><stop offset="100%" style="stop-color:#041228"/></linearGradient></defs><rect width="1200" height="500" fill="url(#dh1)"/><circle cx="220" cy="180" r="80" fill="#4285F4" opacity="0.8"/><circle cx="360" cy="140" r="60" fill="#EA4335" opacity="0.7"/><circle cx="160" cy="310" r="65" fill="#FBBC05" opacity="0.6"/><circle cx="300" cy="360" r="50" fill="#34A853" opacity="0.7"/><line x1="220" y1="180" x2="360" y2="140" stroke="rgba(255,255,255,0.25)" stroke-width="2"/><line x1="220" y1="180" x2="160" y2="310" stroke="rgba(255,255,255,0.25)" stroke-width="2"/><line x1="160" y1="310" x2="300" y2="360" stroke="rgba(255,255,255,0.25)" stroke-width="2"/><path d="M 700 160 A 120 120 0 1 0 700 340" fill="none" stroke="#d4692a" stroke-width="16" stroke-linecap="round"/><text x="880" y="230" font-family="Georgia,serif" font-size="72" font-weight="900" fill="white" opacity="0.9">$40B</text><text x="880" y="280" font-family="sans-serif" font-size="22" fill="rgba(255,255,255,0.6)">investment · $350B valuation</text><polyline points="700,430 770,380 840,360 910,300 980,220 1050,160" fill="none" stroke="#34A853" stroke-width="3" opacity="0.7"/><circle cx="1050" cy="160" r="8" fill="#34A853"/></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>Google ประกาศลงทุนสูงสุด $40 billion ใน Anthropic บริษัทผู้สร้าง Claude เมื่อ 24 เมษายน 2026 ดีลนี้ดัน Anthropic มูลค่าพุ่งสู่ $350 billion ประกอบด้วยเงินลงทุนทันที $10 billion พร้อมอีก $30 billion หาก Anthropic ถึงเป้าหมายที่ตั้งไว้ นอกจากเงินแล้ว Google ยังให้ compute power จาก TPU infrastructure 5 gigawatts ซึ่งเป็นทรัพยากรที่จำเป็นสำหรับเทรนโมเดล AI ขนาดใหญ่ Anthropic มีรายได้ annualized $30 billion ณ ต้นเมษายน 2026 เพิ่มขึ้นจาก $9 billion ปลายปี 2025 การเติบโต 3 เท่าในไม่ถึงปีนี้ทำให้การลงทุนครั้งนี้เป็นดีลที่ใหญ่ที่สุดในประวัติศาสตร์ AI startup</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>Claude ใช้ได้ผ่าน claude.ai ทั้งแบบฟรีและ Pro ($20/เดือน) รวมถึง API สำหรับนักพัฒนา การลงทุนครั้งนี้ไม่ได้เปลี่ยน pricing ผู้ใช้โดยตรง แต่หมายความว่า Google Cloud (Vertex AI) จะเป็น platform หลักสำหรับ enterprise ที่ต้องการใช้ Claude ผ่าน TPU infrastructure ระดับ production สำหรับนักพัฒนาในไทย สามารถเข้าถึง Claude ได้ทั้งผ่าน claude.ai โดยตรงหรือผ่าน Google Cloud Vertex AI</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>ดีลนี้บ่งชี้ว่า Google มอง Anthropic เป็นพันธมิตรเชิงยุทธศาสตร์ระยะยาว ไม่ใช่แค่การลงทุนทางการเงิน เมื่อรวมกับ Amazon ที่ประกาศพร้อมกันในสัปดาห์เดียว Anthropic นั่งบน $65 billion pledged equity capital และ 10 gigawatts ของ AI training power ความมั่นคงทางการเงินนี้ให้ Anthropic มีทรัพยากรแข่งกับ OpenAI/Microsoft ได้ในระยะยาว และทำให้แน่ใจว่า Claude จะยังคงพัฒนาอย่างก้าวกระโดดต่อไป</p></section>',
+  link:'https://techcrunch.com/2026/04/24/google-to-invest-up-to-40b-in-anthropic-in-cash-and-compute/'
+},
+'gemini-files': {
+  cat:'google', chip:'chip-red', label:'Google',
+  headline:'Gemini สร้างไฟล์ PDF, Word, Excel ได้เลยในแชท — ครบจบในที่เดียว',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dh2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1565C0"/><stop offset="100%" style="stop-color:#0a3d7a"/></linearGradient></defs><rect width="1200" height="500" fill="url(#dh2)"/><rect x="100" y="100" width="140" height="180" rx="10" fill="#c8230e" opacity="0.9"/><text x="170" y="200" font-family="sans-serif" font-size="28" font-weight="700" fill="white" text-anchor="middle">PDF</text><rect x="300" y="80" width="140" height="180" rx="10" fill="#2563eb" opacity="0.9"/><text x="370" y="185" font-family="sans-serif" font-size="24" font-weight="700" fill="white" text-anchor="middle">DOCX</text><rect x="500" y="110" width="140" height="180" rx="10" fill="#34A853" opacity="0.9"/><text x="570" y="210" font-family="sans-serif" font-size="24" font-weight="700" fill="white" text-anchor="middle">XLSX</text><rect x="700" y="90" width="140" height="180" rx="10" fill="#FBBC05" opacity="0.9"/><text x="770" y="190" font-family="sans-serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">Slides</text><rect x="900" y="105" width="140" height="180" rx="10" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><text x="970" y="200" font-family="sans-serif" font-size="20" font-weight="700" fill="white" text-anchor="middle">CSV</text><text x="600" y="380" font-family="sans-serif" font-size="24" fill="rgba(255,255,255,0.8)" text-anchor="middle">พิมพ์ Prompt → สร้างไฟล์ → Download ทันที</text><text x="600" y="430" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.5)" text-anchor="middle">ใช้ได้ฟรี · ทุก Gemini user ทั่วโลก · 29 เมษายน 2026</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>Gemini เพิ่มความสามารถสร้างไฟล์ได้โดยตรงจากแชท ประกาศ 29 เมษายน 2026 รองรับฟอร์แมตครบ: Google Docs, Sheets, Slides, PDF, DOCX, XLSX, CSV, LaTeX, TXT, RTF และ Markdown เพียงพิมพ์ prompt อธิบายสิ่งที่ต้องการ เช่น "สร้าง Excel ติดตามค่าใช้จ่ายรายสัปดาห์พร้อมสูตร SUM" แล้ว Gemini จะสร้างไฟล์ให้ดาวน์โหลดได้ทันทีในแชท ไม่ต้องออกไปเปิดแอปอื่น</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>ฟีเจอร์นี้ใช้ได้ฟรีสำหรับ Gemini user ทุกคนทั่วโลก รวมถึงผู้ใช้ในไทย เพียงเปิด Gemini app บน web หรือมือถือ พิมพ์บอกชื่อไฟล์และรูปแบบที่ต้องการ เมื่อ Gemini สร้างเสร็จจะมีปุ่ม Download ให้กดบันทึกลงเครื่อง หรือเลือก "Save to Drive" เพื่อเก็บใน Google Drive สำหรับแชร์ต่อกับทีม</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>เดิมผู้ใช้ต้องขอให้ AI ร่างเนื้อหาแล้ว copy ไปวางใน Word หรือ Excel เอง ขั้นตอนตรงกลางนี้หายไปเลย เหมาะมากสำหรับงาน audit report, template เอกสารทางการ, หรือตารางวิเคราะห์ที่ต้องส่งเป็นไฟล์สำเร็จรูป ข้อจำกัดเดียวในตอนนี้คือยังไม่สามารถ export เป็น PowerPoint (.pptx) โดยตรง แต่สามารถ export เป็น Google Slides แล้วแปลงเป็น PPT ได้</p></section>',
+  link:'https://blog.google/innovation-and-ai/products/gemini-app/generate-files-in-gemini/'
+},
+'deepseek-v4': {
+  cat:'opensource', chip:'chip-blue', label:'Open Source',
+  headline:'DeepSeek V4 — โมเดล Open Source 1.6T Parameters ที่ท้าชน GPT-5.5',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dh3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#1a1a4a"/><stop offset="100%" style="stop-color:#0d0d2e"/></linearGradient></defs><rect width="1200" height="500" fill="url(#dh3)"/><circle cx="150" cy="250" r="20" fill="#6a8aff"/><circle cx="300" cy="130" r="16" fill="#6a8aff" opacity="0.7"/><circle cx="300" cy="250" r="16" fill="#6a8aff" opacity="0.7"/><circle cx="300" cy="370" r="16" fill="#6a8aff" opacity="0.7"/><circle cx="450" cy="180" r="16" fill="#4ade80"/><circle cx="450" cy="320" r="16" fill="#4ade80"/><line x1="150" y1="250" x2="300" y2="130" stroke="rgba(106,138,255,0.4)" stroke-width="2"/><line x1="150" y1="250" x2="300" y2="250" stroke="rgba(106,138,255,0.4)" stroke-width="2"/><line x1="150" y1="250" x2="300" y2="370" stroke="rgba(106,138,255,0.4)" stroke-width="2"/><line x1="300" y1="130" x2="450" y2="180" stroke="rgba(74,222,128,0.4)" stroke-width="2"/><line x1="300" y1="250" x2="450" y2="180" stroke="rgba(74,222,128,0.4)" stroke-width="2"/><line x1="300" y1="250" x2="450" y2="320" stroke="rgba(74,222,128,0.4)" stroke-width="2"/><line x1="300" y1="370" x2="450" y2="320" stroke="rgba(74,222,128,0.4)" stroke-width="2"/><text x="700" y="260" font-family="Georgia,serif" font-size="120" font-weight="900" fill="rgba(106,138,255,0.6)">V4</text><text x="700" y="340" font-family="sans-serif" font-size="22" fill="rgba(255,255,255,0.7)">1.6T params · 49B activated · 1M context</text><text x="700" y="390" font-family="sans-serif" font-size="18" fill="rgba(255,255,255,0.5)">SWE-bench 80.6% · Codeforces 3,206 · MIT License</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>DeepSeek V4 เปิดตัว 24 เมษายน 2026 มาสองรุ่น: V4-Pro (1.6T parameters, activate 49B ต่อ inference) และ V4-Flash (284B parameters, activate 13B) ทั้งคู่รองรับ context 1 million tokens มี 3 โหมด reasoning: Non-think สำหรับคำตอบเร็ว, Think High สำหรับการวิเคราะห์ลึก, Think Max ที่ดึงศักยภาพสูงสุด V4-Pro-Max ทำคะแนน Codeforces 3,206 ซึ่งสูงที่สุดในบรรดาโมเดลทั้งหมด และ SWE-bench 80.6% ที่เทียบเท่า frontier models</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>ใช้ได้ฟรีผ่าน DeepSeek API โดยเปลี่ยน model parameter เป็น deepseek-v4-pro หรือ deepseek-v4-flash หรือดาวน์โหลด weights จาก Hugging Face และ ModelScope ภายใต้ MIT License ราคา API: $0.30/MTok สำหรับ input และ $3.48/MTok สำหรับ output (Pro) ใช้ได้จากไทยผ่าน API โดยตรง</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>DeepSeek V4 เทียบประสิทธิภาพกับ GPT-5.5 และ Claude Opus 4.7 ได้ในราคาที่ถูกกว่ามหาศาล MIT License หมายความว่า enterprise สามารถนำไปใช้เชิงพาณิชย์ได้โดยไม่มีข้อจำกัดด้านลิขสิทธิ์ Hybrid Attention Architecture ใหม่ลด KV cache ลง 90% ทำให้ cost-effective มากเป็นพิเศษสำหรับ long-context tasks นี่คือตัวเลือกที่ดีที่สุดสำหรับ coding tasks ด้วยงบจำกัด</p></section>',
+  link:'https://api-docs.deepseek.com/news/news260424'
+},
+'grok-skills': {
+  cat:'tools', chip:'chip-red', label:'Tools',
+  headline:'Grok Build: กำหนด Instruction แนบเอกสาร สร้าง Code พร้อม Function Skill',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="500" fill="#0d0d0b"/><rect x="80" y="60" width="1040" height="380" rx="12" fill="#1a1a18" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><rect x="80" y="60" width="1040" height="40" rx="12" fill="#2a2a28"/><circle cx="115" cy="80" r="8" fill="#c8230e"/><circle cx="145" cy="80" r="8" fill="#e8a020"/><circle cx="175" cy="80" r="8" fill="#34A853"/><text x="120" y="140" font-family="monospace" font-size="18" fill="#4ade80">$ grok build --plan --attach report.pdf</text><text x="120" y="180" font-family="monospace" font-size="18" fill="rgba(255,255,255,0.6)">&#62; Reading AGENTS.md + Skills directory...</text><text x="120" y="220" font-family="monospace" font-size="18" fill="rgba(255,255,255,0.6)">&#62; Loading Skills: /code-generator, /analyzer</text><text x="120" y="260" font-family="monospace" font-size="18" fill="#4ade80">&#62; File attached: report.pdf (2.4MB) [OK]</text><text x="120" y="300" font-family="monospace" font-size="18" fill="rgba(255,255,255,0.6)">&#62; Multi-agent mode: Grok + Harper + Benjamin + Lucas</text><text x="120" y="340" font-family="monospace" font-size="18" fill="rgba(255,255,255,0.6)">&#62; ACP protocol ready · Parallel execution enabled</text><text x="120" y="400" font-family="monospace" font-size="16" fill="#6a8aff">Grok Build Early Beta · SuperGrok Heavy · May 2026</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>Grok Build เปิดตัว early beta ในเดือนพฤษภาคม 2026 สำหรับ SuperGrok Heavy subscribers มาพร้อม Plan Mode สำหรับวางแผนก่อนเขียนโค้ด, parallel subagents ทำงานพร้อมกัน, และ ACP (Agent Coordination Protocol) support เต็มรูปแบบ รองรับการแนบไฟล์หลายประเภท (txt, py, js, pdf, xlsx และอื่นๆ) ให้ Grok วิเคราะห์และใช้เป็น context Grok Code Fast 1 ออกแบบมาเพื่อ agentic developer workflows ที่ low-latency และ low-cost</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>ต้องสมัคร SuperGrok Heavy subscription บน X/xAI ระบบ Skills ทำงานผ่าน AGENTS.md ใน project folder ทุก Skill อยู่ใน .claude/skills/ หรือ directory ที่กำหนด Grok Build อ่านไฟล์เหล่านี้อัตโนมัติ ใช้ได้จากไทยผ่าน grok.com หรือแอป X สำหรับ Instructions สามารถตั้ง system prompt ได้ผ่านหน้า Settings ของ Grok</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>Skills เป็น open standard ที่ทำงานข้ามแพลตฟอร์มได้ — ทั้ง Claude Code, Codex CLI, Cursor, Gemini CLI, GitHub Copilot เขียน Skill ครั้งเดียวใช้ได้ทุกที่ Grok 4.20 มีสถาปัตยกรรม multi-agent 4 ตัว (Grok, Harper, Benjamin, Lucas) ทำงานแบบ parallel ลดปัญหา priority collapse ในโปรเจกต์ที่มีข้อกำหนดซับซ้อน และมี capability hallucination suppression ที่ไม่อ้างว่าทำได้สิ่งที่ทำไม่ได้จริง</p></section>',
+  link:'https://docs.x.ai/developers/files'
+},
+'claude-api-skill': {
+  cat:'anthropic', chip:'chip-slate', label:'Anthropic',
+  headline:'Claude Code กับ Skill /claude-api — เขียนแอพบน Anthropic SDK ง่ายขึ้นหลายเท่า',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dh6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3d1c08"/><stop offset="100%" style="stop-color:#1a0c03"/></linearGradient></defs><rect width="1200" height="500" fill="url(#dh6)"/><rect x="80" y="80" width="1040" height="70" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(212,105,42,0.3)" stroke-width="1"/><text x="120" y="125" font-family="monospace" font-size="22" fill="#d4692a">POST /v1/messages · /v1/agents · /v1/batch</text><text x="120" y="210" font-family="monospace" font-size="18" fill="rgba(255,255,255,0.6)">Languages: Python · TypeScript · Java · Go · Ruby · C# · PHP · cURL</text><text x="120" y="290" font-family="sans-serif" font-size="18" fill="rgba(255,255,255,0.8)">Features:</text><text x="120" y="325" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.6)">&#9679; Tool use   &#9679; Batch processing   &#9679; Prompt caching   &#9679; Streaming</text><text x="120" y="360" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.6)">&#9679; Structured outputs   &#9679; Managed Agents   &#9679; User-defined tools</text><rect x="80" y="410" width="200" height="44" rx="22" fill="#d4692a" opacity="0.9"/><text x="180" y="438" font-family="sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">/claude-api</text><text x="320" y="438" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.5)">Built-in Skill · Live API Reference · Always Up-to-date</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>claude-api skill คือ built-in skill ที่มากับ Claude Code ให้ข้อมูล reference สดเกี่ยวกับ Anthropic API ทั้งหมดใน context ครอบคลุม Messages API, Managed Agents, tool use, batch processing, prompt caching, structured outputs รองรับ 8 ภาษาสำหรับ Messages API (Python, TypeScript, Java, Go, Ruby, C#, PHP, cURL) และ 7 ภาษาสำหรับ Managed Agents ฟีเจอร์ใหม่ปี 2026 รวมถึง user-defined tools ที่ SDK จัดการ function calling loop ให้อัตโนมัติ</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>เปิดใช้ผ่าน Claude Code โดยพิมพ์ /claude-api ใน terminal ไม่มีค่าใช้จ่ายเพิ่ม skill จะ activate อัตโนมัติเมื่อ Claude ตรวจพบว่าคุณกำลังทำงานกับ Anthropic SDK ตั้งแต่ 15 มิถุนายน 2026 Agent SDK credits จะแยกออกจาก interactive usage limits บน subscription plans ทำให้ไม่กินโควต้าแชทปกติ</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>นักพัฒนาที่สร้างแอพบน Claude API ไม่ต้องเปิด docs แยกอีกต่อไป Skill นี้ดึงข้อมูลล่าสุดเข้ามาใน context ทำให้ Claude แนะนำ code ได้ถูกต้องตาม API version ปัจจุบัน ช่วย debug ปัญหาเฉพาะ SDK ได้ทันที และรู้จัก best practices เช่น prompt caching ที่ลดต้นทุน API ได้กว่า 80% Structured outputs ใหม่ยังรับประกันว่า response จะตรง schema ที่กำหนดเสมอ</p></section>',
+  link:'https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill'
+},
+'cli-compare': {
+  cat:'concept', chip:'chip-blue', label:'Concept',
+  headline:'เปรียบเทียบ Claude Code, Codex CLI, Gemini CLI และ OpenCode ในปี 2026',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="500" fill="#0d0d0b"/><rect x="40" y="60" width="260" height="120" rx="8" fill="#3d1c08" stroke="#d4692a" stroke-width="2"/><text x="170" y="110" font-family="sans-serif" font-size="18" font-weight="700" fill="#d4692a" text-anchor="middle">Claude Code</text><text x="170" y="140" font-family="sans-serif" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">128K output · Opus series</text><rect x="330" y="60" width="260" height="120" rx="8" fill="#0f2d5e" stroke="#0078D4" stroke-width="2"/><text x="460" y="110" font-family="sans-serif" font-size="18" font-weight="700" fill="#4fc3f7" text-anchor="middle">Codex CLI</text><text x="460" y="140" font-family="sans-serif" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">GitHub integration · GPT-5</text><rect x="620" y="60" width="260" height="120" rx="8" fill="#1a3a5c" stroke="#4a90e2" stroke-width="2"/><text x="750" y="110" font-family="sans-serif" font-size="18" font-weight="700" fill="#4a90e2" text-anchor="middle">Gemini CLI</text><text x="750" y="140" font-family="sans-serif" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">Free tier · Google Search</text><rect x="910" y="60" width="260" height="120" rx="8" fill="#1a1a1a" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><text x="1040" y="110" font-family="sans-serif" font-size="18" font-weight="700" fill="rgba(255,255,255,0.8)" text-anchor="middle">OpenCode</text><text x="1040" y="140" font-family="sans-serif" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">Open Source · Multi-model</text><text x="600" y="260" font-family="sans-serif" font-size="20" fill="rgba(255,255,255,0.6)" text-anchor="middle">ทั้ง 4 ตัว converge มาที่ core primitives เดียวกัน: Skills, MCP, Hooks</text><text x="600" y="320" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.4)" text-anchor="middle">ไม่มีผู้ชนะชัดเจน — เลือกตาม workflow และงบประมาณ</text><text x="600" y="420" font-family="monospace" font-size="16" fill="#4ade80" text-anchor="middle">Recommendation: Start with Gemini CLI (free) → Add Claude Code for enterprise</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>AI coding CLI สี่ตัวหลักในปี 2026: Claude Code สร้างบน Anthropic Opus series มี 128K token output เหมาะงาน multi-file refactoring ขนาดใหญ่ Codex CLI ใช้ OpenAI GPT-5 series มี GitHub integration สร้าง PR อัตโนมัติ ทำ code review ผ่าน @mentions Gemini CLI ใช้ Gemini 2.5 Pro มี free tier + Google Search ช่วยให้รู้ best practices ล่าสุด OpenCode เป็น open source รองรับ multi-model ทุกตัว converge มาที่ primitives เดียวกัน (Skills, MCP, hooks)</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>Gemini CLI: ฟรี ติดตั้งผ่าน npm หรือ Google Cloud Shell Claude Code: Pro $20/เดือน, Max $100-$200/เดือน, หรือ pay-per-token ผ่าน API Codex CLI: ผ่าน OpenAI API (pay-per-use) OpenCode: open source ดาวน์โหลดฟรี เชื่อมกับ model ใดก็ได้ ทั้ง 4 ตัวใช้ได้จากไทย ติดตั้งผ่าน terminal ปกติ</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>ในปี 2026 ทั้ง 4 เครื่องมือ converge มาที่ core primitives เดียวกัน benchmark scores ใกล้กันมาก ไม่มีผู้ชนะชัดเจนอีกต่อไป Claude Code ชนะด้าน output ยาวและ multi-file deploys Codex ชนะด้าน CI/CD integration Gemini ชนะด้าน free access แนะนำให้เริ่มด้วย Gemini CLI (ฟรี ไม่เสี่ยง) แล้วค่อยเพิ่ม Claude Code หรือ Codex เมื่อต้องการความสามารถเฉพาะ</p></section>',
+  link:'https://medium.com/@richardhightower/claude-code-vs-codex-cli-vs-gemini-cli-vs-opencode-the-real-differences-after-convergence-fe71401f3f8e'
+},
+'cowork-developer': {
+  cat:'anthropic', chip:'chip-slate', label:'Anthropic',
+  headline:'Claude Cowork & Code เปิด Developer Mode — ใช้ OpenRouter, Ollama ได้เลย',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dh9" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#3d1c08"/><stop offset="100%" style="stop-color:#1a0c03"/></linearGradient></defs><rect width="1200" height="500" fill="url(#dh9)"/><rect x="440" y="80" width="320" height="120" rx="12" fill="rgba(212,105,42,0.15)" stroke="#d4692a" stroke-width="3"/><text x="600" y="135" font-family="sans-serif" font-size="22" font-weight="700" fill="#d4692a" text-anchor="middle">Claude Desktop</text><text x="600" y="170" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.6)" text-anchor="middle">Developer Mode</text><rect x="80" y="300" width="200" height="80" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><text x="180" y="345" font-family="sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">OpenRouter</text><rect x="340" y="300" width="200" height="80" rx="8" fill="rgba(74,222,128,0.1)" stroke="#4ade80" stroke-width="1.5"/><text x="440" y="345" font-family="sans-serif" font-size="16" font-weight="700" fill="#4ade80" text-anchor="middle">Ollama (Local)</text><rect x="600" y="300" width="200" height="80" rx="8" fill="rgba(74,144,226,0.1)" stroke="#4a90e2" stroke-width="1.5"/><text x="700" y="345" font-family="sans-serif" font-size="16" font-weight="700" fill="#4a90e2" text-anchor="middle">Bedrock / Vertex</text><rect x="860" y="300" width="200" height="80" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/><text x="960" y="345" font-family="sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle">LM Studio</text><line x1="500" y1="200" x2="180" y2="300" stroke="rgba(212,105,42,0.6)" stroke-width="2" stroke-dasharray="8,4"/><line x1="550" y1="200" x2="440" y2="300" stroke="rgba(212,105,42,0.6)" stroke-width="2" stroke-dasharray="8,4"/><line x1="650" y1="200" x2="700" y2="300" stroke="rgba(212,105,42,0.6)" stroke-width="2" stroke-dasharray="8,4"/><line x1="700" y1="200" x2="960" y2="300" stroke="rgba(212,105,42,0.6)" stroke-width="2" stroke-dasharray="8,4"/><text x="600" y="440" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.5)" text-anchor="middle">ใช้ model ใดก็ได้ผ่าน Claude interface · ลดต้นทุน · เพิ่มความยืดหยุ่น</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>Claude Desktop รองรับ third-party inference อย่างเป็นทางการ ผู้ใช้สามารถเปิด Developer Mode แล้วใช้ Claude Cowork และ Code กับ model จากนอก Anthropic ได้ ทั้ง OpenRouter (ไม่ต้องการ proxy เพราะรองรับ Anthropic Messages format โดยตรง), Ollama v0.14.0+ (มี Anthropic Messages API native ตั้งแต่มกราคม 2026), Amazon Bedrock, Google Cloud Vertex AI และ Azure AI Foundry</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>เปิด Developer Settings ใน Claude Desktop แล้วใส่ API endpoint และ key ของ provider ที่ต้องการ สำหรับ Ollama ต้องติดตั้ง version 0.14.0 ขึ้นไป แนะนำ Gemma 4 26B MoE สำหรับ local ต้องการ VRAM 16GB สำหรับ OpenRouter ไม่ต้องตั้ง proxy — ใส่ API key แล้วใช้ได้เลย ข้อจำกัด: บาง advanced features อาจทำงานได้เฉพาะกับ Claude models เท่านั้น</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>เปลี่ยน workflow ของนักพัฒนาที่ใช้ Claude Code แต่ต้องการลดต้นทุน — ใช้ Ollama ฟรีสำหรับงานทั่วไป แล้วสลับเป็น Claude ตัวจริงเฉพาะงานที่ซับซ้อน OpenRouter เปิดทางให้เข้าถึง model หลากหลาย (GPT, Gemini, Llama) ผ่าน interface เดียว องค์กรที่ใช้ Amazon Bedrock หรือ Google Vertex อยู่แล้วสามารถ deploy Claude Cowork บน infrastructure เดิมได้ทันทีโดยไม่ต้องเพิ่ม vendor</p></section>',
+  link:'https://www.productcompass.pm/p/cowork-on-3p-any-llm'
+},
+'notion-agents': {
+  cat:'tools', chip:'chip-gold', label:'Tools',
+  headline:'Notion ไม่ใช่แค่โน้ตอีกต่อไป — กลายเป็นระบบสั่งงาน AI Agent เต็มรูปแบบ',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="500" fill="#0d0d0b"/><rect x="480" y="40" width="240" height="160" rx="16" fill="white" opacity="0.9"/><text x="600" y="115" font-family="Georgia,serif" font-size="56" font-weight="900" fill="#0d0d0b" text-anchor="middle">N</text><text x="600" y="165" font-family="sans-serif" font-size="16" font-weight="700" fill="#555" text-anchor="middle">Notion AI Agents</text><rect x="100" y="300" width="180" height="70" rx="8" fill="rgba(232,160,32,0.2)" stroke="#e8a020" stroke-width="2"/><text x="190" y="340" font-family="sans-serif" font-size="14" font-weight="700" fill="#e8a020" text-anchor="middle">Trigger / Schedule</text><rect x="360" y="300" width="180" height="70" rx="8" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><text x="450" y="340" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">AI Agent</text><rect x="620" y="270" width="160" height="45" rx="6" fill="rgba(52,168,83,0.2)" stroke="#34A853" stroke-width="1"/><text x="700" y="298" font-family="sans-serif" font-size="12" fill="#34A853" text-anchor="middle">Update Database</text><rect x="620" y="325" width="160" height="45" rx="6" fill="rgba(52,168,83,0.2)" stroke="#34A853" stroke-width="1"/><text x="700" y="353" font-family="sans-serif" font-size="12" fill="#34A853" text-anchor="middle">Send Reports</text><rect x="620" y="380" width="160" height="45" rx="6" fill="rgba(52,168,83,0.2)" stroke="#34A853" stroke-width="1"/><text x="700" y="408" font-family="sans-serif" font-size="12" fill="#34A853" text-anchor="middle">Answer Q&amp;A</text><rect x="860" y="300" width="160" height="70" rx="8" fill="rgba(106,138,255,0.1)" stroke="#6a8aff" stroke-width="1"/><text x="940" y="340" font-family="sans-serif" font-size="12" font-weight="700" fill="#6a8aff" text-anchor="middle">Workers (Code)</text><line x1="280" y1="335" x2="360" y2="335" stroke="#e8a020" stroke-width="2"/><line x1="540" y1="320" x2="620" y2="292" stroke="#34A853" stroke-width="1.5"/><line x1="540" y1="335" x2="620" y2="347" stroke="#34A853" stroke-width="1.5"/><line x1="540" y1="350" x2="620" y2="402" stroke="#34A853" stroke-width="1.5"/><line x1="780" y1="335" x2="860" y2="335" stroke="#6a8aff" stroke-width="1.5" stroke-dasharray="6,3"/><text x="600" y="470" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.4)" text-anchor="middle">1,000,000+ agents created · Business/Enterprise · $10 per 1,000 credits</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>Notion ปล่อย Custom Agents ใน version 3.3 (กุมภาพันธ์ 2026) และ developer platform ในพฤษภาคม 2026 Agents ทำงานอัตโนมัติ 24/7 บน triggers หรือ schedules รองรับ task triage, internal Q&A, daily standups, status report compilation และ inbox zero Notion Workers คือ cloud-based environment สำหรับรัน custom code ใน secure sandbox ผ่าน webhooks ไม่ต้องพึ่ง external infrastructure</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>ต้องมี Business หรือ Enterprise plan + Notion credits (เริ่ม $10 ต่อ 1,000 credits ตั้งแต่ 4 พฤษภาคม 2026) สร้าง agent ได้ใน Notion workspace ผ่านหน้า "Agents" หรือ Settings &gt; Integrations ใช้ได้จากไทยเช่นเดียวกับ Notion ปกติ Developer platform เปิดให้สร้าง custom tools, sync data, และ trigger workflows ด้วย API</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>Notion กำลังเปลี่ยนจาก note-taking app เป็น AI orchestration platform เต็มรูปแบบ ผู้ใช้สร้าง agents ไปแล้วมากกว่า 1 ล้าน agents นัยสำคัญ: Notion กำลังเป็น "สำนักงาน AI" ที่ทีมสั่งงาน agents แทนที่จะ copy-paste ข้อมูลระหว่าง tools ด้วย orchestration layer ที่ coordinate งานข้ามหลาย tools และ data sources ในที่เดียว</p></section>',
+  link:'https://techcrunch.com/2026/05/13/notion-just-turned-its-workspace-into-a-hub-for-ai-agents/'
+},
+'mcp-a2a': {
+  cat:'concept', chip:'chip-blue', label:'Concept',
+  headline:'MCP vs A2A — สองโปรโตคอล AI Agent ที่นักพัฒนาต้องรู้',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="500" fill="#0d0d0b"/><text x="300" y="60" font-family="sans-serif" font-size="28" font-weight="700" fill="white" text-anchor="middle">MCP</text><text x="300" y="90" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.5)" text-anchor="middle">Model Context Protocol · Hub-and-Spoke</text><circle cx="300" cy="250" r="50" fill="#d4692a"/><text x="300" y="256" font-family="sans-serif" font-size="14" font-weight="700" fill="white" text-anchor="middle">AI Agent</text><circle cx="160" cy="150" r="30" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1.5"/><text x="160" y="155" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Database</text><circle cx="440" cy="150" r="30" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1.5"/><text x="440" y="155" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">API</text><circle cx="160" cy="350" r="30" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1.5"/><text x="160" y="355" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Files</text><circle cx="440" cy="350" r="30" fill="rgba(212,105,42,0.3)" stroke="#d4692a" stroke-width="1.5"/><text x="440" y="355" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Tools</text><line x1="300" y1="200" x2="160" y2="180" stroke="#d4692a" stroke-width="2" stroke-dasharray="6,4"/><line x1="300" y1="200" x2="440" y2="180" stroke="#d4692a" stroke-width="2" stroke-dasharray="6,4"/><line x1="300" y1="300" x2="160" y2="320" stroke="#d4692a" stroke-width="2" stroke-dasharray="6,4"/><line x1="300" y1="300" x2="440" y2="320" stroke="#d4692a" stroke-width="2" stroke-dasharray="6,4"/><line x1="600" y1="30" x2="600" y2="470" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="10,5"/><text x="900" y="60" font-family="sans-serif" font-size="28" font-weight="700" fill="white" text-anchor="middle">A2A</text><text x="900" y="90" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.5)" text-anchor="middle">Agent-to-Agent Protocol · Peer Network</text><circle cx="900" cy="190" r="40" fill="#4a90e2" opacity="0.9"/><text x="900" y="196" font-family="sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">Agent A</text><circle cx="770" cy="310" r="34" fill="rgba(74,144,226,0.5)" stroke="#4a90e2" stroke-width="1.5"/><text x="770" y="316" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Agent B</text><circle cx="1030" cy="310" r="34" fill="rgba(74,144,226,0.5)" stroke="#4a90e2" stroke-width="1.5"/><text x="1030" y="316" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Agent C</text><circle cx="900" cy="410" r="34" fill="rgba(74,144,226,0.5)" stroke="#4a90e2" stroke-width="1.5"/><text x="900" y="416" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Agent D</text><line x1="900" y1="230" x2="770" y2="276" stroke="#4a90e2" stroke-width="2" opacity="0.7"/><line x1="900" y1="230" x2="1030" y2="276" stroke="#4a90e2" stroke-width="2" opacity="0.7"/><line x1="770" y1="344" x2="900" y2="376" stroke="#4a90e2" stroke-width="2" opacity="0.7"/><line x1="1030" y1="344" x2="900" y2="376" stroke="#4a90e2" stroke-width="2" opacity="0.7"/><line x1="770" y1="310" x2="1030" y2="310" stroke="#4a90e2" stroke-width="1.5" opacity="0.4"/></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>MCP (Model Context Protocol) สร้างโดย Anthropic — เป็นมาตรฐานให้ AI เชื่อมต่อกับ tools, data sources, และ services แบบ hub-and-spoke AI agent อยู่ตรงกลาง เชื่อมไปหา databases, APIs, files ผ่าน MCP servers มี 97 ล้าน SDK downloads/เดือน ถูก adopt โดยทุก major AI provider แล้ว A2A (Agent-to-Agent) สร้างโดย Google — เป็นมาตรฐานให้ AI agents สื่อสารกันเองผ่าน "agent cards" ที่กำหนด capabilities ทำงานแบบ peer network ไม่มีศูนย์กลาง</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>MCP: ติดตั้ง MCP server ผ่าน npm หรือ pip แล้วเชื่อมใน Claude Code, Claude Desktop หรือ tools อื่นที่รองรับ A2A: ดาวน์โหลด SDK จาก Google AI GitHub ทั้งสองเป็น open standard ไม่มีค่าใช้จ่าย อยู่ภายใต้ Linux Foundation Agentic AI Foundation (AAIF) ที่ก่อตั้งธันวาคม 2025 โดย OpenAI, Anthropic, Google, Microsoft, AWS และ Block</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>สองโปรโตคอลนี้เป็นพื้นฐานของ AI agentic systems ที่กำลังมาถึง อุปมาง่ายๆ: MCP คือ "มือ" ของ AI ที่ยื่นไปจับ tools และข้อมูล A2A คือ "ปาก" ที่ AI ใช้คุยกับ AI อื่น การใช้ทั้งคู่ร่วมกันคือสูตรสำเร็จของ multi-agent system ที่ทรงพลัง — agents ค้นหากัน delegate งาน (A2A) และแต่ละตัวเข้าถึง tools ที่ต้องการ (MCP) ทั้งคู่จะ evolve ร่วมกันภายใต้ governance เดียว</p></section>',
+  link:'https://dev.to/pockit_tools/mcp-vs-a2a-the-complete-guide-to-ai-agent-protocols-in-2026-30li'
+},
+'ai-analysis': {
+  cat:'concept', chip:'chip-blue', label:'Concept',
+  headline:'artificialanalysis.ai — เช็ค AI Model แต่ละตัวเก่งด้านไหนบ้าง',
+  date:'16 พฤษภาคม 2569', source:'TechBrief',
+  svgHero:'<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="500" fill="#0d0d0b"/><text x="80" y="60" font-family="sans-serif" font-size="18" fill="rgba(255,255,255,0.6)">Intelligence Index v4.0 — artificialanalysis.ai</text><rect x="80" y="85" width="680" height="45" rx="4" fill="#10a37f" opacity="0.85"/><text x="100" y="115" font-family="sans-serif" font-size="16" font-weight="700" fill="white">GPT-5.5 (xhigh)</text><text x="780" y="115" font-family="sans-serif" font-size="16" fill="#10a37f">91.2</text><rect x="80" y="145" width="630" height="45" rx="4" fill="#d4692a" opacity="0.85"/><text x="100" y="175" font-family="sans-serif" font-size="16" font-weight="700" fill="white">Claude Opus 4.7 (max)</text><text x="730" y="175" font-family="sans-serif" font-size="16" fill="#d4692a">88.8</text><rect x="80" y="205" width="590" height="45" rx="4" fill="#4a90e2" opacity="0.85"/><text x="100" y="235" font-family="sans-serif" font-size="16" font-weight="700" fill="white">Gemini 3.1 Pro Preview</text><text x="690" y="235" font-family="sans-serif" font-size="16" fill="#4a90e2">86.5</text><rect x="80" y="265" width="550" height="45" rx="4" fill="#6a8aff" opacity="0.85"/><text x="100" y="295" font-family="sans-serif" font-size="16" font-weight="700" fill="white">DeepSeek V4-Pro-Max</text><text x="650" y="295" font-family="sans-serif" font-size="16" fill="#6a8aff">84.1</text><rect x="80" y="325" width="500" height="45" rx="4" fill="#10a37f" opacity="0.5"/><text x="100" y="355" font-family="sans-serif" font-size="16" font-weight="700" fill="white">GPT-5.5 (high)</text><text x="600" y="355" font-family="sans-serif" font-size="16" fill="rgba(255,255,255,0.5)">82.3</text><text x="80" y="430" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.5)">516+ models tracked · Quality · Speed · Price · Latency · Context Window</text><text x="80" y="470" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.4)">Composite of 10 benchmarks: GDPval-AA, SciCode, GPQA Diamond, IFBench, and more</text></svg>',
+  body:'<section class="detail-section"><h2>ทำอะไรได้บ้าง</h2><p>artificialanalysis.ai เป็น platform เปรียบเทียบ AI models กว่า 516 ตัว ครอบคลุม 6 มิติ: intelligence (คะแนน benchmark รวม), pricing, output speed (tokens/sec), latency (time to first token), end-to-end response time และ context window size Intelligence Index v4.0 เป็น composite benchmark รวม 10 evaluations ท้าทาย เช่น SciCode, GPQA Diamond, Humanity\'s Last Exam, Terminal-Bench Hard ให้ภาพรวมความสามารถ AI ครบทุกด้าน</p></section><section class="detail-section"><h2>วิธีเข้าใช้งาน</h2><p>เปิดเว็บ artificialanalysis.ai ได้ฟรีทันที ไม่ต้อง login ดู leaderboard เรียงตาม intelligence, speed หรือ price ใช้แผนภูมิ quality vs price เพื่อหา "sweet spot" ที่เหมาะกับงบประมาณ หน้า Compare ให้เลือก 2-3 models เทียบกันแบบ head-to-head ใช้ได้จากไทยไม่มีข้อจำกัด</p></section><section class="detail-section"><h2>ทำไมต้องสนใจ</h2><p>เป็นแหล่งข้อมูลที่ neutral ที่สุดสำหรับตัดสินใจเลือก AI model — ไม่ถูก bias จากการตลาดของแต่ละเจ้า อัพเดทอย่างต่อเนื่องทุกครั้งที่มี model ใหม่ ข้อมูล ณ พฤษภาคม 2026: GPT-5.5 (xhigh) นำด้าน intelligence, Claude Opus 4.7 ตามมาที่ 2, Gemini 3.1 Pro ที่ 3 แต่เมื่อดู price/quality ratio DeepSeek V4 อาจเป็นคำตอบที่ดีกว่าสำหรับหลายๆ use case เว็บนี้ช่วยให้ไม่ต้องเชื่อ marketing ของใครเจ้าเดียว</p></section>',
+  link:'https://artificialanalysis.ai/'
+}
+};
+
+function showDetail(id) {
+  var a = articles[id];
+  if (!a) return;
+  document.getElementById('detail-content').innerHTML =
+    '<div class="detail-inner">' +
+    '<div class="detail-meta"><span class="chip ' + a.chip + '">' + a.label + '</span><span class="byline">' + a.date + ' · ' + a.source + '</span></div>' +
+    '<h1 class="detail-headline">' + a.headline + '</h1>' +
+    '<div class="detail-hero-svg">' + a.svgHero + '</div>' +
+    a.body +
+    '<a href="' + a.link + '" target="_blank" rel="noopener" class="detail-footer-link">อ่านบทความต้นฉบับ →</a>' +
+    '</div>';
+  document.getElementById('index-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function showIndex() {
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('index-view').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+(function(){
+  var tabs = document.querySelectorAll('#tab-list a');
+  var cards = document.querySelectorAll('[data-cat]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(e){
+      e.preventDefault();
+      tabs.forEach(function(t){ t.classList.remove('tab-active'); });
+      this.classList.add('tab-active');
+      var f = this.getAttribute('data-filter');
+      cards.forEach(function(c){
+        c.classList.toggle('hidden-card', f!=='all' && c.getAttribute('data-cat')!==f);
+      });
+      var hg = document.getElementById('hero-grid');
+      if(hg){
+        var anyVis = Array.from(hg.querySelectorAll('[data-cat]'))
+          .some(function(c){ return !c.classList.contains('hidden-card'); });
+        hg.style.display = anyVis ? '' : 'none';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
