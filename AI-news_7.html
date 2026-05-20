@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBrief — ฉบับพิเศษ Google I/O 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0f0e;--ink-2:#2a2a28;--ink-3:#4a4a47;
+  --smoke:#f5f4f0;--paper:#faf9f6;--rule:#e0dfd8;
+  --accent:#c8230e;--accent2:#e8a020;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Sarabun','Noto Sans Thai',sans-serif;
+  --max:1180px;
+}
+html{font-size:16px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* TICKER */
+.ticker-wrap{background:var(--accent);overflow:hidden}
+.ticker-inner{display:flex;align-items:center;padding:6px 0;white-space:nowrap;animation:ticker 55s linear infinite;font-size:12px;font-weight:700;color:#fff;letter-spacing:.4px}
+.ticker-inner span{padding:0 36px}
+.tlabel{background:#fff;color:var(--accent);font-size:11px;font-weight:800;padding:2px 10px;margin-right:16px;letter-spacing:1px;flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HEADER */
+.site-header{background:var(--ink);border-bottom:3px solid var(--accent)}
+.masthead-inner{max-width:var(--max);margin:0 auto;padding:22px 24px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.site-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.site-name em{color:var(--accent);font-style:normal}
+.site-tagline{color:rgba(255,255,255,.38);font-size:12px;letter-spacing:.5px;margin-top:5px}
+.site-meta{text-align:right;color:rgba(255,255,255,.4);font-size:12px;line-height:1.8}
+.site-meta strong{color:rgba(255,255,255,.78);display:block;font-size:13px}
+
+/* NAV TABS */
+.site-nav{border-top:1px solid rgba(255,255,255,.1)}
+.site-nav ul{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;list-style:none;overflow-x:auto}
+.site-nav li a{display:block;padding:10px 18px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;cursor:pointer}
+.site-nav li a:hover{color:rgba(255,255,255,.85)}
+.site-nav li a.tab-active{color:#fff;border-bottom-color:var(--accent)}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* SECTION LABEL */
+.section-label{display:flex;align-items:center;gap:12px;margin:36px 0 20px}
+.section-label::before{content:'';width:28px;height:3px;background:var(--accent);flex-shrink:0}
+.slabel-text{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+/* CATEGORY CHIPS */
+.chip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 10px;text-transform:uppercase}
+.chip-red{background:var(--accent);color:#fff}
+.chip-gold{background:var(--accent2);color:var(--ink)}
+.chip-dark{background:rgba(255,255,255,.15);color:#fff}
+.chip-slate{background:#1a1a1a;color:#f0efeb}
+.chip-blue{background:#1a5aaa;color:#fff}
+.chip-green{background:#1a6b3a;color:#fff}
+.chip-purple{background:#5a1a8a;color:#fff}
+
+/* HERO GRID */
+.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:720px){.hero-grid{grid-template-columns:1fr}}
+.hero-primary{position:relative;overflow:hidden;cursor:pointer}
+.hero-primary svg.cover{width:100%;height:440px;display:block;transition:transform .5s ease-out}
+.hero-primary:hover svg.cover{transform:scale(1.03)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,7,.93) 38%,rgba(8,8,7,.15) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.hero-primary .hl{font-family:var(--serif);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;color:#fff;line-height:1.3;margin:10px 0 9px}
+.hero-primary .dk{font-size:14px;color:rgba(255,255,255,.68);line-height:1.65;margin-bottom:12px}
+.byline{font-size:11.5px;color:rgba(255,255,255,.38)}
+.hero-stack{display:flex;flex-direction:column;gap:3px}
+.hero-secondary{position:relative;overflow:hidden;flex:1;cursor:pointer;min-height:218px}
+.hero-secondary svg.cover{width:100%;height:218px;display:block;transition:transform .5s ease-out}
+.hero-secondary:hover svg.cover{transform:scale(1.04)}
+.hero-secondary .hero-overlay{padding:18px 20px}
+.hero-secondary .hl{font-family:var(--serif);font-size:clamp(1rem,1.7vw,1.18rem);font-weight:700;color:#fff;line-height:1.35;margin:8px 0 6px}
+
+/* ARTICLE ROW */
+.article-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px;margin-bottom:14px}
+@media(max-width:860px){.article-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.article-row{grid-template-columns:1fr}}
+.article-card{cursor:pointer}
+.thumb-wrap{overflow:hidden;aspect-ratio:16/9;margin-bottom:14px}
+.thumb-wrap svg{width:100%;height:100%;display:block;transition:transform .45s ease-out}
+.article-card:hover .thumb-wrap svg{transform:scale(1.05)}
+.article-card .chip{margin-bottom:9px}
+.article-card .hl{font-family:var(--serif);font-size:1.08rem;font-weight:700;line-height:1.4;color:var(--ink);margin-bottom:8px}
+.article-card .excerpt{font-size:13.5px;color:var(--ink-3);line-height:1.7;margin-bottom:10px}
+.article-card .byline{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:8px}
+
+/* EXPLAINER DARK */
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:600px){.explainer-grid{grid-template-columns:1fr}}
+.explainer-card{background:#1c1c1a;padding:30px 26px;cursor:pointer;transition:background .2s;display:flex;flex-direction:column}
+.explainer-card:hover{background:#222220}
+.explainer-card svg{width:100%;height:192px;display:block;margin-bottom:20px;opacity:.82;transition:opacity .3s}
+.explainer-card:hover svg{opacity:1}
+.kicker{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.explainer-card .hl{font-family:var(--serif);font-size:1.28rem;font-weight:700;color:#f5f4f0;line-height:1.35;margin-bottom:12px}
+.explainer-card .excerpt{font-size:13.5px;color:rgba(245,244,240,.58);line-height:1.7;margin-bottom:16px;flex:1}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;color:rgba(245,244,240,.45);border:1px solid rgba(245,244,240,.18);padding:3px 9px;transition:.2s}
+.explainer-card:hover .tag{border-color:rgba(245,244,240,.32);color:rgba(245,244,240,.68)}
+
+/* SUMMARY TABLE */
+.table-section{background:var(--smoke);border:1px solid var(--rule);padding:26px 26px 22px;margin-top:36px}
+.table-section h2{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{background:var(--ink);color:#fff;text-align:left;padding:10px 14px;font-weight:700;font-size:12px;letter-spacing:.5px}
+tbody tr{border-bottom:1px solid var(--rule)}
+tbody tr:hover{background:#edece6}
+tbody td{padding:11px 14px;color:var(--ink-2);vertical-align:middle}
+tbody td:first-child{font-weight:800;color:var(--accent);font-size:15px;width:36px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:2px}
+.yes{background:#d4edda;color:#1a5c2a}
+.no{background:#f5e0e0;color:#6b1a1a}
+.part{background:#fff3cd;color:#664d00}
+
+/* FOOTER */
+.site-footer{background:var(--ink);color:rgba(255,255,255,.32);text-align:center;font-size:12px;padding:22px;margin-top:48px}
+.site-footer strong{color:rgba(255,255,255,.7)}
+
+/* UTILS */
+hr.rule{border:none;border-top:1px solid var(--rule);margin:36px 0}
+.hidden-card{display:none!important}
+
+/* HOVER LIFT */
+.article-card,.hero-primary,.hero-secondary,.explainer-card{transition:transform .2s,box-shadow .2s}
+.article-card:hover,.hero-primary:hover,.hero-secondary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.read-more{color:var(--accent);font-size:.8rem;font-weight:600}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .5s ease-out both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}
+
+/* DETAIL VIEW */
+#detail-view{min-height:100vh;background:var(--paper)}
+.detail-topbar{background:var(--ink);padding:12px 32px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:100}
+.back-btn{background:none;border:1px solid rgba(255,255,255,.3);color:white;padding:6px 16px;border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:.85rem}
+.back-btn:hover{background:rgba(255,255,255,.12)}
+.site-name-sm{color:white;font-family:var(--serif);font-size:1.1rem;font-weight:700}
+.site-name-sm em{color:var(--accent);font-style:normal}
+.detail-inner{max-width:780px;margin:0 auto;padding:48px 24px 80px}
+.detail-meta{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.detail-meta .byline{color:var(--ink-3)}
+.detail-hero-svg{width:100%;border-radius:10px;overflow:hidden;margin-bottom:36px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+.detail-hero-svg svg{width:100%;height:auto;display:block}
+.detail-headline{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.25;color:var(--ink);margin-bottom:8px}
+.detail-section{margin-top:40px;padding-top:32px;border-top:1px solid var(--rule)}
+.detail-section h2{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.detail-section p{font-family:var(--sans);font-size:1.05rem;line-height:1.8;color:var(--ink-2)}
+.detail-footer-link{display:inline-flex;align-items:center;gap:8px;margin-top:48px;padding:12px 24px;background:var(--ink);color:white;border-radius:6px;text-decoration:none;font-family:var(--sans);font-size:.9rem;font-weight:600}
+.detail-footer-link:hover{opacity:.82}
+
+/* SPECIAL EDITION BADGE */
+.special-badge{background:linear-gradient(135deg,#4285f4,#ea4335,#fbbc04,#34a853);color:#fff;font-size:11px;font-weight:800;padding:4px 14px;letter-spacing:1.5px;text-transform:uppercase;display:inline-block;margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<div id="index-view">
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="tlabel">GOOGLE I/O 2026</span>
+    <span>Antigravity 2.0 สร้าง OS ทั้งระบบใน 12 ชม. ด้วย 93 Sub-agents</span><span>·</span>
+    <span>Gemini 3.5 Flash เร็ว 4x ถูกกว่าครึ่ง ครองทุก Benchmark</span><span>·</span>
+    <span>Gemini Spark — Personal Agent ทำงาน 24/7 บน Cloud</span><span>·</span>
+    <span>Agentic Commerce ช้อปผ่าน AI จบในแชท ด้วย Google Pay</span><span>·</span>
+    <span>Android XR แว่น AI จาก Samsung × Gentle Monster วางขายปลาย 2026</span><span>·</span>
+    <span>TPU v8 แรงขึ้น 2.8x ลดต้นทุน Inference 80%</span><span>·</span>
+    <span>SynthID ตรวจจับ Deepfake ผ่าน Chrome และ Google Lens</span><span>·</span>
+    <span>Demis Hassabis: "AGI is now on the horizon"</span><span>·</span>
+    <span>Gemini App รีดีไซน์ Neural Expressive + Daily Brief</span><span>·</span>
+    <span class="tlabel">GOOGLE I/O 2026</span>
+    <span>Antigravity 2.0 สร้าง OS ทั้งระบบใน 12 ชม. ด้วย 93 Sub-agents</span><span>·</span>
+    <span>Gemini 3.5 Flash เร็ว 4x ถูกกว่าครึ่ง ครองทุก Benchmark</span><span>·</span>
+    <span>Gemini Spark — Personal Agent ทำงาน 24/7 บน Cloud</span><span>·</span>
+    <span>Agentic Commerce ช้อปผ่าน AI จบในแชท ด้วย Google Pay</span><span>·</span>
+    <span>Android XR แว่น AI จาก Samsung × Gentle Monster วางขายปลาย 2026</span><span>·</span>
+    <span>TPU v8 แรงขึ้น 2.8x ลดต้นทุน Inference 80%</span><span>·</span>
+    <span>SynthID ตรวจจับ Deepfake ผ่าน Chrome และ Google Lens</span><span>·</span>
+    <span>Demis Hassabis: "AGI is now on the horizon"</span><span>·</span>
+    <span>Gemini App รีดีไซน์ Neural Expressive + Daily Brief</span><span>·</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="masthead-inner">
+    <div>
+      <div class="site-name">Tech<em>Brief</em></div>
+      <div class="site-tagline">ฉบับพิเศษ Google I/O 2026 · สรุปทุกประกาศสำคัญ</div>
+    </div>
+    <div class="site-meta">
+      <strong>ฉบับที่ 07 · Special Edition</strong>
+      20 พฤษภาคม 2569 (2026)<br>
+      9 ข่าวสำคัญจาก Google I/O 2026
+    </div>
+  </div>
+  <nav class="site-nav">
+    <ul id="tab-list">
+      <li><a href="#" data-filter="all" class="tab-active">ทั้งหมด</a></li>
+      <li><a href="#" data-filter="platform">Platform</a></li>
+      <li><a href="#" data-filter="model">Model</a></li>
+      <li><a href="#" data-filter="agent">Agent</a></li>
+      <li><a href="#" data-filter="hardware">Hardware</a></li>
+      <li><a href="#" data-filter="safety">Safety</a></li>
+      <li><a href="#" data-filter="vision">Vision</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+<!-- SECTION LABEL -->
+<div class="section-label">
+  <span class="slabel-text">ข่าวเด่น Google I/O 2026</span>
+</div>
+
+<!-- HERO GRID -->
+<div class="hero-grid" id="hero-grid">
+
+  <!-- HERO PRIMARY: Antigravity 2.0 -->
+  <div class="hero-primary fu" data-cat="platform" onclick="showDetail('antigravity')">
+    <svg class="cover" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hg1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0d0d30"/>
+          <stop offset="100%" stop-color="#1a0a2e"/>
+        </linearGradient>
+        <radialGradient id="hg1r" cx="0.5" cy="0.4" r="0.6">
+          <stop offset="0%" stop-color="#4285f4" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <rect width="800" height="440" fill="url(#hg1)"/>
+      <rect width="800" height="440" fill="url(#hg1r)"/>
+      <!-- 93 agent nodes -->
+      <g opacity="0.5">
+        <circle cx="400" cy="180" r="35" fill="none" stroke="#4285f4" stroke-width="2"/>
+        <circle cx="400" cy="180" r="10" fill="#4285f4"/>
+        <text x="400" y="184" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">CORE</text>
+        <!-- Ring 1 -->
+        <circle cx="320" cy="130" r="5" fill="#ea4335"/><line x1="400" y1="180" x2="320" y2="130" stroke="#ea4335" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="480" cy="130" r="5" fill="#34a853"/><line x1="400" y1="180" x2="480" y2="130" stroke="#34a853" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="320" cy="230" r="5" fill="#fbbc04"/><line x1="400" y1="180" x2="320" y2="230" stroke="#fbbc04" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="480" cy="230" r="5" fill="#4285f4"/><line x1="400" y1="180" x2="480" y2="230" stroke="#4285f4" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="260" cy="180" r="4" fill="#ea4335"/><line x1="400" y1="180" x2="260" y2="180" stroke="#ea4335" stroke-width="0.5" opacity="0.3"/>
+        <circle cx="540" cy="180" r="4" fill="#34a853"/><line x1="400" y1="180" x2="540" y2="180" stroke="#34a853" stroke-width="0.5" opacity="0.3"/>
+        <circle cx="350" cy="100" r="3" fill="#fbbc04"/><line x1="320" y1="130" x2="350" y2="100" stroke="#fbbc04" stroke-width="0.3" opacity="0.3"/>
+        <circle cx="450" cy="100" r="3" fill="#4285f4"/><line x1="480" y1="130" x2="450" y2="100" stroke="#4285f4" stroke-width="0.3" opacity="0.3"/>
+        <circle cx="280" cy="260" r="3" fill="#ea4335"/><line x1="320" y1="230" x2="280" y2="260" stroke="#ea4335" stroke-width="0.3" opacity="0.3"/>
+        <circle cx="520" cy="260" r="3" fill="#34a853"/><line x1="480" y1="230" x2="520" y2="260" stroke="#34a853" stroke-width="0.3" opacity="0.3"/>
+      </g>
+      <g font-family="monospace" font-size="13" fill="#4285f4" opacity="0.6">
+        <text x="80" y="340">$ antigravity build --agents=93</text>
+        <text x="80" y="365" opacity="0.4">✓ OS built in 12h · cost &lt; $1,000</text>
+      </g>
+      <text x="400" y="400" text-anchor="middle" font-family="'Playfair Display',serif" font-size="18" fill="#fbbc04" opacity="0.7">"93 agents. 12 hours. One OS."</text>
+    </svg>
+    <div class="hero-overlay">
+      <span class="special-badge">Google I/O 2026</span>
+      <span class="chip chip-red">Platform · Developer</span>
+      <h2 class="hl">Antigravity 2.0 — AI Agent สร้างระบบปฏิบัติการทั้งระบบใน 12 ชั่วโมง ด้วย 93 Sub-agents</h2>
+      <p class="dk">แพลตฟอร์ม Agentic ที่แข็งแกร่งที่สุดของ Google ปล่อย Agent 93 ตัวทำงานพร้อมกัน สร้าง OS ตั้งแต่ Kernel จนถึง GUI ค่า API ไม่ถึง $1,000</p>
+      <span class="byline">พฤษภาคม 2569 · TechBrief</span>
+    </div>
+  </div>
+
+  <div class="hero-stack">
+    <!-- HERO SECONDARY 1: Gemini 3.5 Flash -->
+    <div class="hero-secondary fu d1" data-cat="model" onclick="showDetail('gemini-flash')">
+      <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hg2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0a1628"/>
+            <stop offset="100%" stop-color="#162040"/>
+          </linearGradient>
+        </defs>
+        <rect width="500" height="218" fill="url(#hg2)"/>
+        <!-- Speed bolt -->
+        <polygon points="250,30 220,110 245,110 230,190 290,90 260,90 280,30" fill="#fbbc04" opacity="0.8"/>
+        <text x="250" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#0a1628">4x</text>
+        <text x="120" y="50" font-family="monospace" font-size="11" fill="#4285f4" opacity="0.6">289 tok/s</text>
+        <text x="330" y="50" font-family="monospace" font-size="11" fill="#34a853" opacity="0.6">½ price</text>
+      </svg>
+      <div class="hero-overlay">
+        <span class="chip chip-blue">Model · AI</span>
+        <h2 class="hl">Gemini 3.5 Flash — เร็ว 4 เท่า ถูกกว่าครึ่ง ชนะทุก Benchmark</h2>
+      </div>
+    </div>
+
+    <!-- HERO SECONDARY 2: Gemini Spark -->
+    <div class="hero-secondary fu d2" data-cat="agent" onclick="showDetail('gemini-spark')">
+      <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="hg3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1a0a20"/>
+            <stop offset="100%" stop-color="#0d1a2e"/>
+          </linearGradient>
+        </defs>
+        <rect width="500" height="218" fill="url(#hg3)"/>
+        <!-- Spark icon -->
+        <circle cx="250" cy="100" r="40" fill="none" stroke="#ea4335" stroke-width="2" stroke-dasharray="8 4" opacity="0.6"/>
+        <circle cx="250" cy="100" r="20" fill="#ea4335" opacity="0.3"/>
+        <text x="250" y="106" text-anchor="middle" font-size="16" fill="#fff" font-weight="bold">✦</text>
+        <text x="250" y="170" text-anchor="middle" font-family="monospace" font-size="11" fill="#ea4335" opacity="0.6">24/7 Cloud Agent · Always On</text>
+      </svg>
+      <div class="hero-overlay">
+        <span class="chip chip-red">Agent · Personal AI</span>
+        <h2 class="hl">Gemini Spark — Personal Agent ทำงาน 24/7 บน Cloud แทนคุณ</h2>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end hero-grid -->
+
+<!-- ROW 1: 3 CARDS -->
+<div class="section-label">
+  <span class="slabel-text">ระบบนิเวศและฮาร์ดแวร์</span>
+</div>
+
+<div class="article-row">
+
+  <!-- Agentic Commerce -->
+  <div class="article-card fu" data-cat="agent" onclick="showDetail('agentic-commerce')">
+    <div class="thumb-wrap">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="360" fill="#0d1a0d"/>
+        <g transform="translate(320,140)">
+          <rect x="-50" y="-60" width="100" height="80" rx="8" fill="none" stroke="#34a853" stroke-width="2"/>
+          <text y="-20" text-anchor="middle" font-size="30">🛒</text>
+          <text y="10" text-anchor="middle" font-size="10" fill="#34a853" font-weight="bold">UCP</text>
+        </g>
+        <g font-family="monospace" font-size="10" fill="#34a853" opacity="0.5">
+          <text x="100" y="240">Google Pay ✓</text>
+          <text x="300" y="240">Shopify ✓</text>
+          <text x="460" y="240">24 Retailers ✓</text>
+        </g>
+        <text x="320" y="320" text-anchor="middle" font-size="12" fill="#fbbc04" opacity="0.6">Universal Commerce Protocol</text>
+      </svg>
+    </div>
+    <span class="chip chip-green">Agent · Commerce</span>
+    <h3 class="hl">Agentic Commerce — ช้อปผ่าน AI จบในแชท จ่ายด้วย Google Pay</h3>
+    <p class="excerpt">Universal Commerce Protocol รวม Shopify + 24 ร้านค้า สั่งซื้อจบในแชท AI ไม่ต้องเปิดเว็บ</p>
+    <div class="byline">พฤษภาคม 2569 · TechBrief</div>
+  </div>
+
+  <!-- Android XR -->
+  <div class="article-card fu d1" data-cat="hardware" onclick="showDetail('android-xr')">
+    <div class="thumb-wrap">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="360" fill="#0d0d20"/>
+        <g transform="translate(320,150)">
+          <!-- Glasses shape -->
+          <ellipse cx="-50" cy="0" rx="45" ry="30" fill="none" stroke="#4285f4" stroke-width="2.5"/>
+          <ellipse cx="50" cy="0" rx="45" ry="30" fill="none" stroke="#4285f4" stroke-width="2.5"/>
+          <line x1="-5" y1="0" x2="5" y2="0" stroke="#4285f4" stroke-width="2"/>
+          <line x1="-95" y1="-5" x2="-120" y2="-15" stroke="#4285f4" stroke-width="2"/>
+          <line x1="95" y1="-5" x2="120" y2="-15" stroke="#4285f4" stroke-width="2"/>
+          <text y="60" text-anchor="middle" font-size="10" fill="#ea4335" opacity="0.7">Gemini Built-in</text>
+        </g>
+        <g font-family="monospace" font-size="9" fill="#4285f4" opacity="0.4">
+          <text x="80" y="280">Samsung</text>
+          <text x="240" y="280">Gentle Monster</text>
+          <text x="420" y="280">Warby Parker</text>
+        </g>
+        <text x="320" y="330" text-anchor="middle" font-size="12" fill="#fbbc04" opacity="0.5">Fall 2026 · iOS + Android</text>
+      </svg>
+    </div>
+    <span class="chip chip-blue">Hardware · XR</span>
+    <h3 class="hl">Android XR + Intelligent Eyewear — แว่น AI จาก Samsung × Gentle Monster</h3>
+    <p class="excerpt">2 ฟอร์ม: แว่นเสียง + แว่นจอ ใช้ Gemini ช่วยในชีวิตจริง วางขายปลาย 2026</p>
+    <div class="byline">พฤษภาคม 2569 · TechBrief</div>
+  </div>
+
+  <!-- TPU v8 -->
+  <div class="article-card fu d2" data-cat="hardware" onclick="showDetail('tpu-v8')">
+    <div class="thumb-wrap">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="360" fill="#0a0a0a"/>
+        <g transform="translate(320,140)">
+          <rect x="-60" y="-60" width="120" height="120" rx="4" fill="none" stroke="#34a853" stroke-width="2"/>
+          <rect x="-45" y="-45" width="90" height="90" rx="2" fill="#34a853" opacity="0.15"/>
+          <text y="5" text-anchor="middle" font-family="monospace" font-size="22" fill="#34a853" font-weight="bold">v8</text>
+          <text y="25" text-anchor="middle" font-size="9" fill="#34a853" opacity="0.7">TPU</text>
+          <!-- Pins -->
+          <g stroke="#34a853" stroke-width="1" opacity="0.4">
+            <line x1="-30" y1="60" x2="-30" y2="75"/><line x1="-10" y1="60" x2="-10" y2="75"/>
+            <line x1="10" y1="60" x2="10" y2="75"/><line x1="30" y1="60" x2="30" y2="75"/>
+            <line x1="-30" y1="-60" x2="-30" y2="-75"/><line x1="-10" y1="-60" x2="-10" y2="-75"/>
+            <line x1="10" y1="-60" x2="10" y2="-75"/><line x1="30" y1="-60" x2="30" y2="-75"/>
+          </g>
+        </g>
+        <g font-family="monospace" font-size="11" fill="#34a853" opacity="0.5">
+          <text x="100" y="290">Training: 2.8x ↑</text>
+          <text x="380" y="290">Inference: 80% ↓ cost</text>
+        </g>
+        <text x="320" y="330" text-anchor="middle" font-size="11" fill="#fbbc04" opacity="0.5">9,600-chip Superpods · $175B Infrastructure</text>
+      </svg>
+    </div>
+    <span class="chip chip-green">Hardware · Infra</span>
+    <h3 class="hl">TPU v8 — ชิป AI ใหม่ Training แรง 2.8x, Inference ถูกลง 80%</h3>
+    <p class="excerpt">2 ชิป: TPU 8t (Training) + TPU 8i (Inference) ใน Superpod 9,600 ชิป Google ลงทุน $175B</p>
+    <div class="byline">พฤษภาคม 2569 · TechBrief</div>
+  </div>
+
+</div>
+
+<!-- EXPLAINER DARK ROW -->
+<div class="section-label">
+  <span class="slabel-text">เจาะลึก Concept</span>
+</div>
+
+<div class="explainer-grid">
+
+  <!-- SynthID -->
+  <div class="explainer-card fu" data-cat="safety" onclick="showDetail('synthid')">
+    <svg viewBox="0 0 500 192" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="192" fill="#0a0a18"/>
+      <g transform="translate(250,80)">
+        <!-- Shield icon -->
+        <path d="M 0,-50 L 35,-35 L 35,10 C 35,35 0,55 0,55 C 0,55 -35,35 -35,10 L -35,-35 Z" fill="none" stroke="#4285f4" stroke-width="2"/>
+        <text y="5" text-anchor="middle" font-size="20" fill="#4285f4">🔍</text>
+      </g>
+      <g font-family="monospace" font-size="10" fill="#4285f4" opacity="0.5">
+        <text x="50" y="160">Chrome ✓</text>
+        <text x="180" y="160">Lens ✓</text>
+        <text x="300" y="160">Pixel ✓</text>
+        <text x="400" y="160">Open-source ✓</text>
+      </g>
+    </svg>
+    <span class="kicker">Safety · Deepfake</span>
+    <h3 class="hl">SynthID — รับมือ Deepfake ตรวจจับผ่าน Chrome, Lens และ Pixel</h3>
+    <p class="excerpt">ลายน้ำดิจิทัลมองไม่เห็น ฝังตั้งแต่สร้าง ตรวจจับได้แม้ถูกตัด บีบอัด หรือแก้ไข ตอนนี้ใช้ได้ใน Search และ Chrome แล้ว</p>
+    <div class="tag-row">
+      <span class="tag">Watermark</span><span class="tag">Deepfake</span><span class="tag">Open-source</span><span class="tag">C2PA</span>
+    </div>
+  </div>
+
+  <!-- Agentic Era / AGI -->
+  <div class="explainer-card fu d1" data-cat="vision" onclick="showDetail('agentic-era')">
+    <svg viewBox="0 0 500 192" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="192" fill="#0a0a18"/>
+      <g transform="translate(250,80)">
+        <circle r="50" fill="none" stroke="#fbbc04" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.5"/>
+        <circle r="30" fill="none" stroke="#ea4335" stroke-width="1.5" opacity="0.4"/>
+        <circle r="10" fill="#fbbc04" opacity="0.6"/>
+        <text y="4" text-anchor="middle" font-size="8" fill="#0a0a18" font-weight="bold">AGI</text>
+      </g>
+      <text x="250" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#fbbc04" opacity="0.5">"AGI is now on the horizon" — Demis Hassabis</text>
+    </svg>
+    <span class="kicker">Vision · Future</span>
+    <h3 class="hl">Agentic Era และ AGI Horizon — วิสัยทัศน์ Google ในงาน I/O 2026</h3>
+    <p class="excerpt">Demis Hassabis ประกาศว่า AGI อยู่ใกล้แค่เอื้อม Gemini Omni จำลองฟิสิกส์โลกจริง Sundar Pichai วาง Agentic Era เป็นแกนกลาง</p>
+    <div class="tag-row">
+      <span class="tag">AGI</span><span class="tag">Gemini Omni</span><span class="tag">World Model</span><span class="tag">Agentic</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROW 2: Gemini Neural Expressive (wide) -->
+<div class="section-label">
+  <span class="slabel-text">อัปเดต Gemini App</span>
+</div>
+
+<div class="article-row" style="grid-template-columns:1fr">
+
+  <div class="article-card fu" data-cat="platform" onclick="showDetail('neural-expressive')" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center">
+    <div class="thumb-wrap" style="margin-bottom:0">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ne1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1a0a2e"/>
+            <stop offset="50%" stop-color="#0d1a40"/>
+            <stop offset="100%" stop-color="#0a2818"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#ne1)"/>
+        <!-- Abstract UI mockup -->
+        <g transform="translate(320,150)">
+          <rect x="-100" y="-80" width="200" height="160" rx="14" fill="none" stroke="#4285f4" stroke-width="2" opacity="0.6"/>
+          <!-- Pill prompt -->
+          <rect x="-70" y="50" width="140" height="24" rx="12" fill="#4285f4" opacity="0.3"/>
+          <text y="66" text-anchor="middle" font-size="9" fill="#fff" opacity="0.7">Ask Gemini...</text>
+          <!-- Rich response blocks -->
+          <rect x="-80" y="-60" width="80" height="10" rx="2" fill="#ea4335" opacity="0.4"/>
+          <rect x="-80" y="-40" width="160" height="6" rx="1" fill="#fff" opacity="0.15"/>
+          <rect x="-80" y="-28" width="140" height="6" rx="1" fill="#fff" opacity="0.1"/>
+          <rect x="-80" y="-10" width="70" height="40" rx="4" fill="#34a853" opacity="0.2"/>
+          <rect x="0" y="-10" width="70" height="40" rx="4" fill="#fbbc04" opacity="0.2"/>
+        </g>
+        <text x="320" y="330" text-anchor="middle" font-family="monospace" font-size="11" fill="#4285f4" opacity="0.5">Neural Expressive · 900M+ Monthly Active Users</text>
+      </svg>
+    </div>
+    <div>
+      <span class="chip chip-red" style="margin-bottom:12px">Platform · App</span>
+      <h3 class="hl">Gemini App — Neural Expressive Redesign + Daily Brief</h3>
+      <p class="excerpt">รีดีไซน์ครั้งใหญ่: ตอบไม่ใช่แค่ข้อความ แต่มีภาพ วิดีโอ ไทม์ไลน์ และ Visualization ในตัว พร้อม Daily Brief สรุปวันให้ทุกเช้า ผู้ใช้ 900 ล้านคน/เดือน</p>
+      <div class="byline">พฤษภาคม 2569 · TechBrief</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY TABLE -->
+<div class="table-section">
+  <h2>สรุปทุกข่าว Google I/O 2026</h2>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>หัวข้อ</th>
+        <th>ประเภท</th>
+        <th>พร้อมใช้</th>
+        <th>ฟรี</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="cursor:pointer" onclick="showDetail('antigravity')">
+        <td>1</td>
+        <td>Antigravity 2.0 — สร้าง OS ทั้งระบบด้วย 93 Sub-agents</td>
+        <td><span class="chip chip-red" style="font-size:9px">Platform</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge part">CLI ฟรี / Ultra $100</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('gemini-flash')">
+        <td>2</td>
+        <td>Gemini 3.5 Flash — เร็ว 4x ถูกกว่าครึ่ง</td>
+        <td><span class="chip chip-blue" style="font-size:9px">Model</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge part">Free tier + API</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('gemini-spark')">
+        <td>3</td>
+        <td>Gemini Spark — Personal Agent 24/7</td>
+        <td><span class="chip chip-red" style="font-size:9px">Agent</span></td>
+        <td><span class="badge part">เปิดตัว US</span></td>
+        <td><span class="badge no">AI Ultra เท่านั้น</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('agentic-commerce')">
+        <td>4</td>
+        <td>Agentic Commerce — ช้อปผ่าน AI จบในแชท</td>
+        <td><span class="chip chip-green" style="font-size:9px">Agent</span></td>
+        <td><span class="badge part">เร็วๆ นี้</span></td>
+        <td><span class="badge yes">ฟรีผ่าน Gemini</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('android-xr')">
+        <td>5</td>
+        <td>Android XR + Intelligent Eyewear</td>
+        <td><span class="chip chip-blue" style="font-size:9px">Hardware</span></td>
+        <td><span class="badge no">ปลาย 2026</span></td>
+        <td><span class="badge no">ต้องซื้อแว่น</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('tpu-v8')">
+        <td>6</td>
+        <td>TPU v8 — Training 2.8x, Inference ถูก 80%</td>
+        <td><span class="chip chip-green" style="font-size:9px">Hardware</span></td>
+        <td><span class="badge part">Cloud เร็วๆ นี้</span></td>
+        <td><span class="badge no">Enterprise</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('synthid')">
+        <td>7</td>
+        <td>SynthID — รับมือ Deepfake ผ่าน Chrome/Lens</td>
+        <td><span class="chip chip-blue" style="font-size:9px">Safety</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge yes">ฟรี</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('agentic-era')">
+        <td>8</td>
+        <td>Agentic Era / AGI Horizon — วิสัยทัศน์ Google</td>
+        <td><span class="chip chip-gold" style="font-size:9px">Vision</span></td>
+        <td><span class="badge part">กำลังพัฒนา</span></td>
+        <td>—</td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('neural-expressive')">
+        <td>9</td>
+        <td>Gemini App — Neural Expressive + Daily Brief</td>
+        <td><span class="chip chip-red" style="font-size:9px">Platform</span></td>
+        <td><span class="badge yes">Rolling out</span></td>
+        <td><span class="badge part">บางฟีเจอร์ฟรี</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div><!-- end page-wrap -->
+
+<footer class="site-footer">
+  <strong>TechBrief</strong> · ฉบับพิเศษ Google I/O 2026 · สรุปทุกประกาศสำคัญ © 2569
+</footer>
+
+</div><!-- end index-view -->
+
+<!-- DETAIL VIEW -->
+<div id="detail-view" style="display:none">
+  <div class="detail-topbar">
+    <button class="back-btn" onclick="showIndex()">← กลับ</button>
+    <span class="site-name-sm">Tech<em>Brief</em></span>
+  </div>
+  <div id="detail-content"></div>
+</div>
+
+<script>
+var articles = {
+
+'antigravity': {
+  cat:'platform', chip:'chip-red', label:'Platform · Developer',
+  headline:'Antigravity 2.0 — AI Agent สร้างระบบปฏิบัติการทั้งระบบใน 12 ชั่วโมง ด้วย 93 Sub-agents',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="dh-ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d0d30"/><stop offset="100%" stop-color="#1a0a2e"/></linearGradient></defs>
+    <rect width="1200" height="500" fill="url(#dh-ag)"/>
+    <g opacity="0.6" transform="translate(600,200)">
+      <circle r="60" fill="none" stroke="#4285f4" stroke-width="2.5"/>
+      <circle r="15" fill="#4285f4"/>
+      <text y="5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">CORE</text>
+      <g><circle cx="-120" cy="-80" r="6" fill="#ea4335"/><line x1="0" y1="0" x2="-120" y2="-80" stroke="#ea4335" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="120" cy="-80" r="6" fill="#34a853"/><line x1="0" y1="0" x2="120" y2="-80" stroke="#34a853" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="-120" cy="80" r="6" fill="#fbbc04"/><line x1="0" y1="0" x2="-120" y2="80" stroke="#fbbc04" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="120" cy="80" r="6" fill="#4285f4"/><line x1="0" y1="0" x2="120" y2="80" stroke="#4285f4" stroke-width="0.5" opacity="0.5"/>
+      <circle cx="0" cy="-130" r="5" fill="#ea4335"/><line x1="0" y1="-60" x2="0" y2="-130" stroke="#ea4335" stroke-width="0.4" opacity="0.4"/>
+      <circle cx="0" cy="130" r="5" fill="#34a853"/><line x1="0" y1="60" x2="0" y2="130" stroke="#34a853" stroke-width="0.4" opacity="0.4"/>
+      </g>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#4285f4" opacity="0.6">
+      <text x="150" y="400">$ antigravity build --from-scratch</text>
+      <text x="150" y="425" opacity="0.4">✓ 93 sub-agents · 12 hours · cost: $987</text>
+    </g>
+    <text x="600" y="460" text-anchor="middle" font-family="'Playfair Display',serif" font-size="20" fill="#fbbc04" opacity="0.7">"Build anything. Ship everything."</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Antigravity 2.0 คือแพลตฟอร์ม Agentic Development ตัวเอกจาก Google ที่อัปเกรดจากเวอร์ชันแรกแบบก้าวกระโดด ในงาน I/O 2026 ทีม Google สาธิตให้เห็นว่า Antigravity สามารถสร้างระบบปฏิบัติการใช้งานได้จริง ตั้งแต่ Kernel, File System, Window Manager จนถึง GUI ภายใน 12 ชั่วโมง โดยใช้ Agent 93 ตัวทำงานพร้อมกัน (Parallel Sub-agents) ค่าใช้จ่าย API ทั้งหมดไม่ถึง $1,000 ระบบนี้ขับเคลื่อนด้วย Gemini 3.5 Flash ผ่าน Harness ที่ออกแบบมาเพื่อจัดการ Multi-agent Workflow โดยเฉพาะ</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>Antigravity เปิดให้ใช้ได้ 3 รูปแบบ: CLI (ฟรี สำหรับนักพัฒนา), SDK (Python/TypeScript สำหรับ Integration), และ Desktop App (GUI สำหรับ Non-coder) แผน Ultra ราคา $100/เดือน ปลดล็อก Parallel Agents ได้สูงสุด 100 ตัวและ Priority Compute สำหรับ Free tier จำกัดที่ 5 Concurrent Agents แต่ก็เพียงพอสำหรับโปรเจกต์ขนาดเล็ก-กลาง ใช้ได้ทันทีวันนี้ผ่าน antigravity.dev</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Antigravity 2.0 คือการ Statement ของ Google ว่าอนาคตของ Software Development ไม่ใช่ "AI ช่วยเขียนโค้ด" แต่คือ "AI สร้างระบบทั้งระบบ" การสาธิตสร้าง OS ไม่ใช่แค่ Demo สวยๆ แต่เป็นการพิสูจน์ว่า Multi-agent Architecture ทำงานจริงในระดับ Production ได้แล้ว สำหรับ Startup ที่มีทีมเล็ก นี่อาจเป็นจุดเปลี่ยน — คุณไม่จำเป็นต้องจ้างทีม 50 คนเพื่อสร้างผลิตภัณฑ์ซับซ้อนอีกต่อไป</p>
+    </section>
+  `,
+  link:'https://www.techtimes.com/articles/316858/20260519/google-i-o-2026-not-its-smartest-model-its-cheapest-fastest-one-all-bet-agents.htm'
+},
+
+'gemini-flash': {
+  cat:'model', chip:'chip-blue', label:'Model · AI',
+  headline:'Gemini 3.5 Flash — เร็ว 4 เท่า ถูกกว่าครึ่ง ชนะทุก Coding Benchmark',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="dh-gf" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a1628"/><stop offset="100%" stop-color="#162040"/></linearGradient></defs>
+    <rect width="1200" height="500" fill="url(#dh-gf)"/>
+    <polygon points="600,80 540,260 580,260 555,420 660,220 615,220 650,80" fill="#fbbc04" opacity="0.7"/>
+    <text x="600" y="270" text-anchor="middle" font-size="50" font-weight="bold" fill="#0a1628">4x</text>
+    <g font-family="monospace" font-size="16" fill="#4285f4" opacity="0.6">
+      <text x="200" y="100">Speed: 289 tokens/sec</text>
+      <text x="200" y="130">Price: less than ½ of frontier</text>
+      <text x="200" y="160">Terminal-Bench: 76.2%</text>
+    </g>
+    <text x="600" y="470" text-anchor="middle" font-family="'Playfair Display',serif" font-size="20" fill="#fbbc04" opacity="0.7">"Not our smartest — our fastest and cheapest"</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Gemini 3.5 Flash คือ AI Model ที่ Google เลือกเป็นดาวเด่นของ I/O 2026 แทนที่จะเปิดตัว "Gemini 4.0" ที่หลายคนคาดหวัง Google กลับโฟกัสที่ความเร็วและราคา — Flash ทำได้ 289 tokens/sec เร็วกว่า Frontier model ถึง 4 เท่า ราคาถูกกว่าครึ่ง ทำคะแนน Terminal-Bench 76.2% สูงกว่า Gemini 3.1 Pro ในทุก Benchmark ด้าน Coding และ Agentic Task ขณะที่ยังรักษาคุณภาพเทียบเท่า Frontier ในงาน Reasoning ทั่วไป</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>เปิดใช้ได้ทันทีผ่าน Gemini App (ฟรีสำหรับทุกผู้ใช้), Google AI Studio, และ Vertex AI API มี Free tier สำหรับนักพัฒนา ไม่ต้องสมัคร AI Plus ก็ใช้ 3.5 Flash ได้ สำหรับ Enterprise ราคา API ถูกกว่า Gemini 3.1 Pro ราว 60% ต่อ Million tokens Flash เป็น Default model ใหม่ใน Gemini App แทนที่ 3.1 Pro</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>กลยุทธ์ของ Google ชัดเจน: แทนที่จะแข่ง "โมเดลฉลาดที่สุด" กลับเลือกแข่ง "โมเดลที่คุ้มค่าที่สุด" ซึ่งเป็นสิ่งที่ Developer ต้องการจริงๆ ในยุคที่ต้นทุน API กำหนดความอยู่รอดของ Startup การมี Model ที่เร็ว 4x และถูก 2x หมายความว่า Use case ที่เคยทำไม่ได้เพราะค่าใช้จ่าย ตอนนี้ทำได้แล้ว นี่อาจเป็นจุดเปลี่ยนที่ทำให้ AI Agent กลายเป็นเรื่องปกติในแอปทุกตัว</p>
+    </section>
+  `,
+  link:'https://www.techtimes.com/articles/316858/20260519/google-i-o-2026-not-its-smartest-model-its-cheapest-fastest-one-all-bet-agents.htm'
+},
+
+'gemini-spark': {
+  cat:'agent', chip:'chip-red', label:'Agent · Personal AI',
+  headline:'Gemini Spark — Personal Agent ทำงาน 24/7 บน Cloud แทนคุณ',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="dh-gs" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0a20"/><stop offset="100%" stop-color="#0d1a2e"/></linearGradient></defs>
+    <rect width="1200" height="500" fill="url(#dh-gs)"/>
+    <g transform="translate(600,200)">
+      <circle r="80" fill="none" stroke="#ea4335" stroke-width="2" stroke-dasharray="12 6" opacity="0.5">
+        <animateTransform attributeName="transform" type="rotate" dur="20s" repeatCount="indefinite" from="0" to="360"/>
+      </circle>
+      <circle r="50" fill="none" stroke="#fbbc04" stroke-width="1.5" opacity="0.4"/>
+      <circle r="25" fill="#ea4335" opacity="0.5"/>
+      <text y="8" text-anchor="middle" font-size="24" fill="#fff">✦</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#ea4335" opacity="0.5">
+      <text x="200" y="380">Gmail ✓</text>
+      <text x="400" y="380">Docs ✓</text>
+      <text x="560" y="380">Slides ✓</text>
+      <text x="720" y="380">Canva ✓</text>
+      <text x="880" y="380">Instacart ✓</text>
+    </g>
+    <text x="600" y="440" text-anchor="middle" font-family="'Playfair Display',serif" font-size="18" fill="#fbbc04" opacity="0.7">"Your AI that never sleeps"</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Gemini Spark คือ Personal AI Agent ตัวแรกจาก Google ที่ทำงานบน Cloud ตลอด 24 ชั่วโมง 7 วัน ไม่ต้องเปิดแอป ไม่ต้องสั่ง — Spark ทำงานให้เองในเบื้องหลัง ขับเคลื่อนด้วย Gemini 3.5 Flash บน Antigravity Harness รองรับการเชื่อมต่อกับ Gmail, Google Docs, Slides, Calendar และบริการภายนอกผ่าน MCP อย่าง Canva, OpenTable, Instacart ตัวอย่าง: สั่ง Spark จองร้านอาหารให้ 4 คนคืนศุกร์ — มันจะเช็คปฏิทิน, ดูรีวิว, จอง และส่ง Invite ให้ทุกคน</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>Spark เปิดตัวเฉพาะผู้ใช้ AI Ultra (แพลนสูงสุด) ในสหรัฐฯ ก่อน จากนั้นจะขยายไปประเทศอื่น Google ยังไม่เปิดเผยราคา AI Ultra อย่างเป็นทางการ แต่คาดว่าจะอยู่ในระดับ Premium เทียบเท่า ChatGPT Pro การใช้งานผ่าน Gemini App บนมือถือและเว็บ สั่งงานด้วยข้อความหรือเสียง</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Spark คือก้าวสำคัญจาก "AI ที่ตอบเมื่อถาม" ไปสู่ "AI ที่ทำงานให้โดยไม่ต้องถาม" การที่ Agent ทำงานบน Cloud 24/7 หมายความว่ามันสามารถ Monitor งานของคุณ แจ้งเตือนเมื่อมีเรื่องด่วน และลงมือทำแทนได้เลย นี่คือ Vision ที่ OpenAI, Anthropic และ Microsoft ต่างแข่งกันทำ แต่ Google มีข้อได้เปรียบชัดเจน — พวกเขาเป็นเจ้าของ Gmail, Calendar, Docs ซึ่งเป็นเครื่องมือที่คนใช้ทำงานจริงทุกวัน</p>
+    </section>
+  `,
+  link:'https://9to5google.com/2026/05/19/gemini-app-google-io-2026/'
+},
+
+'agentic-commerce': {
+  cat:'agent', chip:'chip-green', label:'Agent · Commerce',
+  headline:'Agentic Commerce — ช้อปผ่าน AI จบในแชท จ่ายด้วย Google Pay ผ่าน Universal Commerce Protocol',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0d1a0d"/>
+    <g transform="translate(600,200)">
+      <rect x="-80" y="-80" width="160" height="120" rx="12" fill="none" stroke="#34a853" stroke-width="2.5"/>
+      <text y="-10" text-anchor="middle" font-size="50">🛒</text>
+      <text y="25" text-anchor="middle" font-size="14" fill="#34a853" font-weight="bold">UCP</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#34a853" opacity="0.5">
+      <text x="150" y="380">Google Pay ✓</text>
+      <text x="400" y="380">Shopify ✓</text>
+      <text x="600" y="380">24 Retailers ✓</text>
+      <text x="850" y="380">In-chat Checkout ✓</text>
+    </g>
+    <text x="600" y="450" text-anchor="middle" font-family="'Playfair Display',serif" font-size="18" fill="#fbbc04" opacity="0.6">"$1 Trillion US revenue by 2030"</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Agentic Commerce คือระบบช้อปปิ้งผ่าน AI Agent ที่ Google เปิดตัวพร้อม Universal Commerce Protocol (UCP) มาตรฐานเปิดที่ให้ AI Agent สื่อสารกับร้านค้าออนไลน์ได้โดยตรง ผู้ใช้แค่พิมพ์ในแชท Gemini ว่าต้องการอะไร Agent จะค้นหา เปรียบเทียบราคา แนะนำสินค้า และให้จ่ายเงินผ่าน Google Pay จบในหน้าแชทเดียว ไม่ต้องเปิดเว็บ ไม่ต้องเข้าแอปร้านค้า Google ร่วมมือกับ Shopify และร้านค้า 24 แห่ง ตั้งเป้ารายได้ $1 Trillion ในสหรัฐฯ ภายในปี 2030</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>Agentic Commerce จะเปิดให้ใช้ผ่าน Gemini App และ Google Search ในสหรัฐฯ เป็นที่แรก ช่วง Q3 2026 ฟรีสำหรับผู้ใช้ Gemini ทุกคน การจ่ายเงินผ่าน Google Pay ที่ผูกไว้กับบัญชี Google สำหรับร้านค้า/นักพัฒนา UCP เป็น Open protocol สามารถ Integrate ได้ผ่าน API documentation ที่ Google เตรียมไว้</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Agentic Commerce อาจเปลี่ยนอนาคตของ E-commerce ทั้งหมด ถ้า AI Agent ซื้อของแทนคน หน้าเว็บสวยๆ อาจไม่สำคัญอีกต่อไป — สิ่งที่สำคัญคือร้านค้าต้อง Integrate กับ UCP ให้ Agent อ่านข้อมูลได้ นี่คือจุดเปลี่ยนที่ SEO, UX Design และ Digital Marketing จะต้องปรับตัวใหม่ทั้งหมด ใครที่ทำธุรกิจออนไลน์ควรเริ่มศึกษา UCP ตั้งแต่วันนี้</p>
+    </section>
+  `,
+  link:'https://www.techtimes.com/articles/316858/20260519/google-i-o-2026-not-its-smartest-model-its-cheapest-fastest-one-all-bet-agents.htm'
+},
+
+'android-xr': {
+  cat:'hardware', chip:'chip-blue', label:'Hardware · XR',
+  headline:'Android XR + Intelligent Eyewear — แว่น AI 2 ฟอร์ม จาก Samsung × Gentle Monster × Warby Parker',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0d0d20"/>
+    <g transform="translate(600,200)">
+      <ellipse cx="-80" cy="0" rx="70" ry="45" fill="none" stroke="#4285f4" stroke-width="3"/>
+      <ellipse cx="80" cy="0" rx="70" ry="45" fill="none" stroke="#4285f4" stroke-width="3"/>
+      <line x1="-10" y1="0" x2="10" y2="0" stroke="#4285f4" stroke-width="2.5"/>
+      <line x1="-150" y1="-10" x2="-190" y2="-25" stroke="#4285f4" stroke-width="2.5"/>
+      <line x1="150" y1="-10" x2="190" y2="-25" stroke="#4285f4" stroke-width="2.5"/>
+      <text y="80" text-anchor="middle" font-size="14" fill="#ea4335" opacity="0.7">Gemini Built-in</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#4285f4" opacity="0.5">
+      <text x="150" y="370">Samsung ✓</text>
+      <text x="400" y="370">Gentle Monster ✓</text>
+      <text x="700" y="370">Warby Parker ✓</text>
+    </g>
+    <text x="600" y="440" text-anchor="middle" font-size="14" fill="#fbbc04" opacity="0.5">Audio Glasses + Display Glasses · iOS + Android · Fall 2026</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Google เปิดตัวโครงการ Intelligent Eyewear บน Android XR ร่วมกับพาร์ทเนอร์ 3 ราย โดยมี 2 ฟอร์มแฟคเตอร์: Audio Glasses (แว่นเสียง ไม่มีจอ ใช้ Gemini ผ่านเสียงและกล้อง) กับ Display Glasses (แว่นที่มีจอ HUD แสดงข้อมูลซ้อนภาพจริง) Samsung และ Gentle Monster ทำ Audio Glasses สไตล์แฟชั่น ส่วน Warby Parker ทำ Display Glasses สไตล์คลาสสิก ทุกรุ่นมี Gemini Built-in สามารถถ่ายภาพ ถามคำถาม แปลภาษา นำทาง และรับการแจ้งเตือนได้</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>แว่น AI ทั้ง 2 ฟอร์มจะวางจำหน่ายช่วงปลายปี 2026 (Fall 2026) รองรับทั้ง iOS และ Android ไม่จำกัดเฉพาะ Android ราคายังไม่เปิดเผย แต่คาดว่า Audio Glasses จะอยู่ในระดับ $200-400 และ Display Glasses ระดับ $500+ สั่งจอง Pre-order ได้ผ่านเว็บ Samsung, Gentle Monster และ Warby Parker</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Google เรียนรู้จากความผิดพลาดของ Google Glass และ Meta เลือกเปิดตัว "แว่นแฟชั่น" ไม่ใช่ "แว่นเทค" พาร์ทเนอร์อย่าง Gentle Monster (แบรนด์แว่นเกาหลีที่ดาราทั่วเอเชียใส่) และ Warby Parker (แบรนด์อเมริกันยอดนิยม) ทำให้คนจะใส่ได้โดยไม่ดูแปลก และการรองรับ iOS ทำให้ฐานผู้ใช้กว้างกว่า Meta Ray-Ban ที่ผูกกับ Meta ecosystem เพียงอย่างเดียว</p>
+    </section>
+  `,
+  link:'https://tech.yahoo.com/general/live/google-io-2026-live-gemini-ai-android-17-android-xr-updates-and-more-135626963.html'
+},
+
+'tpu-v8': {
+  cat:'hardware', chip:'chip-green', label:'Hardware · Infrastructure',
+  headline:'TPU v8 — ชิป AI ใหม่ Training แรง 2.8x, Inference ถูกลง 80% พร้อม Superpod 9,600 ชิป',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0a0a0a"/>
+    <g transform="translate(600,200)">
+      <rect x="-100" y="-100" width="200" height="200" rx="8" fill="none" stroke="#34a853" stroke-width="3"/>
+      <rect x="-75" y="-75" width="150" height="150" rx="4" fill="#34a853" opacity="0.1"/>
+      <text y="10" text-anchor="middle" font-family="monospace" font-size="40" fill="#34a853" font-weight="bold">v8</text>
+      <text y="40" text-anchor="middle" font-size="16" fill="#34a853" opacity="0.7">TPU</text>
+      <g stroke="#34a853" stroke-width="1.5" opacity="0.4">
+        <line x1="-50" y1="100" x2="-50" y2="130"/><line x1="-25" y1="100" x2="-25" y2="130"/>
+        <line x1="0" y1="100" x2="0" y2="130"/><line x1="25" y1="100" x2="25" y2="130"/>
+        <line x1="50" y1="100" x2="50" y2="130"/>
+        <line x1="-50" y1="-100" x2="-50" y2="-130"/><line x1="-25" y1="-100" x2="-25" y2="-130"/>
+        <line x1="0" y1="-100" x2="0" y2="-130"/><line x1="25" y1="-100" x2="25" y2="-130"/>
+        <line x1="50" y1="-100" x2="50" y2="-130"/>
+      </g>
+    </g>
+    <g font-family="monospace" font-size="16" fill="#34a853" opacity="0.6">
+      <text x="150" y="400">TPU 8t: Training 2.8x faster</text>
+      <text x="150" y="430">TPU 8i: Inference 80% cheaper per perf</text>
+    </g>
+    <text x="600" y="470" text-anchor="middle" font-size="14" fill="#fbbc04" opacity="0.5">9,600-chip Superpods · $175-185B Infrastructure Spend</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Google เปิดตัว TPU v8 ซึ่งแบ่งเป็น 2 ชิปเฉพาะทาง: TPU 8t สำหรับ Training ที่แรงขึ้น 2.8 เท่าจากรุ่นก่อน และ TPU 8i สำหรับ Inference ที่ให้ประสิทธิภาพต่อราคาดีขึ้น 80% ทั้งสองชิปสามารถจัดเป็น Superpod ขนาด 9,600 ชิป เพื่อ Train โมเดลขนาดใหญ่ Google ประกาศงบลงทุนโครงสร้างพื้นฐาน AI รวม $175-185 พันล้านดอลลาร์ ซึ่งรวมทั้ง Data Center, เครือข่าย และชิป TPU รุ่นใหม่</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>TPU v8 จะเปิดให้ใช้ผ่าน Google Cloud ในรูปแบบ Cloud TPU สำหรับลูกค้า Enterprise และนักวิจัย ราคาจะประกาศในช่วง Q3 2026 สำหรับ Developer ทั่วไป จะได้ประโยชน์ทางอ้อม เพราะ Gemini API, Vertex AI และ Google Services ทั้งหมดจะ Run บน TPU v8 ซึ่งหมายถึง Latency ต่ำลงและราคา API ถูกลง</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>สงคราม AI ไม่ได้วัดกันแค่โมเดล แต่วัดที่ "ใครมีชิปเยอะกว่า" Google เป็นบริษัทเดียวในโลกที่ออกแบบทั้ง AI Model (Gemini) และ Custom Chip (TPU) เอง ไม่ต้องพึ่ง NVIDIA ทำให้ควบคุม Supply chain ได้ดีกว่าคู่แข่ง สำหรับผู้ใช้ทั่วไป ผลลัพธ์คือ AI ที่เร็วขึ้นและถูกลง — ทุกบริการ Google ตั้งแต่ Search ถึง YouTube จะรันบน TPU v8 ภายในสิ้นปี</p>
+    </section>
+  `,
+  link:'https://www.techtimes.com/articles/316858/20260519/google-i-o-2026-not-its-smartest-model-its-cheapest-fastest-one-all-bet-agents.htm'
+},
+
+'synthid': {
+  cat:'safety', chip:'chip-blue', label:'Safety · Deepfake',
+  headline:'SynthID — รับมือ Deepfake ตรวจจับ AI Content ผ่าน Chrome, Google Lens และ Pixel',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0a0a18"/>
+    <g transform="translate(600,200)">
+      <path d="M 0,-90 L 60,-60 L 60,20 C 60,65 0,95 0,95 C 0,95 -60,65 -60,20 L -60,-60 Z" fill="none" stroke="#4285f4" stroke-width="3"/>
+      <path d="M 0,-50 L 35,-35 L 35,15 C 35,40 0,55 0,55 C 0,55 -35,40 -35,15 L -35,-35 Z" fill="#4285f4" opacity="0.15"/>
+      <text y="0" text-anchor="middle" font-size="36">🔍</text>
+      <text y="30" text-anchor="middle" font-size="10" fill="#4285f4" font-weight="bold" opacity="0.8">SynthID</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#4285f4" opacity="0.5">
+      <text x="150" y="380">Chrome ✓</text>
+      <text x="350" y="380">Google Lens ✓</text>
+      <text x="600" y="380">Pixel 8/9/10 ✓</text>
+      <text x="850" y="380">Open-source ✓</text>
+    </g>
+    <text x="600" y="440" text-anchor="middle" font-size="14" fill="#fbbc04" opacity="0.5">10B+ images watermarked · Partners: OpenAI, ElevenLabs, Kakao</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>SynthID คือเทคโนโลยี Digital Watermarking จาก Google DeepMind ที่ฝังลายน้ำดิจิทัลมองไม่เห็นด้วยตาเปล่าลงใน Content ที่ AI สร้าง ครอบคลุมทั้งภาพ วิดีโอ เสียง และข้อความ ในงาน I/O 2026 Google ประกาศขยาย SynthID เข้าสู่ Chrome และ Google Search โดยตรง — ผู้ใช้สามารถ Highlight ภาพบนเว็บใดก็ได้ ถาม Google Lens ว่า "ภาพนี้ AI สร้างหรือเปล่า" แล้วได้คำตอบทันที SynthID ฝังลายน้ำไปแล้วกว่า 10,000 ล้านภาพทั่ว Google Services</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>ฟีเจอร์ตรวจจับใน Chrome และ Google Search เปิดใช้แล้ววันนี้ ไม่ต้องติดตั้งอะไรเพิ่ม ใช้ Circle to Search บน Android หรือ Google Lens บน iOS ก็ได้ สำหรับ Pixel 8, 9 และ 10 จะรองรับการตรวจจับวิดีโอด้วย สำหรับ Enterprise Google Cloud เปิดตัว AI Content Detection API ใช้ผ่าน Vertex AI Google ยัง Open-source เครื่องมือ Text-tracking ให้ชุมชนนักวิจัย</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>ในโลกที่ Deepfake สร้างได้ง่ายขึ้นทุกวัน SynthID เป็นเครื่องมือป้องกันที่ใช้งานง่ายที่สุดในขณะนี้ สิ่งที่น่าสนใจคือ Google ไม่ได้เก็บเทคโนโลยีนี้ไว้เอง แต่ร่วมมือกับ OpenAI, ElevenLabs และ Kakao ให้ใช้ SynthID Watermarking ในโมเดลคู่แข่งด้วย นี่แสดงว่า Google เลือกเล่นเกม "มาตรฐานอุตสาหกรรม" มากกว่า "ข้อได้เปรียบเฉพาะตัว" ซึ่งเป็นสัญญาณดีสำหรับการรับมือ Deepfake ในระดับ Internet-scale</p>
+    </section>
+  `,
+  link:'https://blog.google/innovation-and-ai/products/google-synthid-ai-content-detector/'
+},
+
+'agentic-era': {
+  cat:'vision', chip:'chip-gold', label:'Vision · Future',
+  headline:'Agentic Era และ AGI Horizon — วิสัยทัศน์ Google จากเวที I/O 2026',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="dh-ae" cx="0.5" cy="0.4" r="0.6"><stop offset="0%" stop-color="#fbbc04" stop-opacity="0.2"/><stop offset="100%" stop-color="#0a0a18"/></radialGradient></defs>
+    <rect width="1200" height="500" fill="#0a0a18"/>
+    <rect width="1200" height="500" fill="url(#dh-ae)"/>
+    <g transform="translate(600,200)">
+      <circle r="100" fill="none" stroke="#fbbc04" stroke-width="1.5" stroke-dasharray="8 4" opacity="0.4"/>
+      <circle r="65" fill="none" stroke="#ea4335" stroke-width="1.5" stroke-dasharray="6 3" opacity="0.3"/>
+      <circle r="35" fill="none" stroke="#4285f4" stroke-width="2" opacity="0.5"/>
+      <circle r="15" fill="#fbbc04" opacity="0.6"/>
+      <text y="5" text-anchor="middle" font-size="12" fill="#0a0a18" font-weight="bold">AGI</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#fbbc04" opacity="0.5">
+      <text x="150" y="380">Gemini Omni: World Model</text>
+      <text x="600" y="380">Physics Simulation</text>
+      <text x="900" y="380">Agentic Era</text>
+    </g>
+    <text x="600" y="440" text-anchor="middle" font-family="'Playfair Display',serif" font-size="18" fill="#fbbc04" opacity="0.7">"AGI is now on the horizon" — Demis Hassabis</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Google I/O 2026 เป็นงานที่ Google วางทิศทางชัดที่สุดในประวัติศาสตร์: ทุกอย่างโคจรรอบ "Agentic Era" Sundar Pichai ประกาศว่ายุคนี้ AI ไม่ใช่แค่ตอบคำถาม แต่ต้อง "ลงมือทำ" Demis Hassabis จาก DeepMind เปิดตัว Gemini Omni ซึ่งเป็น "World Model" ที่จำลองฟิสิกส์ของโลกจริง ไม่ใช่แค่ Predict text แต่เข้าใจ Kinetic Energy, Gravity และ Physical Interaction สาธิตโดยให้สร้าง Claymation Video อธิบาย Protein Folding และแก้ไขวิดีโอด้วยคำสั่งภาษาพูด</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>Gemini Omni Flash เปิดให้ใช้ทันทีสำหรับผู้ใช้ AI Plus, Pro และ Ultra ใน Gemini App และ Flow (เครื่องมือสร้างวิดีโอ) YouTube Shorts Integration ตามมาในภายหลัง แต่ Google เตือนเองว่า "Full Omni" ที่มีศักยภาพเต็มจะมาในปลายปี 2026 สิ่งที่เปิดตัววันนี้เป็น Early variant ที่เน้นความเร็ว</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>ประโยค "AGI is now on the horizon" จาก Hassabis ไม่ใช่แค่ Marketing — เมื่อรวมกับ Gemini Omni ที่จำลองฟิสิกส์ได้ มันแสดงว่า Google กำลังเดินหน้าสู่ AI ที่เข้าใจ "โลกจริง" ไม่ใช่แค่ "ภาษา" ส่วน Agentic Era คือเหตุผลที่ทุกผลิตภัณฑ์ใน I/O ปีนี้เชื่อมโยงกัน — Antigravity ทำ Multi-agent, Spark เป็น Personal Agent, Commerce เป็น Shopping Agent, แม้แต่ SynthID ก็เป็น Safety สำหรับ Agent-generated content นี่ไม่ใช่ Feature list แต่เป็น Platform shift ครั้งใหญ่ที่สุดนับตั้งแต่ Mobile</p>
+    </section>
+  `,
+  link:'https://www.techtimes.com/articles/316858/20260519/google-i-o-2026-not-its-smartest-model-its-cheapest-fastest-one-all-bet-agents.htm'
+},
+
+'neural-expressive': {
+  cat:'platform', chip:'chip-red', label:'Platform · App',
+  headline:'Gemini App — Neural Expressive Redesign + Daily Brief เปลี่ยนวิธีใช้ AI ไปตลอดกาล',
+  date:'พฤษภาคม 2569', source:'TechBrief · Google I/O 2026',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="dh-ne" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a0a2e"/><stop offset="50%" stop-color="#0d1a40"/><stop offset="100%" stop-color="#0a2818"/></linearGradient></defs>
+    <rect width="1200" height="500" fill="url(#dh-ne)"/>
+    <g transform="translate(600,200)">
+      <rect x="-150" y="-120" width="300" height="240" rx="20" fill="none" stroke="#4285f4" stroke-width="2.5" opacity="0.6"/>
+      <rect x="-110" y="80" width="220" height="30" rx="15" fill="#4285f4" opacity="0.25"/>
+      <text y="100" text-anchor="middle" font-size="12" fill="#fff" opacity="0.6">Ask Gemini anything...</text>
+      <rect x="-120" y="-90" width="120" height="14" rx="3" fill="#ea4335" opacity="0.4"/>
+      <rect x="-120" y="-65" width="240" height="8" rx="2" fill="#fff" opacity="0.12"/>
+      <rect x="-120" y="-50" width="200" height="8" rx="2" fill="#fff" opacity="0.08"/>
+      <rect x="-120" y="-25" width="105" height="60" rx="6" fill="#34a853" opacity="0.2"/>
+      <rect x="0" y="-25" width="105" height="60" rx="6" fill="#fbbc04" opacity="0.2"/>
+    </g>
+    <text x="600" y="440" text-anchor="middle" font-family="monospace" font-size="14" fill="#4285f4" opacity="0.5">Neural Expressive · 900M+ MAU · Android + iOS + Web</text>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Neural Expressive คือ Design Language ใหม่ของ Gemini App ที่เปลี่ยนวิธีแสดงผลคำตอบแบบถอนรากถอนโคน — ไม่ใช่แค่ "กำแพงข้อความ" อีกต่อไป แต่ตอบด้วยภาพประกอบ วิดีโอคำอธิบาย ไทม์ไลน์ Interactive Visualization และ Bold hierarchy ที่ดึงข้อมูลสำคัญขึ้นมาก่อน พร้อม Fluid animation, สีสัน, Haptic feedback และ Typography ใหม่ Gemini Live เปลี่ยนจาก Fullscreen เป็น Inline ไม่ต้องสลับ Mode อีกต่อไป</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>Neural Expressive Rolling out แล้ววันนี้บน Android, iOS และ Web สำหรับผู้ใช้ทุกคน ส่วน Daily Brief เปิดตัวเฉพาะ AI Plus, Pro และ Ultra subscribers ในสหรัฐฯ ก่อน Daily Brief ดึงข้อมูลจาก Gmail, Calendar และ Task List สร้างสรุปวันให้ทุกเช้า พร้อมแนะนำ Next Steps ที่จัดลำดับความสำคัญแล้ว Gemini App ปัจจุบันมีผู้ใช้กว่า 900 ล้านคนต่อเดือน</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Neural Expressive เป็นสัญญาณว่า AI Assistant จะไม่ใช่ Chatbot อีกต่อไป — มันกำลังกลายเป็น "Interface" ที่ Design ข้อมูลให้คุณอ่านง่ายที่สุด นี่คือสิ่งที่ ChatGPT ยังไม่ทำ (ตอบแค่ Text+Code) และ Claude ก็ยังเน้น Text-first เช่นกัน Google ใช้ความแข็งแกร่งด้าน UX/UI ที่มีมาตลอด 25 ปีมาสร้างจุดต่าง ส่วน Daily Brief เป็นก้าวแรกสู่ "Proactive AI" ที่ทำงานให้โดยไม่ต้องถาม — ถ้ารวมกับ Spark จะเป็น Ecosystem ที่แข็งแกร่งมาก</p>
+    </section>
+  `,
+  link:'https://9to5google.com/2026/05/19/gemini-app-google-io-2026/'
+}
+
+}; // end articles
+
+
+function showDetail(id){
+  var a = articles[id];
+  if(!a) return;
+  document.getElementById('detail-content').innerHTML =
+    '<div class="detail-inner">' +
+      '<div class="detail-meta">' +
+        '<span class="chip ' + a.chip + '">' + a.label + '</span>' +
+        '<span class="byline">' + a.date + ' · ' + a.source + '</span>' +
+      '</div>' +
+      '<h1 class="detail-headline">' + a.headline + '</h1>' +
+      '<div class="detail-hero-svg">' + a.svgHero + '</div>' +
+      a.body +
+      '<a href="' + a.link + '" target="_blank" rel="noopener" class="detail-footer-link">' +
+        'อ่านบทความต้นฉบับ →' +
+      '</a>' +
+    '</div>';
+  document.getElementById('index-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function showIndex(){
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('index-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+/* TAB FILTER */
+(function(){
+  var tabs = document.querySelectorAll('#tab-list a');
+  var cards = document.querySelectorAll('[data-cat]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(e){
+      e.preventDefault();
+      tabs.forEach(function(t){ t.classList.remove('tab-active'); });
+      this.classList.add('tab-active');
+      var f = this.getAttribute('data-filter');
+      cards.forEach(function(c){
+        c.classList.toggle('hidden-card', f!=='all' && c.getAttribute('data-cat')!==f);
+      });
+      var hg = document.getElementById('hero-grid');
+      if(hg){
+        var anyVis = Array.from(hg.querySelectorAll('[data-cat]'))
+          .some(function(c){ return !c.classList.contains('hidden-card'); });
+        hg.style.display = anyVis ? '' : 'grid';
+        if(!anyVis) hg.style.display = 'none';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
