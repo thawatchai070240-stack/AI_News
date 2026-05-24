@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBrief — สรุปข่าวเทคโนโลยีและ AI รายสัปดาห์</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0f0f0e;--ink-2:#2a2a28;--ink-3:#4a4a47;
+  --smoke:#f5f4f0;--paper:#faf9f6;--rule:#e0dfd8;
+  --accent:#c8230e;--accent2:#e8a020;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Sarabun','Noto Sans Thai',sans-serif;
+  --max:1180px;
+}
+html{font-size:16px}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* TICKER */
+.ticker-wrap{background:var(--accent);overflow:hidden}
+.ticker-inner{display:flex;align-items:center;padding:6px 0;white-space:nowrap;animation:ticker 55s linear infinite;font-size:12px;font-weight:700;color:#fff;letter-spacing:.4px}
+.ticker-inner span{padding:0 36px}
+.tlabel{background:#fff;color:var(--accent);font-size:11px;font-weight:800;padding:2px 10px;margin-right:16px;letter-spacing:1px;flex-shrink:0}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HEADER */
+.site-header{background:var(--ink);border-bottom:3px solid var(--accent)}
+.masthead-inner{max-width:var(--max);margin:0 auto;padding:22px 24px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.site-name{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-1.5px;line-height:1}
+.site-name em{color:var(--accent);font-style:normal}
+.site-tagline{color:rgba(255,255,255,.38);font-size:12px;letter-spacing:.5px;margin-top:5px}
+.site-meta{text-align:right;color:rgba(255,255,255,.4);font-size:12px;line-height:1.8}
+.site-meta strong{color:rgba(255,255,255,.78);display:block;font-size:13px}
+
+/* NAV TABS */
+.site-nav{border-top:1px solid rgba(255,255,255,.1)}
+.site-nav ul{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;list-style:none;overflow-x:auto}
+.site-nav li a{display:block;padding:10px 18px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;cursor:pointer}
+.site-nav li a:hover{color:rgba(255,255,255,.85)}
+.site-nav li a.tab-active{color:#fff;border-bottom-color:var(--accent)}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* SECTION LABEL */
+.section-label{display:flex;align-items:center;gap:12px;margin:36px 0 20px}
+.section-label::before{content:'';width:28px;height:3px;background:var(--accent);flex-shrink:0}
+.slabel-text{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+/* CATEGORY CHIPS */
+.chip{display:inline-block;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 10px;text-transform:uppercase}
+.chip-red{background:var(--accent);color:#fff}
+.chip-gold{background:var(--accent2);color:var(--ink)}
+.chip-dark{background:rgba(255,255,255,.15);color:#fff}
+.chip-slate{background:#1a1a1a;color:#f0efeb}
+.chip-blue{background:#1a5aaa;color:#fff}
+.chip-green{background:#1a6b3a;color:#fff}
+.chip-purple{background:#5a1a8a;color:#fff}
+
+/* HERO GRID */
+.hero-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:720px){.hero-grid{grid-template-columns:1fr}}
+.hero-primary{position:relative;overflow:hidden;cursor:pointer}
+.hero-primary svg.cover{width:100%;height:440px;display:block;transition:transform .5s ease-out}
+.hero-primary:hover svg.cover{transform:scale(1.03)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,7,.93) 38%,rgba(8,8,7,.15) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.hero-primary .hl{font-family:var(--serif);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;color:#fff;line-height:1.3;margin:10px 0 9px}
+.hero-primary .dk{font-size:14px;color:rgba(255,255,255,.68);line-height:1.65;margin-bottom:12px}
+.byline{font-size:11.5px;color:rgba(255,255,255,.38)}
+.hero-stack{display:flex;flex-direction:column;gap:3px}
+.hero-secondary{position:relative;overflow:hidden;flex:1;cursor:pointer;min-height:218px}
+.hero-secondary svg.cover{width:100%;height:218px;display:block;transition:transform .5s ease-out}
+.hero-secondary:hover svg.cover{transform:scale(1.04)}
+.hero-secondary .hero-overlay{padding:18px 20px}
+.hero-secondary .hl{font-family:var(--serif);font-size:clamp(1rem,1.7vw,1.18rem);font-weight:700;color:#fff;line-height:1.35;margin:8px 0 6px}
+
+/* ARTICLE ROW */
+.article-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px;margin-bottom:14px}
+@media(max-width:860px){.article-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.article-row{grid-template-columns:1fr}}
+.article-card{cursor:pointer}
+.thumb-wrap{overflow:hidden;aspect-ratio:16/9;margin-bottom:14px}
+.thumb-wrap svg{width:100%;height:100%;display:block;transition:transform .45s ease-out}
+.article-card:hover .thumb-wrap svg{transform:scale(1.05)}
+.article-card .chip{margin-bottom:9px}
+.article-card .hl{font-family:var(--serif);font-size:1.08rem;font-weight:700;line-height:1.4;color:var(--ink);margin-bottom:8px}
+.article-card .excerpt{font-size:13.5px;color:var(--ink-3);line-height:1.7;margin-bottom:10px}
+.article-card .byline{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--rule);padding-top:8px}
+
+/* EXPLAINER DARK */
+.explainer-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--ink)}
+@media(max-width:600px){.explainer-grid{grid-template-columns:1fr}}
+.explainer-card{background:#1c1c1a;padding:30px 26px;cursor:pointer;transition:background .2s;display:flex;flex-direction:column}
+.explainer-card:hover{background:#222220}
+.explainer-card svg{width:100%;height:192px;display:block;margin-bottom:20px;opacity:.82;transition:opacity .3s}
+.explainer-card:hover svg{opacity:1}
+.kicker{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
+.explainer-card .hl{font-family:var(--serif);font-size:1.28rem;font-weight:700;color:#f5f4f0;line-height:1.35;margin-bottom:12px}
+.explainer-card .excerpt{font-size:13.5px;color:rgba(245,244,240,.58);line-height:1.7;margin-bottom:16px;flex:1}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;color:rgba(245,244,240,.45);border:1px solid rgba(245,244,240,.18);padding:3px 9px;transition:.2s}
+.explainer-card:hover .tag{border-color:rgba(245,244,240,.32);color:rgba(245,244,240,.68)}
+
+/* SUMMARY TABLE */
+.table-section{background:var(--smoke);border:1px solid var(--rule);padding:26px 26px 22px;margin-top:36px}
+.table-section h2{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{background:var(--ink);color:#fff;text-align:left;padding:10px 14px;font-weight:700;font-size:12px;letter-spacing:.5px}
+tbody tr{border-bottom:1px solid var(--rule)}
+tbody tr:hover{background:#edece6}
+tbody td{padding:11px 14px;color:var(--ink-2);vertical-align:middle}
+tbody td:first-child{font-weight:800;color:var(--accent);font-size:15px;width:36px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:2px}
+.yes{background:#d4edda;color:#1a5c2a}
+.no{background:#f5e0e0;color:#6b1a1a}
+.part{background:#fff3cd;color:#664d00}
+
+/* FOOTER */
+.site-footer{background:var(--ink);color:rgba(255,255,255,.32);text-align:center;font-size:12px;padding:22px;margin-top:48px}
+.site-footer strong{color:rgba(255,255,255,.7)}
+
+/* UTILS */
+hr.rule{border:none;border-top:1px solid var(--rule);margin:36px 0}
+.hidden-card{display:none!important}
+
+/* HOVER LIFT */
+.article-card,.hero-primary,.hero-secondary,.explainer-card{transition:transform .2s,box-shadow .2s}
+.article-card:hover,.hero-primary:hover,.hero-secondary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.read-more{color:var(--accent);font-size:.8rem;font-weight:600}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .5s ease-out both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}
+
+/* DETAIL VIEW */
+#detail-view{min-height:100vh;background:var(--paper)}
+.detail-topbar{background:var(--ink);padding:12px 32px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:100}
+.back-btn{background:none;border:1px solid rgba(255,255,255,.3);color:white;padding:6px 16px;border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:.85rem}
+.back-btn:hover{background:rgba(255,255,255,.12)}
+.site-name-sm{color:white;font-family:var(--serif);font-size:1.1rem;font-weight:700}
+.site-name-sm em{color:var(--accent);font-style:normal}
+.detail-inner{max-width:780px;margin:0 auto;padding:48px 24px 80px}
+.detail-meta{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.detail-meta .byline{color:var(--ink-3)}
+.detail-hero-svg{width:100%;border-radius:10px;overflow:hidden;margin-bottom:36px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+.detail-hero-svg svg{width:100%;height:auto;display:block}
+.detail-headline{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.25;color:var(--ink);margin-bottom:8px}
+.detail-section{margin-top:40px;padding-top:32px;border-top:1px solid var(--rule)}
+.detail-section h2{font-family:var(--sans);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.detail-section p{font-family:var(--sans);font-size:1.05rem;line-height:1.8;color:var(--ink-2)}
+.detail-footer-link{display:inline-flex;align-items:center;gap:8px;margin-top:48px;padding:12px 24px;background:var(--ink);color:white;border-radius:6px;text-decoration:none;font-family:var(--sans);font-size:.9rem;font-weight:600}
+.detail-footer-link:hover{opacity:.82}
+</style>
+</head>
+<body>
+
+<div id="index-view">
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="tlabel">TECHBRIEF</span>
+    <span>Cursor Composer 2.5 สู้ Opus 4.7 ได้ ในราคาถูกกว่า 10 เท่า</span><span>·</span>
+    <span>Codex Chrome Plugin — AI Agent ควบคุม Browser จริงแบบ Login อยู่แล้ว</span><span>·</span>
+    <span>Notion CLI (ntn) เปิดตัวพร้อม Workers และ Developer Platform</span><span>·</span>
+    <span>Manus AI Scheduled Tasks 2.0 ใช้ฟรี มี Persistent Context</span><span>·</span>
+    <span>Claude Code 2.1.145 เพิ่ม agents --json และ Plugin Discover</span><span>·</span>
+    <span>CapCut × Gemini ตัดต่อวิดีโอผ่านแชท AI ได้เลย</span><span>·</span>
+    <span>Google AI Studio มีแอปมือถือ + สร้าง Android App ได้ฟรี</span><span>·</span>
+    <span class="tlabel">TECHBRIEF</span>
+    <span>Cursor Composer 2.5 สู้ Opus 4.7 ได้ ในราคาถูกกว่า 10 เท่า</span><span>·</span>
+    <span>Codex Chrome Plugin — AI Agent ควบคุม Browser จริงแบบ Login อยู่แล้ว</span><span>·</span>
+    <span>Notion CLI (ntn) เปิดตัวพร้อม Workers และ Developer Platform</span><span>·</span>
+    <span>Manus AI Scheduled Tasks 2.0 ใช้ฟรี มี Persistent Context</span><span>·</span>
+    <span>Claude Code 2.1.145 เพิ่ม agents --json และ Plugin Discover</span><span>·</span>
+    <span>CapCut × Gemini ตัดต่อวิดีโอผ่านแชท AI ได้เลย</span><span>·</span>
+    <span>Google AI Studio มีแอปมือถือ + สร้าง Android App ได้ฟรี</span><span>·</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="masthead-inner">
+    <div>
+      <div class="site-name">Tech<em>Brief</em></div>
+      <div class="site-tagline">สรุปข่าวเทคโนโลยีและ AI รายสัปดาห์ · ฉบับภาษาไทย</div>
+    </div>
+    <div class="site-meta">
+      <strong>ฉบับที่ 08</strong>
+      24 พฤษภาคม 2569 (2026)<br>
+      7 ข่าวสำคัญประจำสัปดาห์
+    </div>
+  </div>
+  <nav class="site-nav">
+    <ul id="tab-list">
+      <li><a href="#" data-filter="all" class="tab-active">ทั้งหมด</a></li>
+      <li><a href="#" data-filter="google">Google</a></li>
+      <li><a href="#" data-filter="openai">OpenAI</a></li>
+      <li><a href="#" data-filter="anthropic">Anthropic</a></li>
+      <li><a href="#" data-filter="tools">Tools &amp; Apps</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+<!-- SECTION LABEL -->
+<div class="section-label">
+  <span class="slabel-text">ข่าวเด่นประจำสัปดาห์</span>
+</div>
+
+<!-- HERO GRID -->
+<div class="hero-grid" id="hero-grid">
+
+  <!-- HERO PRIMARY: Cursor Composer 2.5 -->
+  <div class="hero-primary fu" data-cat="tools" onclick="showDetail('composer')">
+    <svg class="cover" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="hg1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0d0d1a"/>
+          <stop offset="100%" stop-color="#1a1030"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="440" fill="url(#hg1)"/>
+      <!-- Cursor logo abstraction -->
+      <g transform="translate(400,160)">
+        <path d="M -40,-80 L 40,-80 L 0,0 Z" fill="none" stroke="#7c3aed" stroke-width="3" opacity="0.6"/>
+        <path d="M -40,0 L 40,0 L 0,80 Z" fill="none" stroke="#22d3ee" stroke-width="3" opacity="0.6"/>
+        <circle cx="0" cy="0" r="12" fill="#7c3aed" opacity="0.8"/>
+        <text y="5" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">2.5</text>
+      </g>
+      <g font-family="monospace" font-size="13" fill="#7c3aed" opacity="0.5">
+        <text x="100" y="300">SWE-Bench: 79.8%  (Opus 4.7: 80.5%)</text>
+        <text x="100" y="325">CursorBench: 63.2% (Opus 4.7: 61.6%)</text>
+        <text x="100" y="350" fill="#22d3ee">Price: 10x cheaper than frontier</text>
+      </g>
+      <g font-family="monospace" font-size="11" fill="#fff" opacity="0.3">
+        <text x="100" y="390">Base: Kimi K2.5 + 25x synthetic RL</text>
+      </g>
+    </svg>
+    <div class="hero-overlay">
+      <span class="chip chip-purple">Tools · Coding</span>
+      <h2 class="hl">Cursor Composer 2.5 — สู้ Opus 4.7 ได้ ในราคาถูกกว่า 10 เท่า ด้วย Kimi K2.5</h2>
+      <p class="dk">โมเดล Coding Agent จาก Cursor ทำคะแนน SWE-Bench 79.8% เทียบเท่า Frontier แต่ราคา API ถูกกว่า 10 เท่า สร้างบน Kimi K2.5 + RL 25x</p>
+      <span class="byline">พฤษภาคม 2569 · TechBrief</span>
+    </div>
+  </div>
+
+  <div class="hero-stack">
+    <!-- HERO SECONDARY 1: Codex Chrome -->
+    <div class="hero-secondary fu d1" data-cat="openai" onclick="showDetail('codex-chrome')">
+      <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="218" fill="#0d1a0d"/>
+        <g transform="translate(250,90)">
+          <circle r="35" fill="none" stroke="#10b981" stroke-width="2.5"/>
+          <circle r="15" fill="#10b981" opacity="0.3"/>
+          <text y="5" text-anchor="middle" font-size="20">🌐</text>
+        </g>
+        <g font-family="monospace" font-size="10" fill="#10b981" opacity="0.5">
+          <text x="100" y="170">@Chrome → Codex controls your browser</text>
+          <text x="100" y="190" opacity="0.4">Tab Groups · Allowlist · Auto-login</text>
+        </g>
+      </svg>
+      <div class="hero-overlay">
+        <span class="chip chip-slate">OpenAI · Plugin</span>
+        <h2 class="hl">Codex Chrome Plugin — AI Agent ควบคุม Browser ที่คุณ Login อยู่แล้ว</h2>
+      </div>
+    </div>
+
+    <!-- HERO SECONDARY 2: Google AI Studio Mobile -->
+    <div class="hero-secondary fu d2" data-cat="google" onclick="showDetail('ai-studio')">
+      <svg class="cover" viewBox="0 0 500 218" xmlns="http://www.w3.org/2000/svg">
+        <rect width="500" height="218" fill="#0a1628"/>
+        <g transform="translate(250,85)">
+          <!-- Phone shape -->
+          <rect x="-30" y="-50" width="60" height="100" rx="8" fill="none" stroke="#4285f4" stroke-width="2"/>
+          <rect x="-22" y="-38" width="44" height="70" rx="2" fill="#4285f4" opacity="0.15"/>
+          <text y="-5" text-anchor="middle" font-size="16" fill="#4285f4">AI</text>
+          <text y="12" text-anchor="middle" font-size="8" fill="#4285f4" opacity="0.6">Studio</text>
+          <circle cx="0" cy="42" r="4" fill="none" stroke="#4285f4" stroke-width="1" opacity="0.4"/>
+        </g>
+        <text x="250" y="180" text-anchor="middle" font-family="monospace" font-size="10" fill="#4285f4" opacity="0.5">Build Android apps + Deploy free · From your phone</text>
+      </svg>
+      <div class="hero-overlay">
+        <span class="chip chip-red">Google · Developer</span>
+        <h2 class="hl">Google AI Studio — แอปมือถือ + สร้าง Android App ได้ฟรี ไม่ต้องเขียนโค้ด</h2>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end hero-grid -->
+
+<!-- ROW 1: 3 CARDS -->
+<div class="section-label">
+  <span class="slabel-text">เครื่องมือและแพลตฟอร์ม</span>
+</div>
+
+<div class="article-row">
+
+  <!-- Notion CLI -->
+  <div class="article-card fu" data-cat="tools" onclick="showDetail('notion-cli')">
+    <div class="thumb-wrap">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="360" fill="#0a0a0a"/>
+        <g transform="translate(320,130)">
+          <rect x="-50" y="-50" width="100" height="100" rx="6" fill="none" stroke="#fff" stroke-width="2.5" opacity="0.7"/>
+          <text y="8" text-anchor="middle" font-family="monospace" font-size="28" fill="#fff" font-weight="bold" opacity="0.8">ntn</text>
+        </g>
+        <g font-family="monospace" font-size="11" fill="#fff" opacity="0.4">
+          <text x="120" y="260">$ ntn workers deploy</text>
+          <text x="120" y="280">$ ntn api pages.list</text>
+          <text x="120" y="300">$ ntn login</text>
+        </g>
+        <text x="320" y="340" text-anchor="middle" font-size="10" fill="#e8a020" opacity="0.5">Notion Developer Platform · May 2026</text>
+      </svg>
+    </div>
+    <span class="chip chip-gold">Tools · CLI</span>
+    <h3 class="hl">Notion CLI (ntn) — ใช้ Notion จาก Terminal พร้อม Workers และ Developer Platform</h3>
+    <p class="excerpt">CLI อย่างเป็นทางการจาก Notion พร้อม Workers (Hosted TypeScript), API access, และ Agent tools</p>
+    <div class="byline">พฤษภาคม 2569 · TechBrief</div>
+  </div>
+
+  <!-- Manus AI -->
+  <div class="article-card fu d1" data-cat="tools" onclick="showDetail('manus')">
+    <div class="thumb-wrap">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="360" fill="#0d0d18"/>
+        <g transform="translate(320,130)">
+          <circle r="45" fill="none" stroke="#6366f1" stroke-width="2" stroke-dasharray="8 4"/>
+          <circle r="25" fill="#6366f1" opacity="0.2"/>
+          <text y="6" text-anchor="middle" font-size="22" fill="#6366f1" font-weight="bold">M</text>
+        </g>
+        <g font-family="monospace" font-size="11" fill="#6366f1" opacity="0.5">
+          <text x="150" y="260">Scheduled Tasks 2.0</text>
+          <text x="150" y="280">Persistent Context ✓</text>
+          <text x="150" y="300">Projects Integration ✓</text>
+          <text x="400" y="260">Free: 2 tasks</text>
+          <text x="400" y="280">Pro: 20 tasks</text>
+        </g>
+      </svg>
+    </div>
+    <span class="chip chip-purple">Tools · Agent</span>
+    <h3 class="hl">Manus AI Scheduled Tasks 2.0 — ใช้ฟรี พร้อม Persistent Context</h3>
+    <p class="excerpt">Agent ตั้งเวลาทำงานซ้ำ จำ Context เดิมได้ ทำงานต่อจากที่ค้างไว้ ใช้ฟรี 2 Tasks</p>
+    <div class="byline">พฤษภาคม 2569 · TechBrief</div>
+  </div>
+
+  <!-- CapCut × Gemini -->
+  <div class="article-card fu d2" data-cat="google" onclick="showDetail('capcut')">
+    <div class="thumb-wrap">
+      <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cc1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0a0a1a"/>
+            <stop offset="100%" stop-color="#1a0a2e"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="360" fill="url(#cc1)"/>
+        <g transform="translate(250,140)">
+          <rect x="-40" y="-40" width="80" height="80" rx="14" fill="none" stroke="#00d4aa" stroke-width="2.5"/>
+          <text y="8" text-anchor="middle" font-size="14" fill="#00d4aa" font-weight="bold">CapCut</text>
+        </g>
+        <text x="320" y="140" text-anchor="middle" font-size="20" fill="#fff" opacity="0.4">×</text>
+        <g transform="translate(420,140)">
+          <circle r="30" fill="none" stroke="#4285f4" stroke-width="2"/>
+          <text y="6" text-anchor="middle" font-size="10" fill="#4285f4" font-weight="bold">Gemini</text>
+        </g>
+        <text x="320" y="260" text-anchor="middle" font-family="monospace" font-size="11" fill="#00d4aa" opacity="0.5">Edit videos in Gemini chat · Coming soon</text>
+      </svg>
+    </div>
+    <span class="chip chip-red">Google · Creative</span>
+    <h3 class="hl">CapCut × Gemini — ตัดต่อวิดีโอและภาพผ่านแชท Gemini ได้เลย</h3>
+    <p class="excerpt">CapCut จับมือ Google ให้ตัดต่อ AI ผ่าน Gemini App โดยตรง ต่อจาก Canva ที่เปิดตัวไปก่อน</p>
+    <div class="byline">พฤษภาคม 2569 · TechBrief</div>
+  </div>
+
+</div>
+
+<!-- EXPLAINER DARK ROW -->
+<div class="section-label">
+  <span class="slabel-text">อัปเดต Developer Tools</span>
+</div>
+
+<div class="explainer-grid">
+
+  <!-- Claude Code 2.1.145 -->
+  <div class="explainer-card fu" data-cat="anthropic" onclick="showDetail('claude-code')">
+    <svg viewBox="0 0 500 192" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="192" fill="#0a0a12"/>
+      <g transform="translate(250,75)">
+        <rect x="-60" y="-40" width="120" height="80" rx="8" fill="none" stroke="#d97706" stroke-width="2"/>
+        <text y="-5" text-anchor="middle" font-family="monospace" font-size="16" fill="#d97706" font-weight="bold">v2.1.145</text>
+        <text y="18" text-anchor="middle" font-size="10" fill="#d97706" opacity="0.6">Claude Code</text>
+      </g>
+      <g font-family="monospace" font-size="10" fill="#d97706" opacity="0.5">
+        <text x="60" y="155">agents --json</text>
+        <text x="220" y="155">/plugin discover</text>
+        <text x="380" y="155">status line++</text>
+      </g>
+    </svg>
+    <span class="kicker">Anthropic · Update</span>
+    <h3 class="hl">Claude Code 2.1.145 — agents --json, Plugin Discover, และ Status Line ใหม่</h3>
+    <p class="excerpt">อัปเดตใหม่เน้น Scripting: ดึงข้อมูล Agent เป็น JSON, ดูรายละเอียด Plugin ก่อนติดตั้ง, แสดง GitHub repo/PR ใน Status line</p>
+    <div class="tag-row">
+      <span class="tag">agents --json</span><span class="tag">Plugin</span><span class="tag">OTEL</span><span class="tag">Security</span>
+    </div>
+  </div>
+
+  <!-- Cursor Composer deep dive (second explainer) -->
+  <div class="explainer-card fu d1" data-cat="tools" onclick="showDetail('composer')">
+    <svg viewBox="0 0 500 192" xmlns="http://www.w3.org/2000/svg">
+      <rect width="500" height="192" fill="#0a0a12"/>
+      <g transform="translate(250,70)">
+        <rect x="-70" y="-35" width="140" height="70" rx="6" fill="none" stroke="#7c3aed" stroke-width="1.5"/>
+        <text y="-5" text-anchor="middle" font-family="monospace" font-size="12" fill="#7c3aed">Kimi K2.5 base</text>
+        <text y="15" text-anchor="middle" font-family="monospace" font-size="10" fill="#22d3ee" opacity="0.7">+ 25x RL · Sharded Muon</text>
+      </g>
+      <g font-family="monospace" font-size="10" fill="#7c3aed" opacity="0.5">
+        <text x="80" y="150">$0.50/M input</text>
+        <text x="230" y="150">$2.50/M output</text>
+        <text x="380" y="150">(standard)</text>
+      </g>
+    </svg>
+    <span class="kicker">Deep Dive · Architecture</span>
+    <h3 class="hl">Composer 2.5 ใต้ฝากระโปรง — Kimi K2.5, RL 25x, และ Sharded Muon</h3>
+    <p class="excerpt">เจาะลึกสถาปัตยกรรม: ใช้ Open-source Kimi K2.5 เป็นฐาน 85% compute ลงใน Post-training RL ด้วย Text-feedback localized correction</p>
+    <div class="tag-row">
+      <span class="tag">Kimi K2.5</span><span class="tag">RL</span><span class="tag">Open-source</span><span class="tag">SpaceXAI</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY TABLE -->
+<div class="table-section">
+  <h2>สรุปข่าวสัปดาห์ที่ 8</h2>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>หัวข้อ</th>
+        <th>ประเภท</th>
+        <th>พร้อมใช้</th>
+        <th>ฟรี</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="cursor:pointer" onclick="showDetail('codex-chrome')">
+        <td>1</td>
+        <td>Codex Chrome Plugin — AI Agent ควบคุม Browser</td>
+        <td><span class="chip chip-slate" style="font-size:9px">OpenAI</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge no">ต้อง Plus+</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('notion-cli')">
+        <td>2</td>
+        <td>Notion CLI (ntn) + Developer Platform</td>
+        <td><span class="chip chip-gold" style="font-size:9px">Tools</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge part">Workers ฟรี (Beta)</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('manus')">
+        <td>3</td>
+        <td>Manus AI Scheduled Tasks 2.0</td>
+        <td><span class="chip chip-purple" style="font-size:9px">Tools</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge yes">ฟรี 2 tasks</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('claude-code')">
+        <td>4</td>
+        <td>Claude Code 2.1.145</td>
+        <td><span class="chip chip-slate" style="font-size:9px">Anthropic</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge part">ตาม Plan</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('capcut')">
+        <td>5</td>
+        <td>CapCut × Gemini</td>
+        <td><span class="chip chip-red" style="font-size:9px">Google</span></td>
+        <td><span class="badge part">เร็วๆ นี้</span></td>
+        <td><span class="badge part">ยังไม่ระบุ</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('ai-studio')">
+        <td>6</td>
+        <td>Google AI Studio Mobile + Android App Builder</td>
+        <td><span class="chip chip-red" style="font-size:9px">Google</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge yes">ฟรี Deploy 2 แอป</span></td>
+      </tr>
+      <tr style="cursor:pointer" onclick="showDetail('composer')">
+        <td>7</td>
+        <td>Cursor Composer 2.5</td>
+        <td><span class="chip chip-purple" style="font-size:9px">Tools</span></td>
+        <td><span class="badge yes">ใช้ได้แล้ว</span></td>
+        <td><span class="badge no">ตาม Cursor Plan</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div><!-- end page-wrap -->
+
+<footer class="site-footer">
+  <strong>TechBrief</strong> · สรุปข่าว AI รายสัปดาห์ © 2569
+</footer>
+
+</div><!-- end index-view -->
+
+<!-- DETAIL VIEW -->
+<div id="detail-view" style="display:none">
+  <div class="detail-topbar">
+    <button class="back-btn" onclick="showIndex()">← กลับ</button>
+    <span class="site-name-sm">Tech<em>Brief</em></span>
+  </div>
+  <div id="detail-content"></div>
+</div>
+
+<script>
+var articles = {
+
+'codex-chrome': {
+  cat:'openai', chip:'chip-slate', label:'OpenAI · Plugin',
+  headline:'Codex Chrome Plugin — AI Agent ที่ควบคุม Browser ที่คุณ Login อยู่แล้วได้ทันที',
+  date:'พฤษภาคม 2569', source:'TechBrief',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0d1a0d"/>
+    <g transform="translate(600,180)">
+      <circle r="70" fill="none" stroke="#10b981" stroke-width="3"/>
+      <circle r="35" fill="#10b981" opacity="0.2"/>
+      <text y="8" text-anchor="middle" font-size="36">🌐</text>
+    </g>
+    <g font-family="monospace" font-size="15" fill="#10b981" opacity="0.6">
+      <text x="200" y="340">@Chrome "Update the Salesforce dashboard"</text>
+      <text x="200" y="370" opacity="0.4">→ Opens tab → Logs in → Fills form → Done</text>
+    </g>
+    <g font-family="monospace" font-size="12" fill="#10b981" opacity="0.4">
+      <text x="200" y="420">Allowlist ✓  Blocklist ✓  Tab Groups ✓  Ask before sensitive ✓</text>
+    </g>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Codex Chrome Plugin คือส่วนเสริมของ Codex (AI Agent ของ OpenAI) ที่ให้ Agent เข้าควบคุม Chrome Browser ของคุณได้โดยตรง ไม่ใช่แค่สร้างโค้ดให้ Copy ไปวาง แต่เปิดแท็บ กรอกฟอร์ม กดปุ่ม และทำ Multi-step Workflow ข้ามเว็บไซต์ได้เอง สิ่งที่ทำให้ต่างจาก Computer Use ทั่วไปคือ Codex ใช้ Session ที่คุณ Login อยู่แล้ว หมายความว่ามันเข้า Salesforce, Gmail, LinkedIn หรือเครื่องมือภายในองค์กรของคุณได้ทันที ไม่ต้องกรอก Password ใหม่ งานทั้งหมดรันใน Tab Groups แยกจากแท็บปกติของคุณ</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>เปิด Codex App → ไปที่ Plugins → ค้นหา Chrome → กดติดตั้ง Extension จากนั้นก็พิมพ์ @Chrome ในแชท Codex แล้วบอกว่าต้องการทำอะไร ต้องใช้ ChatGPT Plus ขึ้นไป (Free tier ไม่รองรับ Plugin) ระบบมี Allowlist/Blocklist ให้ตั้งค่าว่า Domain ไหนให้เข้าได้ ไหนห้าม และ Codex จะถามก่อนทำ Action ที่อาจเปลี่ยนข้อมูลสำคัญเสมอ</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>นี่คือจุดเปลี่ยนของ AI Agent — จากที่เคยทำได้แค่ "สร้างโค้ด" หรือ "ตอบคำถาม" ตอนนี้ Agent ทำงานจริงบนเว็บได้แล้ว คิดดูว่าแทนที่จะนั่งกรอก Report, อัพเดท CRM, หรือ Research คู่แข่งเอง คุณแค่สั่ง Codex แล้วมันจะทำให้ใน Background สิ่งที่น่าสนใจคือ OpenAI เลือกใช้ Chrome Extension แทน Computer Vision ที่ Anthropic ใช้กับ Claude Computer Use ทำให้แม่นยำกว่า (DOM-aware) แต่จำกัดเฉพาะ Chrome</p>
+    </section>
+  `,
+  link:'https://developers.openai.com/codex/app/chrome-extension'
+},
+
+'notion-cli': {
+  cat:'tools', chip:'chip-gold', label:'Tools · CLI',
+  headline:'Notion CLI (ntn) — ใช้ Notion จาก Terminal พร้อม Workers, Agent Tools และ Developer Platform เต็มรูปแบบ',
+  date:'พฤษภาคม 2569', source:'TechBrief',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0a0a0a"/>
+    <g transform="translate(600,180)">
+      <rect x="-80" y="-70" width="160" height="140" rx="10" fill="none" stroke="#fff" stroke-width="3" opacity="0.7"/>
+      <text y="10" text-anchor="middle" font-family="monospace" font-size="42" fill="#fff" font-weight="bold" opacity="0.8">ntn</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#fff" opacity="0.4">
+      <text x="200" y="360">$ curl -fsSL https://ntn.dev | bash</text>
+      <text x="200" y="390">$ ntn workers new → ntn workers deploy</text>
+      <text x="200" y="420">$ ntn api pages.create --title "My Page"</text>
+    </g>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Notion CLI หรือ ntn คือ Command-line Interface อย่างเป็นทางการที่ Notion เปิดตัวเป็นส่วนหนึ่งของ Developer Platform ใหม่ ให้นักพัฒนาและ AI Coding Agent ทำงานกับ Notion ผ่าน Terminal ได้โดยตรง ฟีเจอร์หลักคือ Workers — TypeScript Runtime ที่ Notion Host ให้ ใช้สร้าง Sync, Webhook, Agent tools โดยไม่ต้องมี Server เอง นอกจากนี้ยังเรียก Notion API ได้ตรงจาก Terminal สร้าง/อ่าน/อัพเดท Pages, Databases, อัพโหลดไฟล์ และจัดการ Data Sources ได้หมด</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>ติดตั้งง่ายมาก: รัน curl -fsSL https://ntn.dev | bash หรือติดตั้งผ่าน npm ก็ได้ ตอนนี้รองรับ macOS และ Linux (Windows กำลังมา) Workers ฟรีในช่วง Beta จนถึง 11 สิงหาคม 2569 หลังจากนั้นจะเปลี่ยนเป็นระบบ Credit Developer Platform ทั้งหมดรวม: ntn CLI, Workers, Database Sync, Agent Tools, Webhook Triggers, External Agents API และ Notion Agents SDK</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Notion ไม่ใช่แค่แอปจดโน้ตอีกต่อไป — กำลังกลายเป็น Platform สำหรับ Developer ที่จริงจัง สิ่งที่น่าสนใจที่สุดคือ Agent Tools ที่ให้ AI Agent (จาก Claude Code, Codex หรืออะไรก็ตาม) เข้ามาอ่าน-เขียน Notion ได้โดยตรงผ่าน ntn CLI โดยไม่ต้องสร้าง Integration เอง สำหรับทีมที่ใช้ Notion เป็นศูนย์กลางข้อมูล นี่คือจุดเชื่อมระหว่าง "ข้อมูลของทีม" กับ "AI Agent ที่ทำงานให้" ที่ง่ายที่สุดในตลาดตอนนี้</p>
+    </section>
+  `,
+  link:'https://developers.notion.com/cli/get-started/overview'
+},
+
+'manus': {
+  cat:'tools', chip:'chip-purple', label:'Tools · Agent',
+  headline:'Manus AI Scheduled Tasks 2.0 — Agent ตั้งเวลาทำงานซ้ำ จำ Context เดิม ใช้ฟรี',
+  date:'พฤษภาคม 2569', source:'TechBrief',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0d0d18"/>
+    <g transform="translate(600,190)">
+      <circle r="80" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-dasharray="10 5" opacity="0.5"/>
+      <circle r="45" fill="#6366f1" opacity="0.15"/>
+      <text y="10" text-anchor="middle" font-size="36" fill="#6366f1" font-weight="bold">M</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#6366f1" opacity="0.5">
+      <text x="200" y="360">Persistent Context ✓</text>
+      <text x="200" y="390">Projects Integration ✓</text>
+      <text x="200" y="420">Web App Scheduling ✓</text>
+      <text x="600" y="360">Free: 2 scheduled tasks</text>
+      <text x="600" y="390">300 daily credits</text>
+      <text x="600" y="420">Pro: 20 tasks + Connectors</text>
+    </g>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Manus AI เปิดตัว Scheduled Tasks 2.0 ซึ่งอัปเกรดระบบตั้งเวลาให้ AI Agent ทำงานซ้ำ จากที่เคยรันแบบ "เริ่มใหม่ทุกครั้ง" ตอนนี้มี Persistent Context — Agent จำ Instructions, ไฟล์แนบ, บทสนทนาเก่า และผลลัพธ์ที่เคยทำไว้ ทำให้ทำงานต่อจากครั้งก่อนได้อย่างต่อเนื่อง เช่น สั่งให้สรุปข่าว AI ทุกเช้า Agent จะรู้ว่าเมื่อวานสรุปอะไรไปแล้ว และเลือกข่าวใหม่มาให้ นอกจากนี้ยัง Integrate กับ Projects ที่ตั้งค่า Skills, Connectors และ Instructions ไว้ล่วงหน้า</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>ใช้ฟรีได้ทันทีที่ manus.im — แผน Free ให้ Scheduled Tasks 2 งาน, 300 Credits/วัน และ 1 Concurrent task ใช้ Manus 1.6 Lite ใน Agent Mode สำหรับ Pro ($39/เดือน ขึ้นไป) ได้ 20 Scheduled Tasks, 20 Concurrent tasks และ Advanced features เช่น Wide Research, Slide generation, Website deployment และ Connectors สำหรับเชื่อมต่อแอปภายนอก</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>ปัญหาใหญ่ของ AI Agent ที่ทำงานซ้ำคือ "ลืมทุกอย่างทุกครั้งที่รัน" — Manus แก้ปัญหานี้ด้วย Persistent Context ที่ทำให้ Agent ฉลาดขึ้นทุกรอบ นี่คือสิ่งที่ Claude Code ยังไม่มี (แต่ละ Session เริ่มใหม่), ChatGPT ก็ยังไม่มี (Scheduled GPTs ไม่จำ Context ข้ามรอบ) Manus อาจตัวเล็กกว่าคู่แข่ง แต่ในเรื่อง "Agent ที่ทำงานเป็นประจำ" พวกเขานำหน้าอยู่ชัดเจน และที่สำคัญ — ใช้ฟรีได้จริง ไม่ใช่แค่ Trial</p>
+    </section>
+  `,
+  link:'https://manus.im/blog/manus-schedules'
+},
+
+'claude-code': {
+  cat:'anthropic', chip:'chip-slate', label:'Anthropic · Update',
+  headline:'Claude Code 2.1.145 — agents --json, Plugin Discover ใหม่ และ Security Fix สำคัญ',
+  date:'พฤษภาคม 2569', source:'TechBrief',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0a0a12"/>
+    <g transform="translate(600,180)">
+      <rect x="-100" y="-60" width="200" height="120" rx="12" fill="none" stroke="#d97706" stroke-width="2.5"/>
+      <text y="-10" text-anchor="middle" font-family="monospace" font-size="28" fill="#d97706" font-weight="bold">v2.1.145</text>
+      <text y="22" text-anchor="middle" font-size="14" fill="#d97706" opacity="0.6">Claude Code</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#d97706" opacity="0.5">
+      <text x="200" y="350">$ claude agents --json</text>
+      <text x="200" y="380" opacity="0.4">→ [{id, status, model, awaiting_input}]</text>
+      <text x="200" y="420" fill="#ef4444" opacity="0.5">🔒 Security: env var bypass fix</text>
+    </g>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Claude Code เวอร์ชัน 2.1.145 (19 พฤษภาคม 2569) เป็นอัปเดตที่เน้นฝั่ง Developer Experience โดยเฉพาะ ฟีเจอร์เด่นคือ claude agents --json ที่ให้ดึงข้อมูล Agent ที่กำลังรันอยู่ออกมาเป็น JSON สำหรับ Scripting — ใช้ทำ tmux status bar, Session picker, หรือ Custom dashboard ได้ /plugin Discover ใหม่แสดง Commands, Agents, Skills, Hooks และ MCP Servers ของแต่ละ Plugin ก่อนติดตั้ง ไม่ต้องลุ้นว่า Plugin จะทำอะไรได้บ้าง</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>อัปเดตผ่าน claude update หรือ npm install -g @anthropic-ai/claude-code ฟีเจอร์ใหม่ทุกตัวใช้ได้ทันทีทุก Plan (Pro, Max, Team, Enterprise) สำหรับ OTEL integration: agent_id/parent_agent_id ฝังใน span attributes แล้ว เปิดใช้ได้ผ่าน --otel flag Status line ตอนนี้โชว์ GitHub repo และ PR number ถ้าอยู่ใน Git repo ที่ผูกกับ GitHub</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>การเพิ่ม agents --json อาจดูเล็ก แต่มันเปิดประตูให้สร้าง Tooling รอบ Claude Code ได้เต็มที่ — คิดดูว่าตอนนี้ Power user หลายคนรัน 5-10 Agent พร้อมกัน การมี JSON output ทำให้สร้าง Dashboard, Alert system, หรือ Auto-scaling workflow ได้ง่าย อีกจุดสำคัญคือ Security fix: เวอร์ชันก่อนหน้ามีช่องโหว่ที่ Bare variable assignment (เช่น MY_VAR=value) สามารถ Bypass permission prompt ได้ ตอนนี้แก้แล้ว ควรอัปเดตทันที</p>
+    </section>
+  `,
+  link:'https://github.com/anthropics/claude-code/releases/tag/v2.1.145'
+},
+
+'capcut': {
+  cat:'google', chip:'chip-red', label:'Google · Creative',
+  headline:'CapCut × Gemini — ตัดต่อวิดีโอและภาพผ่านแชท Gemini App ได้โดยตรง',
+  date:'พฤษภาคม 2569', source:'TechBrief',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="dh-cc" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="100%" stop-color="#1a0a2e"/></linearGradient></defs>
+    <rect width="1200" height="500" fill="url(#dh-cc)"/>
+    <g transform="translate(450,200)">
+      <rect x="-60" y="-60" width="120" height="120" rx="20" fill="none" stroke="#00d4aa" stroke-width="3"/>
+      <text y="10" text-anchor="middle" font-size="22" fill="#00d4aa" font-weight="bold">CapCut</text>
+    </g>
+    <text x="600" y="200" text-anchor="middle" font-size="36" fill="#fff" opacity="0.3">×</text>
+    <g transform="translate(750,200)">
+      <circle r="50" fill="none" stroke="#4285f4" stroke-width="3"/>
+      <text y="8" text-anchor="middle" font-size="16" fill="#4285f4" font-weight="bold">Gemini</text>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#00d4aa" opacity="0.5">
+      <text x="250" y="370">Trim · Effects · Captions · AI Edit</text>
+      <text x="250" y="400" opacity="0.4">After: Canva ✓  Adobe (coming) · CapCut (coming)</text>
+    </g>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>CapCut ประกาศ Partnership กับ Google Gemini ให้ผู้ใช้ตัดต่อภาพและวิดีโอผ่าน Gemini App ได้โดยตรง โดยใช้เครื่องมือ Creative ของ CapCut — ตัดคลิป, ใส่เอฟเฟกต์, สร้างคำบรรยายอัตโนมัติ และแก้ไขด้วย Prompt ภาษาธรรมชาติ ทั้งหมดนี้ทำได้ในแชท Gemini โดยไม่ต้องเปิดแอป CapCut แยก การประกาศนี้มาหลัง Google I/O 2026 ที่เปิดตัว Gemini Omni และ Integration กับ Canva ที่เริ่ม Roll out แล้ว</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>CapCut × Gemini ยังอยู่ในขั้น "Coming Soon" ไม่มีวันเปิดตัวที่ชัดเจน คาดว่าจะตามหลัง Canva Integration ที่ Roll out ก่อนหน้า (สัปดาห์-เดือน) และมาก่อน Adobe Integration ที่ประกาศพร้อมกัน เมื่อเปิดตัวจะใช้ได้ผ่าน Gemini App บนมือถือและเว็บ คาดว่า Feature พื้นฐานจะฟรี แต่ Advanced editing อาจต้องใช้ CapCut Pro</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Google กำลังเปลี่ยน Gemini App จาก "Chatbot" เป็น "Creative Hub" ที่รวมเครื่องมือสร้างสรรค์ทั้งหมดไว้ที่เดียว — Canva สำหรับ Design, Adobe สำหรับ Photo/Video Pro, CapCut สำหรับ Short-form Video ซึ่งเป็นตลาดที่ใหญ่มาก (TikTok, Reels, Shorts) สำหรับ Content Creator ไทย นี่อาจเปลี่ยนวิธีทำงานจาก "เปิด 5 แอป" เป็น "ทำทุกอย่างในแชท Gemini" โดยเฉพาะถ้ารวมกับ Gemini Omni ที่ Generate วิดีโอได้เอง</p>
+    </section>
+  `,
+  link:'https://9to5google.com/2026/05/21/capcut-announces-partnership-with-gemini-app/'
+},
+
+'ai-studio': {
+  cat:'google', chip:'chip-red', label:'Google · Developer',
+  headline:'Google AI Studio — แอปมือถือ + สร้าง Native Android App ได้ฟรี ไม่ต้องเขียนโค้ดสักบรรทัด',
+  date:'พฤษภาคม 2569', source:'TechBrief',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="500" fill="#0a1628"/>
+    <g transform="translate(600,180)">
+      <rect x="-50" y="-80" width="100" height="160" rx="14" fill="none" stroke="#4285f4" stroke-width="3"/>
+      <rect x="-36" y="-60" width="72" height="110" rx="4" fill="#4285f4" opacity="0.12"/>
+      <text y="-10" text-anchor="middle" font-size="26" fill="#4285f4" font-weight="bold">AI</text>
+      <text y="18" text-anchor="middle" font-size="12" fill="#4285f4" opacity="0.7">Studio</text>
+      <circle cx="0" cy="68" r="6" fill="none" stroke="#4285f4" stroke-width="1.5" opacity="0.4"/>
+    </g>
+    <g font-family="monospace" font-size="14" fill="#4285f4" opacity="0.5">
+      <text x="200" y="380">Build Android apps → No code needed</text>
+      <text x="200" y="410">Workspace: Sheets, Drive, Docs ✓</text>
+      <text x="200" y="440">Free deploy: 2 apps, no credit card</text>
+    </g>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Google ขยับ AI Studio จากเครื่องมือทดลอง API บนเว็บ ให้กลายเป็น Full Platform สำหรับสร้างแอป ฟีเจอร์ใหม่ 3 อย่างที่สำคัญ: (1) สร้าง Native Android App ได้ใน Browser — พิมพ์บอกว่าอยากได้แอปแบบไหน AI Studio สร้าง Kotlin/Jetpack Compose ให้ พร้อม Emulator ในเว็บ และ One-click publish ขึ้น Play Store Internal Test (2) Mobile App — ใช้ AI Studio บนมือถือ สร้าง Prototype ตอน 11 PM แล้ววันรุ่งขึ้นมาต่อบน Desktop ได้ (3) Google Workspace Integration — ดึงข้อมูลจาก Sheets, Drive, Docs มาสร้าง Dashboard หรือ Tool ได้ทันที</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>เข้า ai.google.dev/aistudio ได้ทันที ฟรี ไม่ต้องสมัคร Google Cloud สำหรับ Android App Builder เลือก "Build an Android app" ใน Build tab ไม่ต้องติดตั้ง SDK หรือ Android Studio บนเครื่อง Deploy แอปแรก 2 ตัวฟรีบน Google Cloud โดยไม่ต้องผูกบัตรเครดิต แอปมือถือเปิดให้ Pre-register แล้ว</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Google AI Studio กำลังกลายเป็นคู่แข่ง Replit, Bolt, Lovable และ v0 โดยตรง — แต่มีข้อได้เปรียบที่ไม่มีใครมี: สร้าง Native Android App ได้จริง (ไม่ใช่ Web App), เชื่อม Google Workspace ได้ทันที, และ Deploy ฟรีบน Google Cloud สำหรับคนไทยที่อยากทำแอปแต่เขียนโค้ดไม่เป็น นี่อาจเป็นช่องทางที่ง่ายที่สุดในโลกตอนนี้ — พิมพ์ภาษาอังกฤษบอกว่าอยากได้แอปอะไร แล้วได้แอป Android จริงๆ กลับมา</p>
+    </section>
+  `,
+  link:'https://blog.google/innovation-and-ai/technology/developers-tools/google-ai-studio-io-2026/'
+},
+
+'composer': {
+  cat:'tools', chip:'chip-purple', label:'Tools · Coding',
+  headline:'Cursor Composer 2.5 — สู้ Opus 4.7 ได้ ในราคาถูกกว่า 10 เท่า ด้วย Kimi K2.5 + RL 25x',
+  date:'พฤษภาคม 2569', source:'TechBrief',
+  svgHero:`<svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="dh-cm" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d0d1a"/><stop offset="100%" stop-color="#1a1030"/></linearGradient></defs>
+    <rect width="1200" height="500" fill="url(#dh-cm)"/>
+    <g transform="translate(600,180)">
+      <path d="M -60,-100 L 60,-100 L 0,0 Z" fill="none" stroke="#7c3aed" stroke-width="3.5" opacity="0.6"/>
+      <path d="M -60,0 L 60,0 L 0,100 Z" fill="none" stroke="#22d3ee" stroke-width="3.5" opacity="0.6"/>
+      <circle cx="0" cy="0" r="18" fill="#7c3aed" opacity="0.8"/>
+      <text y="6" text-anchor="middle" font-size="14" fill="#fff" font-weight="bold">2.5</text>
+    </g>
+    <g font-family="monospace" font-size="16" fill="#7c3aed" opacity="0.6">
+      <text x="200" y="350">SWE-Bench Multilingual: 79.8%</text>
+      <text x="200" y="380">CursorBench v3.1:      63.2%</text>
+      <text x="200" y="410" fill="#22d3ee">Standard: $0.50/$2.50 per M tokens</text>
+    </g>
+    <g font-family="monospace" font-size="13" fill="#fff" opacity="0.3">
+      <text x="200" y="450">Base: Kimi K2.5 (Moonshot AI) · Post-training: 85% compute · RL: 25x tasks</text>
+    </g>
+  </svg>`,
+  body:`
+    <section class="detail-section">
+      <h2>ทำอะไรได้บ้าง</h2>
+      <p>Cursor เปิดตัว Composer 2.5 เมื่อ 18 พฤษภาคม 2569 เป็น AI Coding Agent รุ่นใหม่ที่สร้างบน Open-source Kimi K2.5 ของ Moonshot AI แล้วใส่ Post-training Pipeline ของ Cursor เอง (85% ของ Compute ทั้งหมดลงใน RL) ผลลัพธ์คือโมเดลที่ทำคะแนน SWE-Bench Multilingual 79.8% (เทียบกับ Opus 4.7 ที่ 80.5%) และ CursorBench v3.1 ที่ 63.2% (นำ Opus 4.7 ที่ 61.6%) ในราคาถูกกว่า 10 เท่า ฟีเจอร์ใหม่รวมถึง Long-running Task ที่ดีขึ้นมาก และ Communication style ที่ Natural กว่า</p>
+    </section>
+    <section class="detail-section">
+      <h2>วิธีเข้าใช้งาน</h2>
+      <p>ใช้ได้เฉพาะใน Cursor Editor เท่านั้น ไม่มี External API เปิด Cursor → เลือก Composer 2.5 เป็น Model ราคา Standard: $0.50/M input, $2.50/M output (ถูกกว่า Frontier 10 เท่า) ราคา Fast: $3.00/$15.00 (สำหรับ Interactive ที่ต้องการ Low latency) สัปดาห์แรกหลังเปิดตัวได้ Double usage Cursor กำลังร่วมกับ SpaceXAI Train โมเดลที่ใหญ่กว่าจาก Scratch ด้วย 10x Total compute</p>
+    </section>
+    <section class="detail-section">
+      <h2>ทำไมต้องสนใจ</h2>
+      <p>Composer 2.5 พิสูจน์ว่า "โมเดลที่ดีไม่จำเป็นต้องแพง" — ด้วยการใช้ Open-source base (Kimi K2.5) แล้วเน้น Post-training RL ที่เฉพาะเจาะจง Cursor สร้างโมเดลที่แข่งกับ Frontier ได้ในราคาเศษเสี้ยว นี่เป็นแรงกดดันโดยตรงต่อ Anthropic (Opus 4.7) และ OpenAI (GPT-5.5) ที่คิดราคาสูงกว่ามาก สำหรับ Developer ที่ใช้ Cursor อยู่แล้ว ลองเปลี่ยนมาใช้ Composer 2.5 ดู — อาจประหลาดใจว่าคุณภาพใกล้เคียง Frontier แต่ Bill ลดลงอย่างมาก</p>
+    </section>
+  `,
+  link:'https://cursor.com/blog/composer-2-5'
+}
+
+}; // end articles
+
+
+function showDetail(id){
+  var a = articles[id];
+  if(!a) return;
+  document.getElementById('detail-content').innerHTML =
+    '<div class="detail-inner">' +
+      '<div class="detail-meta">' +
+        '<span class="chip ' + a.chip + '">' + a.label + '</span>' +
+        '<span class="byline">' + a.date + ' · ' + a.source + '</span>' +
+      '</div>' +
+      '<h1 class="detail-headline">' + a.headline + '</h1>' +
+      '<div class="detail-hero-svg">' + a.svgHero + '</div>' +
+      a.body +
+      '<a href="' + a.link + '" target="_blank" rel="noopener" class="detail-footer-link">' +
+        'อ่านบทความต้นฉบับ →' +
+      '</a>' +
+    '</div>';
+  document.getElementById('index-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function showIndex(){
+  document.getElementById('detail-view').style.display = 'none';
+  document.getElementById('index-view').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+/* TAB FILTER */
+(function(){
+  var tabs = document.querySelectorAll('#tab-list a');
+  var cards = document.querySelectorAll('[data-cat]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(e){
+      e.preventDefault();
+      tabs.forEach(function(t){ t.classList.remove('tab-active'); });
+      this.classList.add('tab-active');
+      var f = this.getAttribute('data-filter');
+      cards.forEach(function(c){
+        c.classList.toggle('hidden-card', f!=='all' && c.getAttribute('data-cat')!==f);
+      });
+      var hg = document.getElementById('hero-grid');
+      if(hg){
+        var anyVis = Array.from(hg.querySelectorAll('[data-cat]'))
+          .some(function(c){ return !c.classList.contains('hidden-card'); });
+        hg.style.display = anyVis ? '' : 'grid';
+        if(!anyVis) hg.style.display = 'none';
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
