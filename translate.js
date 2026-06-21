@@ -8,13 +8,12 @@
 /* ───────── CONFIG: เพิ่มภาษาที่นี่ ───────── */
 var LANGS = [
   { code:'th', label:'ไทย',     flag:'🇹🇭' },   // ต้นฉบับ
-  { code:'en', label:'EN',      flag:'🇬🇧' }
-  // เพิ่มทีหลังได้เลย เช่น:
-  // { code:'vi', label:'VI', flag:'🇻🇳' },
-  // { code:'id', label:'ID', flag:'🇮🇩' }
+  { code:'en', label:'EN',      flag:'🇬🇧' },
+  { code:'vi', label:'VI',      flag:'🇻🇳' },
+  { code:'id', label:'ID',      flag:'🇮🇩' }
 ];
-// โค้ดภาษาปลายทางที่ให้ Google โหลด (คั่นด้วย comma) — เพิ่ม vi,id ทีหลังตรงนี้
-var INCLUDED = 'en';
+// โค้ดภาษาปลายทางที่ให้ Google โหลด (คั่นด้วย comma)
+var INCLUDED = 'en,vi,id';
 var PAGE_LANG = 'th';
 
 /* ───────── CSS ───────── */
