@@ -20,10 +20,15 @@ var PAGE_LANG = 'th';
 var css = document.createElement('style');
 css.textContent = `
 /* ซ่อน UI ของ Google Translate ที่ไม่ต้องการ */
-.goog-te-banner-frame{display:none!important}
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame,
+iframe.skiptranslate,
+.skiptranslate iframe{display:none!important;visibility:hidden!important;height:0!important}
 .goog-te-gadget{display:none!important}
 #google_translate_element{display:none!important}
-body{top:0!important;position:static!important}
+html,body{top:0!important;position:static!important;margin-top:0!important}
+html.translated-ltr body,html.translated-rtl body{top:0!important}
 .goog-tooltip,.goog-tooltip:hover{display:none!important}
 .goog-text-highlight{background:none!important;box-shadow:none!important}
 
@@ -116,5 +121,18 @@ if(document.readyState === 'loading'){
 } else {
   buildSwitcher();
 }
+
+/* ───────── ตัวกำจัดแถบ Google ที่โผล่มาบัง (รันตลอด) ───────── */
+function killBanner(){
+  // ลบ iframe แถบบนของ Google
+  var frames = document.querySelectorAll('iframe.skiptranslate, .goog-te-banner-frame');
+  frames.forEach(function(f){ f.style.display = 'none'; });
+  // รีเซ็ต body ที่ Google ดันลงมา
+  if(document.body && document.body.style.top && document.body.style.top !== '0px'){
+    document.body.style.top = '0px';
+  }
+}
+setInterval(killBanner, 350);
+document.addEventListener('DOMContentLoaded', killBanner);
 
 })();
