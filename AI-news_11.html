@@ -439,6 +439,7 @@ function showDetail(id){var a=articles[id];if(!a)return;document.getElementById(
 function showIndex(){document.getElementById('detail-view').style.display='none';document.getElementById('index-view').style.display='block';window.scrollTo(0,0);}
 (function(){var tabs=document.querySelectorAll('#tab-list a');var cards=document.querySelectorAll('[data-cat]');tabs.forEach(function(tab){tab.addEventListener('click',function(e){e.preventDefault();tabs.forEach(function(t){t.classList.remove('tab-active');});this.classList.add('tab-active');var f=this.getAttribute('data-filter');cards.forEach(function(c){c.classList.toggle('hidden-card',f!=='all'&&c.getAttribute('data-cat')!==f);});var hg=document.getElementById('hero-grid');if(hg){var anyVis=Array.from(hg.querySelectorAll('[data-cat]')).some(function(c){return!c.classList.contains('hidden-card');});hg.style.display=anyVis?'':'grid';if(!anyVis)hg.style.display='none';}});});})();
 </script>
+<script src="translate.js"></script>
 <script src="glossary.js"></script>
 </body>
 </html>
